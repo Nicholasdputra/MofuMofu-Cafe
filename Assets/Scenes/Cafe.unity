@@ -1467,6 +1467,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seatManager: {fileID: 1156768477}
   cashierManager: {fileID: 2108568827}
+  dialogueManager: {fileID: 1730023334}
   cashierPosition: {fileID: 204862371}
   exitPosition: {fileID: 2043579773}
   npcPrefab: {fileID: 8330415044878439396, guid: e97a71c7ef3e0fe40b82908604a58909, type: 3}
@@ -2661,6 +2662,51 @@ Transform:
   - {fileID: 1915460834}
   m_Father: {fileID: 1007013028}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1730023333
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1730023335}
+  - component: {fileID: 1730023334}
+  m_Layer: 0
+  m_Name: DialogueManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1730023334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730023333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db9a643d8511ac445b00bf759a74b1ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterDialogueSO: {fileID: 11400000, guid: 5c9e50a61e457604b9c069e2d2349737, type: 2}
+--- !u!4 &1730023335
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730023333}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.2484763, y: -3.5087492, z: -0.0018563945}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1786019283
 GameObject:
   m_ObjectHideFlags: 0
@@ -2845,7 +2891,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.14509805}
+  m_Color: {r: 0.45911938, g: 0.45911938, b: 0.45911938, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3229,4 +3275,5 @@ SceneRoots:
   - {fileID: 1786019284}
   - {fileID: 1156768476}
   - {fileID: 1111760575}
+  - {fileID: 1730023335}
   - {fileID: 2108568828}
