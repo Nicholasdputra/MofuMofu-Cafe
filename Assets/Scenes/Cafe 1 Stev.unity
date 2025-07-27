@@ -1048,9 +1048,9 @@ MonoBehaviour:
   - {fileID: 557815199}
   - {fileID: 861161578}
   exitPathNodes:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 557815199}
+  - {fileID: 1375407975}
+  - {fileID: 2043579773}
 --- !u!1 &862893538
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,6 +1390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seatManager: {fileID: 1156768477}
+  cashierManager: {fileID: 2108568827}
   cashierPosition: {fileID: 204862371}
   exitPosition: {fileID: 2043579773}
   npcPrefab: {fileID: 8330415044878439396, guid: e97a71c7ef3e0fe40b82908604a58909, type: 3}
@@ -2588,7 +2589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.7294118}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.14509805}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2866,6 +2867,54 @@ PolygonCollider2D:
       - {x: 7.024147, y: -7.5306563}
       - {x: 5.639878, y: -2.2259822}
   m_UseDelaunayMesh: 0
+--- !u!1 &2108568826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2108568828}
+  - component: {fileID: 2108568827}
+  m_Layer: 0
+  m_Name: CashierManager
+  m_TagString: Cashier
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2108568827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2108568826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cdb178fdfed8c419f985b37ab8dcdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cashierPosition: {fileID: 204862371}
+  firstCustomerGap: 1.5
+  customerGap: 1
+  customers: []
+--- !u!4 &2108568828
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2108568826}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.08513442, y: -0.1057038, z: -2.1553035}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2877,3 +2926,4 @@ SceneRoots:
   - {fileID: 1786019284}
   - {fileID: 1156768476}
   - {fileID: 1111760575}
+  - {fileID: 2108568828}
