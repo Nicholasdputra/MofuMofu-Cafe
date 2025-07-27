@@ -5,6 +5,7 @@ using UnityEngine;
 public class NPCManager : MonoBehaviour
 {
     public SeatManager seatManager;
+    public CashierManager cashierManager;
     public Transform cashierPosition;
     public Transform exitPosition;
     public GameObject npcPrefab;
@@ -15,6 +16,14 @@ public class NPCManager : MonoBehaviour
         SpawnNPC();
     }
 
+    void Update()
+    {
+        // Check for input to spawn a new NPC
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            SpawnNPC();
+        }
+    }
     [ContextMenu("Spawn NPC")]
     void SpawnNPC()
     {
@@ -28,6 +37,9 @@ public class NPCManager : MonoBehaviour
                 cafeNPC.seatManager = seatManager;
                 cafeNPC.cashierPosition = cashierPosition.position;
                 cafeNPC.exitPosition = exitPosition.position;
+                cafeNPC.cashierManager = cashierManager;
+                // Debug.Log("Adding Customer to CashierManager");
+                cashierManager.AddCustomer(cafeNPC);
             }
         }
     }

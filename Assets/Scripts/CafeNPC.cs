@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class CafeNPC : MonoBehaviour
 {
     public NPCManager npcManager;
     public SeatManager seatManager;
+    public CashierManager cashierManager;
     public Vector2 cashierPosition;
     public Vector2 exitPosition;
 
@@ -15,12 +17,22 @@ public class CafeNPC : MonoBehaviour
 
     private Rigidbody2D rb;
     private int currentPathIndex = 0;
-    private List<Vector2> currentPath = new List<Vector2>();
+    [SerializeField] private List<Vector2> currentPath = new List<Vector2>();
     private CafeSeat currentSeat;
+
+    [TextArea(3, 10)]
+    public string npcOrderDialogue = "I would like to order a coffee, please.";
 
     public enum NPCState
     {
+        //Moving within queue
+        MovingToQueue,
+        //Nunggu di queue, basically to stop movement
+        WaitingInQueue,
+        //Jalan ke cashier, so ikutin path cashier dari GetPathFromCashier
         MovingToCashier,
+
+        //Nunggu di cashier, basically to stop movement
         WaitingAtCashier,
         MovingToSeat,
         Seated,
@@ -34,15 +46,18 @@ public class CafeNPC : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         seatManager = FindObjectOfType<SeatManager>();
         rb.gravityScale = 0f;
-        
+
         // Start by moving to cashier
-        SetPathToCashier();
+        // SetPathToCashier();
     }
 
     void Update()
     {
         switch (currentState)
         {
+            case NPCState.MovingToQueue:
+                MoveToTarget();
+                break;
             case NPCState.MovingToCashier:
                 MoveToTarget();
                 break;
@@ -87,9 +102,12 @@ public class CafeNPC : MonoBehaviour
     {
         switch (currentState)
         {
+            case NPCState.MovingToQueue:
+                currentState = NPCState.WaitingInQueue;
+                break;
             case NPCState.MovingToCashier:
                 currentState = NPCState.WaitingAtCashier;
-                StartCoroutine(OrderCoroutine());
+                // StartCoroutine(OrderCoroutine());
                 break;
             case NPCState.MovingToSeat:
                 currentState = NPCState.Seated;
@@ -101,10 +119,10 @@ public class CafeNPC : MonoBehaviour
         }
     }
 
-    private IEnumerator OrderCoroutine()
+    //TODO: Implement interaction with cashier
+    public void FindSeat()
     {
-        yield return new WaitForSeconds(waitTime);
-        
+        Debug.Log("Finding seat for NPC: " + gameObject.name);
         // Find empty seat
         currentSeat = seatManager.GetEmptyCafeSeat();
         if (currentSeat != null)
@@ -118,23 +136,33 @@ public class CafeNPC : MonoBehaviour
             SetPathToExit();
             currentState = NPCState.Leaving;
         }
+        // Debug.Log("Moving queue");
+        // GameObject.Find("CashierManager").GetComponent<CashierManager>().MoveQueue();
     }
 
     private IEnumerator SitAndLeave()
     {
         yield return new WaitForSeconds(5f);
-        
+
         if (currentSeat != null)
         {
             seatManager.FreeSeat(currentSeat);
         }
-        
+
         SetPathToExit();
         currentState = NPCState.Leaving;
     }
 
-    void SetPathToCashier()
+    public void SetPath(Vector2 targetPosition)
     {
+        currentPath.Clear();
+        currentPath.Add(targetPosition);
+        currentPathIndex = 0;
+    }
+
+    public void SetPathToCashier()
+    {
+        currentState = NPCState.MovingToCashier;
         currentPath.Clear();
         currentPath.Add(cashierPosition);
         currentPathIndex = 0;
