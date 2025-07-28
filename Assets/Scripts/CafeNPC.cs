@@ -193,7 +193,7 @@ public class CafeNPC : MonoBehaviour
 
     public void FindSeat()
     {
-        Debug.Log("Finding seat for NPC: " + gameObject.name);
+        // Debug.Log("Finding seat for NPC: " + gameObject.name);
         // Find empty seat
         currentSeat = seatManager.GetEmptyCafeSeat();
         if (currentSeat != null)

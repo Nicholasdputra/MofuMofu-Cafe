@@ -40,7 +40,7 @@ public class CashierManager : MonoBehaviour
                 isOpeningDialogue = true;
                 dialoguePanel.SetActive(true);
                 // Trigger dialogue logic here
-                Debug.Log("Opening dialogue with cashier");
+                // Debug.Log("Opening dialogue with cashier");
                 // Simulate dialogue completion after a delay
                 StartCoroutine(TypeDialogue());
             }
@@ -85,7 +85,7 @@ public class CashierManager : MonoBehaviour
         // Debug.Log("Removing customer, Current queue size: " + customers.Count);
         for (int i = 0; i < customers.Count; i++)
         {
-            Debug.Log("Moving customer " + i);
+            // Debug.Log("Moving customer " + i);
             if (i == 0)
             {
                 // Debug.Log("Setting first customer path");

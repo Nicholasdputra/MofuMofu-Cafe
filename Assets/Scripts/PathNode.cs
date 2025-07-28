@@ -8,6 +8,11 @@ public class PathNode : MonoBehaviour
     [Header("Node Info")]
     public NodeType nodeType = NodeType.General;
     public bool isOccupied = false;
+    public bool isTargetedByCat = false; // Track if a cat is currently targeting this node
+    
+    [Header("Ramp Settings")]
+    [Tooltip("Tilt angle in degrees for ramp nodes (0 = flat, positive = upward slope, negative = downward slope)")]
+    public float tiltAngle = 0f;
     
     [Header("Cat Access")]
     public CatAccessType catAccess = CatAccessType.All;
@@ -42,6 +47,17 @@ public class PathNode : MonoBehaviour
                catAccess == CatAccessType.Shared;
     }
     
+    public Quaternion GetTargetRotation()
+    {
+        // Return rotation based on tilt angle (Z-axis rotation for 2D)
+        return Quaternion.AngleAxis(tiltAngle, Vector3.forward);
+    }
+    
+    public bool IsRamp()
+    {
+        return nodeType == NodeType.RampNode;
+    }
+    
     void OnDrawGizmos()
     {
         // Draw node
@@ -64,17 +80,19 @@ public class PathNode : MonoBehaviour
         switch (catAccess)
         {
             case CatAccessType.Cat1Only: return Color.red;
-            case CatAccessType.Cat2Only: return Color.green;
-            case CatAccessType.Cat3Only: return Color.blue;
+            case CatAccessType.Cat2Only: return Color.blue;
+            case CatAccessType.Cat3Only: return Color.green;
             case CatAccessType.Shared: return Color.yellow;
             default:
                 // Use node type colors for "All" access
                 switch (nodeType)
                 {
+                    case NodeType.RoamNode: return Color.black;
+                    case NodeType.RampNode: return Color.magenta;
                     case NodeType.CatBed: return Color.cyan;
-                    case NodeType.CustomerSeat: return Color.magenta;
+                    case NodeType.CustomerSeat: return Color.yellow;
                     case NodeType.Junction: return Color.gray;
-                    default: return Color.white;
+                    default: return Color.white; // General nodes
                 }
         }
     }
@@ -82,10 +100,12 @@ public class PathNode : MonoBehaviour
 
 public enum NodeType
 {
-    General,        // Regular path nodes
+    General,        // Regular path nodes (transit only)
+    RoamNode,      // Destination nodes for cat roaming
+    RampNode,      // Ramp sections with tilt angles
     CatBed,        // Cat's sleeping spot
     CustomerSeat,  // Near customer seats
-    Junction       // Path intersections
+    Junction       // Path intersections (transit only)
 }
 
 public enum CatAccessType
