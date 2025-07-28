@@ -179,7 +179,7 @@ MonoBehaviour:
     drinkName: Matcha
     coldSprite: {fileID: 21300000, guid: 82dcf107087b958428ae57b0316d72e3, type: 3}
     hotSprite: {fileID: 21300000, guid: 9df1529215e4ce34eaf027557aadadc2, type: 3}
-    isCold: 0
+    isIced: 0
   displayedObject: {fileID: 942963763}
   player: {fileID: 1530800304}
 --- !u!61 &27104342
@@ -1063,7 +1063,7 @@ MonoBehaviour:
     drinkName: Chocolate
     coldSprite: {fileID: 21300000, guid: 1c109ac98cb18af479e07e2dc18656f7, type: 3}
     hotSprite: {fileID: 21300000, guid: e35b1fb9fb6a8a344badd47b93b60fb8, type: 3}
-    isCold: 0
+    isIced: 0
   displayedObject: {fileID: 1773601047}
   player: {fileID: 1530800304}
 --- !u!61 &420248577
@@ -2463,11 +2463,11 @@ Transform:
   m_GameObject: {fileID: 862893538}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.2153141, y: -0.6658277, z: 0.0027348995}
+  m_LocalPosition: {x: -3.081498, y: 3.397622, z: 2.295156}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1786019284}
+  m_Father: {fileID: 1124281575}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!60 &862893540
 PolygonCollider2D:
@@ -2604,7 +2604,7 @@ Transform:
   m_GameObject: {fileID: 909525897}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.24, y: 1.06, z: -0.07205795}
+  m_LocalPosition: {x: -3.32, y: 1.06, z: -0.07205795}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2632,7 +2632,7 @@ MonoBehaviour:
     drinkName: Coffee
     coldSprite: {fileID: 21300000, guid: 58ed9ae993dfd0645bd56a6c501d3578, type: 3}
     hotSprite: {fileID: 21300000, guid: ef84a540d711ab84099f75e5228cbf35, type: 3}
-    isCold: 0
+    isIced: 0
   displayedObject: {fileID: 2040605653}
   player: {fileID: 1530800304}
 --- !u!61 &909525900
@@ -3712,7 +3712,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1124281575}
   m_Layer: 0
-  m_Name: TableAndChairSprites
+  m_Name: Furnitures and Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3731,6 +3731,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 862893539}
   - {fileID: 1048079609}
   - {fileID: 275542467}
   - {fileID: 1427990516}
@@ -5113,10 +5114,11 @@ MonoBehaviour:
     drinkName: 
     coldSprite: {fileID: 0}
     hotSprite: {fileID: 0}
-    isCold: 0
+    isIced: 0
   isHoldingItem: 0
   hold_item: {fileID: 1665936440}
   isInteractable: 0
+  targetNPC: {fileID: 0}
 --- !u!70 &1530800305
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -5469,7 +5471,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1665936441
 Transform:
   m_ObjectHideFlags: 0
@@ -5479,8 +5481,8 @@ Transform:
   m_GameObject: {fileID: 1665936440}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.94, y: 0.332, z: 0}
+  m_LocalScale: {x: 0.3783908, y: 0.2791389, z: 0.3783908}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1530800300}
@@ -5526,15 +5528,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ab36feb1b8bd5b948b74c47d22e4d7da, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9df1529215e4ce34eaf027557aadadc2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.26, y: 2.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1692980309
@@ -5718,38 +5720,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1786019283
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1786019284}
-  m_Layer: 0
-  m_Name: Colliders
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1786019284
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1786019283}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.556524, y: 0.96250427, z: 2.2964728}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 862893539}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1825052986
 GameObject:
   m_ObjectHideFlags: 0
@@ -5933,7 +5903,7 @@ MonoBehaviour:
     drinkName: 
     coldSprite: {fileID: 0}
     hotSprite: {fileID: 0}
-    isCold: 0
+    isIced: 0
   displayedObject: {fileID: 0}
   player: {fileID: 1530800304}
 --- !u!1 &1843027970
@@ -6968,7 +6938,6 @@ SceneRoots:
   - {fileID: 1105258546}
   - {fileID: 1530800300}
   - {fileID: 983621276}
-  - {fileID: 1786019284}
   - {fileID: 1156768476}
   - {fileID: 1111760575}
   - {fileID: 1730023335}

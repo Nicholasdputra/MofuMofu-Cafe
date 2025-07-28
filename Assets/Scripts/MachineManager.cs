@@ -8,7 +8,7 @@ public class DrinkData
     public string drinkName;
     public Sprite coldSprite;
     public Sprite hotSprite;
-    public bool isCold;
+    public bool isIced;
 }
 
 public class MachineManager : MonoBehaviour
@@ -88,7 +88,7 @@ public class MachineManager : MonoBehaviour
     {
         if (player.item_Data != null)
         {
-            player.item_Data.isCold = true;
+            player.item_Data.isIced = true;
         }
     }
 }

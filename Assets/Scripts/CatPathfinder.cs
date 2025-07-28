@@ -65,7 +65,7 @@ public class CatPathfinder : MonoBehaviour
             nodeGraph[node] = connections;
         }
         
-        Debug.Log($"Built graph with {nodes.Length} nodes and {GetTotalConnections()} connections");
+        // Debug.Log($"Built graph with {nodes.Length} nodes and {GetTotalConnections()} connections");
     }
     
     int GetTotalConnections()

@@ -344,7 +344,7 @@ public class CatNPC : MonoBehaviour
         
         currentState = CatState.Roaming;
         stateTimer = 0f; // Will only start counting when destination is reached
-        Debug.Log($"Cat {catID} started roaming - timer will start when destination reached");
+        // Debug.Log($"Cat {catID} started roaming - timer will start when destination reached");
         MoveToRandomNode();
     }
     
@@ -422,7 +422,7 @@ public class CatNPC : MonoBehaviour
         if (privateRoamNodes.Count > 0)
         {
             PathNode randomNode = privateRoamNodes[Random.Range(0, privateRoamNodes.Count)];
-            Debug.Log($"Cat {catID}: Moving to roam destination: {randomNode.name}");
+            // Debug.Log($"Cat {catID}: Moving to roam destination: {randomNode.name}");
             MoveToNode(randomNode); // Back to normal pathfinding
         }
         else
@@ -454,7 +454,7 @@ public class CatNPC : MonoBehaviour
             return;
         }
         
-        Debug.Log($"Cat {catID}: Finding path from {startNode.name} to {destination.name}");
+        // Debug.Log($"Cat {catID}: Finding path from {startNode.name} to {destination.name}");
         currentPath = pathfinder.FindPath(startNode, destination, catID);
         
         if (currentPath.Count > 0)
@@ -502,7 +502,7 @@ public class CatNPC : MonoBehaviour
         
         if (closest != null)
         {
-            Debug.Log($"Cat {catID}: Closest node is {closest.name} at distance {closestDistance}");
+            // Debug.Log($"Cat {catID}: Closest node is {closest.name} at distance {closestDistance}");
         }
         else
         {
@@ -596,7 +596,7 @@ public class CatNPC : MonoBehaviour
             }
         }
         
-        Debug.Log($"Cat {catID}: Physically closest shared customer node is {closest.name} at distance {closestDistance}");
+        // Debug.Log($"Cat {catID}: Physically closest shared customer node is {closest.name} at distance {closestDistance}");
         return closest;
     }
     

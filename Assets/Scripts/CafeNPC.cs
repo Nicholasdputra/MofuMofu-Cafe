@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 [System.Serializable]
 public class CafeNPC : MonoBehaviour
@@ -45,23 +46,14 @@ public class CafeNPC : MonoBehaviour
     bool hasRepeatedOrder = false;
     public string npcRepeatedOrderDialogue = "I would like to order a coffee, please.";
     public bool isImage = false;
-    public Order currentOrder;
+    //public Order currentOrder;
+    public DrinkSO[] AllDrinkData;
+    public DrinkSO currentOrder;
     public bool hasReceivedOrder = false;
 
     [Header("Patience Variables")]
     [SerializeField] float patience = 100f;
     Image heartImage;
-
-    public enum Order
-    {
-        IcedCoffee,
-        WarmCoffee,
-        IcedChocolate,
-        WarmChocolate,
-        IcedMatcha,
-        WarmMatcha
-    }
-
     public enum NPCState
     {
         //Moving within queue
@@ -94,11 +86,19 @@ public class CafeNPC : MonoBehaviour
         transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
         npcName = npcNames[Random.Range(0, npcNames.Count)];
         npcName = npcNames[0];
-        currentOrder = (Order)Random.Range(0, System.Enum.GetValues(typeof(Order)).Length);
+        //currentOrder = (Order)Random.Range(0, System.Enum.GetValues(typeof(Order)).Length);
+        currentOrder = AllDrinkData[Random.Range(0, AllDrinkData.Length)];
+        currentOrder.isIced = Random.Range(0, 2) == 0; // Randomly choose if the drink is iced or not
         isImage = Random.Range(0, 2) == 0; // Randomly choose if the order is an image or not
         Debug.Log(isImage ? "Image order" : "Text order");
         // Set the dialogue for the NPC
         dialogueManager.SetDialogue(this);
+    }
+
+    public void SetTextHint(string hint)
+    {
+        // Set the text hint for the NPC
+        transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<TMP_Text>().text = hint;
     }
     public void ShowOrder()
     {
@@ -111,15 +111,16 @@ public class CafeNPC : MonoBehaviour
         else
         {
             transform.GetChild(0).GetChild(0).GetChild(0).gameObject.SetActive(false);
-            // transform.GetChild(0).GetChild(1).GetComponent<Text>().text = npcOrderDialogue;
             transform.GetChild(0).GetChild(0).GetChild(1).gameObject.SetActive(true);
         }
         transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
     }
 
-    public void HideOrder()
+    public void FinishOrder()
     {
         transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        patience = 5f;
+        hasReceivedOrder = true;
     }
 
     #region Movement
@@ -280,7 +281,7 @@ public class CafeNPC : MonoBehaviour
                     }
                     else
                     {
-                        HideOrder();
+                        FinishOrder();
                         SetEmote("Angry");
                     }
                     yield break;
