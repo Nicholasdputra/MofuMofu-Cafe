@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b4a2039af6ba6e544b8c47dc1e6a4245
+guid: 9e25a61a15892b44c9b4071a4c4fe0a4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -94,7 +94,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Windows Store Apps
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -107,7 +107,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
+    buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fridge_0
+      name: matcha_station_interact_0
       rect:
         serializedVersion: 2
-        x: 63
-        y: 114
-        width: 298
-        height: 321
+        x: 184
+        y: 201
+        width: 133
+        height: 94
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,8 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a991d1a454f0c44eaf9ef9119c3121b
-      internalID: -1212560866
+      spriteID: d249ffa703357a64abfce2fc9a151586
+      internalID: -1895103430
       vertices: []
       indices: 
       edges: []
@@ -154,7 +154,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Fridge_0: -1212560866
+      matcha_station_interact_0: -1895103430
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

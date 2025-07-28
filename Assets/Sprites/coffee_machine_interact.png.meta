@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b4a2039af6ba6e544b8c47dc1e6a4245
+guid: 963bbc9c2da1fb4468c3ca245473e987
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -94,7 +94,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Windows Store Apps
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -107,7 +107,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
+    buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fridge_0
+      name: coffee_machine_interact_0
       rect:
         serializedVersion: 2
-        x: 63
-        y: 114
-        width: 298
-        height: 321
+        x: 163
+        y: 189
+        width: 166
+        height: 157
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,8 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a991d1a454f0c44eaf9ef9119c3121b
-      internalID: -1212560866
+      spriteID: 00c2692bb55b09a4c852205a41859092
+      internalID: -2034301213
       vertices: []
       indices: 
       edges: []
@@ -154,7 +154,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Fridge_0: -1212560866
+      coffee_machine_interact_0: -2034301213
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
