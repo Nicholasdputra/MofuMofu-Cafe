@@ -24,6 +24,7 @@ public class CatNPC : MonoBehaviour
     [Header("References")]
     public CatPathfinder pathfinder;
     public SeatManager seatManager;
+    public QTEScript qteScript; // Reference to the QTE script
     
     [Header("Current State")]
     public CatState currentState = CatState.Roaming;
@@ -135,10 +136,10 @@ public class CatNPC : MonoBehaviour
     
     void HandlePlayerDetection()
     {
-        // Only detect player when not at cat bed (not resting)
-        if (currentState == CatState.Resting)
+        // Only detect player when not at cat bed (not resting) AND not visiting a customer
+        if (currentState == CatState.Resting || currentState == CatState.VisitingCustomer)
         {
-            // Reset detection when at bed
+            // Reset detection when at bed or with customer
             playerInRange = false;
             playerDetectionTimer = 0f;
             qteTriggered = false;
@@ -180,9 +181,7 @@ public class CatNPC : MonoBehaviour
     
     void OpenQTE()
     {
-        Debug.Log($"Cat {catID}: Opening QTE! Player has been in range for 1+ seconds");
-        // This is where you would implement your QTE system
-        // For example: show QTE UI, start mini-game, etc.
+        qteScript.StartQuickTimeEvent();
     }
     
     void HandleBehaviorLogic()
@@ -279,7 +278,7 @@ public class CatNPC : MonoBehaviour
         
         // Reset state timer when reaching destination - start counting down from here
         stateTimer = 0f;
-        Debug.Log($"Cat {catID} reached destination, starting {currentState} timer");
+        // Debug.Log($"Cat {catID} reached destination, starting {currentState} timer");
         
         switch (currentState)
         {
@@ -381,7 +380,7 @@ public class CatNPC : MonoBehaviour
         PathNode targetCustomerNode = GetRandomOccupiedCustomerSeat();
         if (targetCustomerNode == null)
         {
-            Debug.Log($"Cat {catID}: No customers to visit, roaming instead");
+            // Debug.Log($"Cat {catID}: No customers to visit, roaming instead");
             StartRoaming();
             return;
         }
@@ -392,8 +391,8 @@ public class CatNPC : MonoBehaviour
         {
             // Step 3: Move straight to entry point, then pathfind to customer
             MoveDirectlyToNode(entryNode, targetCustomerNode);
-            Debug.Log($"Cat {catID} is targetting customer at {targetCustomerNode.name}");
-            Debug.Log($"Cat {catID} moving directly to customer area - timer will start when customer reached");
+            // Debug.Log($"Cat {catID} is targetting customer at {targetCustomerNode.name}");
+                // Debug.Log($"Cat {catID} moving directly to customer area - timer will start when customer reached");
         }
         else
         {
@@ -637,7 +636,7 @@ public class CatNPC : MonoBehaviour
         if (finalCustomerTarget != null)
         {
             MoveToNode(finalCustomerTarget);
-            Debug.Log($"Cat {catID} reached customer area, now pathfinding to specific customer");
+            // Debug.Log($"Cat {catID} reached customer area, now pathfinding to specific customer");
         }
         else
         {

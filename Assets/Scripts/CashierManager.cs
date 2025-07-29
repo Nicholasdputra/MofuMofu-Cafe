@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CashierManager : MonoBehaviour
 {
+    public PlayerMovement playerMovement;
     public Transform cashierPosition;
     public float firstCustomerGap;
     public float customerGap;
@@ -16,35 +17,43 @@ public class CashierManager : MonoBehaviour
 
     void Update()
     {
-        if (onCashier)
+        if (isOpeningDialogue)
         {
-            if (dialoguePanel.activeSelf && isDialogueFinished && Input.GetMouseButtonDown(0))
-            {
-                isDialogueFinished = false;
-                isOpeningDialogue = false;
-                dialoguePanel.SetActive(false);
-                MoveQueue(false);
-            }
-            if (Input.GetKeyDown(KeyCode.E) && !isOpeningDialogue)
-            {
-                if(customers.Count == 0)
-                {
-                    Debug.Log("No customers in queue");
-                    return;
-                }
-                if (customers[0].currentState != CafeNPC.NPCState.WaitingAtCashier)
-                {
-                    Debug.Log("Customer is not waiting at cashier");
-                    return;
-                }
-                isOpeningDialogue = true;
-                dialoguePanel.SetActive(true);
-                // Trigger dialogue logic here
-                // Debug.Log("Opening dialogue with cashier");
-                // Simulate dialogue completion after a delay
-                StartCoroutine(TypeDialogue());
-            }
+            playerMovement.canMove = false;
         }
+        else
+        {
+            playerMovement.canMove = true;
+        }    
+        if (onCashier)
+            {
+                if (dialoguePanel.activeSelf && isDialogueFinished && Input.GetMouseButtonDown(0))
+                {
+                    isDialogueFinished = false;
+                    isOpeningDialogue = false;
+                    dialoguePanel.SetActive(false);
+                    MoveQueue(false);
+                }
+                if (Input.GetKeyDown(KeyCode.E) && !isOpeningDialogue)
+                {
+                    if (customers.Count == 0)
+                    {
+                        Debug.Log("No customers in queue");
+                        return;
+                    }
+                    if (customers[0].currentState != CafeNPC.NPCState.WaitingAtCashier)
+                    {
+                        Debug.Log("Customer is not waiting at cashier");
+                        return;
+                    }
+                    isOpeningDialogue = true;
+                    dialoguePanel.SetActive(true);
+                    // Trigger dialogue logic here
+                    // Debug.Log("Opening dialogue with cashier");
+                    // Simulate dialogue completion after a delay
+                    StartCoroutine(TypeDialogue());
+                }
+            }
     }
 
     public void AddCustomer(CafeNPC cafeNPC)

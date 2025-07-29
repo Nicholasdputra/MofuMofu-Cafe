@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     
     private Rigidbody2D rb;
     private Vector2 moveInput;
+    public bool canMove = true;
     
     void Start()
     {
@@ -29,7 +30,14 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         // Apply movement in FixedUpdate for smooth physics-based movement
-        rb.velocity = moveInput * moveSpeed;
+        if (canMove)
+        {
+            rb.velocity = moveInput * moveSpeed;
+        }
+        else
+        {
+            rb.velocity = Vector2.zero; // Stop movement if cannot move
+        }
     }
     
     void GetInput()

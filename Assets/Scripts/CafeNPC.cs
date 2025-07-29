@@ -36,15 +36,14 @@ public class CafeNPC : MonoBehaviour
     [TextArea(3, 10)]
     List<string> npcNames = new List<string> {
         "BusinessWoman",
-        "AltGuy",
-        "NerdyGuy",
         "Kid",
-        "Influencer"
+        "CutesyInfluencer",
+        "AlternativeGuy",
+        "NerdyPerson"
     };
     public string npcName;
-    public string npcOrderDialogue = "I would like to order a coffee, please.";
+    public string npcOrderDialogue;
     bool hasRepeatedOrder = false;
-    public string npcRepeatedOrderDialogue = "I would like to order a coffee, please.";
     public bool isImage = false;
     //public Order currentOrder;
     public DrinkSO[] AllDrinkData;
@@ -85,8 +84,6 @@ public class CafeNPC : MonoBehaviour
     {
         transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
         npcName = npcNames[Random.Range(0, npcNames.Count)];
-        npcName = npcNames[0];
-        //currentOrder = (Order)Random.Range(0, System.Enum.GetValues(typeof(Order)).Length);
         currentOrder = AllDrinkData[Random.Range(0, AllDrinkData.Length)];
         currentOrder.isIced = Random.Range(0, 2) == 0; // Randomly choose if the drink is iced or not
         isImage = Random.Range(0, 2) == 0; // Randomly choose if the order is an image or not
@@ -97,22 +94,46 @@ public class CafeNPC : MonoBehaviour
 
     public void SetTextHint(string hint)
     {
+        Debug.Log("Setting text hint: " + hint);
+        TMP_Text textComponent = transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<TMP_Text>();
         // Set the text hint for the NPC
-        transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<TMP_Text>().text = hint;
+        //TMP Text renders special characters like \n, so we need to unescape it
+        string formattedHint = System.Text.RegularExpressions.Regex.Unescape(hint);
+
+        textComponent.text = formattedHint;
+
     }
     public void ShowOrder()
     {
+        Image drinkImage = transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>();
+        TMP_Text drinkClues = transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<TMP_Text>();
         if (isImage)
         {
-            // transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = GetDrinkImage(currentOrder);
-            transform.GetChild(0).GetChild(0).GetChild(0).gameObject.SetActive(true);
-            transform.GetChild(0).GetChild(0).GetChild(1).gameObject.SetActive(false);
+            foreach (DrinkSO drink in AllDrinkData)
+            {
+                if (drink.itemName == currentOrder.itemName)
+                {
+                    if (currentOrder.isIced)
+                    {
+                        drinkImage.sprite = drink.coldSprite;
+                    }
+                    else
+                    {
+                        drinkImage.sprite = drink.hotSprite;
+                    }
+                    break;
+                }
+            }
+            drinkImage.gameObject.SetActive(true);
+            drinkClues.gameObject.SetActive(false);
         }
         else
         {
-            transform.GetChild(0).GetChild(0).GetChild(0).gameObject.SetActive(false);
-            transform.GetChild(0).GetChild(0).GetChild(1).gameObject.SetActive(true);
+            // Hint is already set alongside NPC dialogue
+            drinkImage.gameObject.SetActive(false);
+            drinkClues.gameObject.SetActive(true);
         }
+        //Order bubble
         transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
     }
 

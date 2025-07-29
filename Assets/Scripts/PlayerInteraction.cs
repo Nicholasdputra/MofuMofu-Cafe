@@ -13,7 +13,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log("Player Interaction Trigger Entered with: " + collision.gameObject.name);
+        // Debug.Log("Player Interaction Trigger Entered with: " + collision.gameObject.name);
         isInteractable = true;
         if(collision.CompareTag("Customer"))
         {
@@ -23,7 +23,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("Player Inside: " + collision.gameObject.name);
+        // Debug.Log("Player Inside: " + collision.gameObject.name);
         isInteractable = false;
         targetNPC = null;
     }

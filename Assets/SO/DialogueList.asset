@@ -65,7 +65,7 @@ MonoBehaviour:
     - I wanna get a warm sweet drink!
     - Warm\nSweet\n
     repeatedDialogue: 
-  - npcName: Cutesy Influencer
+  - npcName: CutesyInfluencer
     orderingIcedCoffee:
     - An iced coffee please, make it look good~
     - Get me a my usual morning cup, but in cold pleaseee~
@@ -91,7 +91,7 @@ MonoBehaviour:
     - I want something that gives a cozy energy~
     - Warm\nCozy\n
     repeatedDialogue: 
-  - npcName: Alternative Guy
+  - npcName: AlternativeGuy
     orderingIcedCoffee:
     - Yooo, can i get an iced coffee? Thanksss dudeeee
     - You got anything cold and bitterrr? Feels like that kinda day man.
@@ -117,7 +117,7 @@ MonoBehaviour:
     - I reallly want something warm, sweet, and cozy right now
     - Warm\nSweet\nCozy\n
     repeatedDialogue: 
-  - npcName: Nerdy Person
+  - npcName: NerdyPerson
     orderingIcedCoffee:
     - '*Ahem*, iced coffee, please. I need to stay... sharp.'
     - Give me something cold and bitter, i want to feel something
