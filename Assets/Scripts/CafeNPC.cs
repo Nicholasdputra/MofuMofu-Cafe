@@ -80,10 +80,10 @@ public class CafeNPC : MonoBehaviour
         StartCoroutine(DrainPatience());
     }
 
-    public void SetupCustomerOrder()
+    public void SetupCustomerOrder(string npcName)
     {
         transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-        npcName = npcNames[Random.Range(0, npcNames.Count)];
+        this.npcName = npcName;
         currentOrder = AllDrinkData[Random.Range(0, AllDrinkData.Length)];
         currentOrder.isIced = Random.Range(0, 2) == 0; // Randomly choose if the drink is iced or not
         isImage = Random.Range(0, 2) == 0; // Randomly choose if the order is an image or not

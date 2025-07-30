@@ -561,7 +561,7 @@ Transform:
   m_GameObject: {fileID: 204862370}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.58, y: 1.93, z: 0}
+  m_LocalPosition: {x: -2.209, y: 1.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -653,7 +653,7 @@ GameObject:
   - component: {fileID: 275542467}
   - component: {fileID: 275542468}
   - component: {fileID: 275542469}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CounterBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1225,7 +1225,7 @@ GameObject:
   - component: {fileID: 426807725}
   - component: {fileID: 426807726}
   - component: {fileID: 426807727}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: kursi (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1819,7 +1819,7 @@ GameObject:
   - component: {fileID: 664022829}
   - component: {fileID: 664022830}
   - component: {fileID: 664022831}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: kursi (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2419,7 +2419,7 @@ GameObject:
   - component: {fileID: 815239957}
   - component: {fileID: 815239958}
   - component: {fileID: 815239959}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: kursi (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2563,7 +2563,7 @@ Transform:
   m_GameObject: {fileID: 837550753}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.34, y: 1.34, z: 0}
+  m_LocalPosition: {x: 0.010000229, y: 1.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2706,7 +2706,7 @@ GameObject:
   m_Component:
   - component: {fileID: 862893539}
   - component: {fileID: 862893540}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: OuterWallsCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3077,7 +3077,7 @@ GameObject:
   - component: {fileID: 937692677}
   - component: {fileID: 937692678}
   - component: {fileID: 937692679}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: kursi (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3381,7 +3381,7 @@ Transform:
   m_GameObject: {fileID: 965078525}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.3500001, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3486,7 +3486,7 @@ GameObject:
   - component: {fileID: 1007634829}
   - component: {fileID: 1007634830}
   - component: {fileID: 1007634831}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: kursi (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3616,7 +3616,7 @@ GameObject:
   - component: {fileID: 1048079609}
   - component: {fileID: 1048079610}
   - component: {fileID: 1048079611}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CounterFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3895,7 +3895,11 @@ MonoBehaviour:
   dialogueManager: {fileID: 1730023334}
   cashierPosition: {fileID: 204862371}
   exitPosition: {fileID: 2043579773}
-  npcPrefab: {fileID: 8330415044878439396, guid: e97a71c7ef3e0fe40b82908604a58909, type: 3}
+  businessWomanPrefab: {fileID: 3247852226794954236, guid: 41dd1c22190eb4249ac39a14d6c8a731, type: 3}
+  nerdyPersonPrefab: {fileID: 4964400531900085414, guid: d52cb6c2df0c38f488e2e4d12182f75f, type: 3}
+  alternativeGuyPrefab: {fileID: 359237170409440056, guid: a37e7a37f90f31b44924e5a8643591f5, type: 3}
+  cutesyInfluencerPrefab: {fileID: 8835432729299555177, guid: 227b4cea220f02d4285dd0c021976a84, type: 3}
+  kidPrefab: {fileID: 7731993419088090941, guid: 525c7d906590b894086bc04c6f615113, type: 3}
 --- !u!4 &1111760575
 Transform:
   m_ObjectHideFlags: 0
@@ -3905,7 +3909,7 @@ Transform:
   m_GameObject: {fileID: 1111760573}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.28, y: 1.78, z: -2.1519945}
+  m_LocalPosition: {x: 7.93, y: 1.78, z: -2.1519945}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4849,7 +4853,7 @@ GameObject:
   - component: {fileID: 1408684015}
   - component: {fileID: 1408684016}
   - component: {fileID: 1408684017}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: meja_1x1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5055,7 +5059,7 @@ GameObject:
   - component: {fileID: 1427990516}
   - component: {fileID: 1427990517}
   - component: {fileID: 1427990518}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: meja_2x2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5664,7 +5668,7 @@ GameObject:
   - component: {fileID: 1601562664}
   - component: {fileID: 1601562665}
   - component: {fileID: 1601562666}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: kursi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6365,7 +6369,7 @@ GameObject:
   - component: {fileID: 1843027971}
   - component: {fileID: 1843027972}
   - component: {fileID: 1843027973}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: kursi (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6607,7 +6611,7 @@ GameObject:
   - component: {fileID: 1908676614}
   - component: {fileID: 1908676615}
   - component: {fileID: 1908676616}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: kursi (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7029,7 +7033,7 @@ GameObject:
   - component: {fileID: 2061420881}
   - component: {fileID: 2061420882}
   - component: {fileID: 2061420883}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: kursi (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
