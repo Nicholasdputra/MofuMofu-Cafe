@@ -18,5 +18,4 @@ public class Dialogues
     public string[] orderingWarmMatcha;
     public string[] orderingIcedChocolate;
     public string[] orderingWarmChocolate;
-    public string repeatedDialogue;
 }

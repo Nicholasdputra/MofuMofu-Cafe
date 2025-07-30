@@ -14,6 +14,9 @@ public class CashierManager : MonoBehaviour
     bool isDialogueFinished = false;
     public GameObject dialoguePanel;
     public List<CafeNPC> customers = new List<CafeNPC>();
+    public SpriteRenderer cashierSpriteRenderer;
+    public Sprite baseSprite;
+    public Sprite selectedSprite;
 
     void Update()
     {
@@ -125,12 +128,21 @@ public class CashierManager : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision)
     {
+        if(cashierSpriteRenderer == null)
+        {
+            cashierSpriteRenderer = GetComponent<SpriteRenderer>();
+        }
         onCashier = true;
-
+        cashierSpriteRenderer.sprite = selectedSprite;
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
+        if(cashierSpriteRenderer == null)
+        {
+            cashierSpriteRenderer = GetComponent<SpriteRenderer>();
+        }
         onCashier = false;
+        cashierSpriteRenderer.sprite = baseSprite;
     }
 }
