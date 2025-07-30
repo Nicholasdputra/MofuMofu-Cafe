@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class QTEScript : MonoBehaviour
 {
+    [SerializeField] GameObject qtePanel;
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] Slider quickTimeSlider;
     [SerializeField] float sliderDrainSpeed = 0.5f;
@@ -16,7 +17,7 @@ public class QTEScript : MonoBehaviour
     {
         quickTimeSlider.maxValue = 100; // Initialize slider to full
         quickTimeSlider.value = 0; // Initialize slider to full
-        gameObject.SetActive(false); // Hide the QTE UI initially
+        qtePanel.SetActive(false); // Hide the QTE UI initially
     }
 
     // Update is called once per frame
@@ -43,7 +44,7 @@ public class QTEScript : MonoBehaviour
         if (isQuickTimeActive) return; // Prevent multiple QTEs from starting
         isQuickTimeActive = true;
         quickTimeSlider.value = 0; // Reset slider to full
-        gameObject.SetActive(true); // Show the QTE UI
+        qtePanel.SetActive(true); // Show the QTE UI
         StartCoroutine(QuickTimeEvent());
     }
     IEnumerator QuickTimeEvent()
@@ -62,7 +63,7 @@ public class QTEScript : MonoBehaviour
         Debug.Log("QuickTime event ended");
         Time.timeScale = 1;
         isQuickTimeActive = false;
-        gameObject.SetActive(false);
+        qtePanel.SetActive(false);
         playerMovement.canMove = true; // Re-enable player movement
     }
 }

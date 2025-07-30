@@ -1497,7 +1497,6 @@ GameObject:
   - component: {fileID: 574730394}
   - component: {fileID: 574730396}
   - component: {fileID: 574730395}
-  - component: {fileID: 574730397}
   m_Layer: 5
   m_Name: QTEPanel
   m_TagString: Untagged
@@ -1563,22 +1562,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 574730393}
   m_CullTransparentMesh: 1
---- !u!114 &574730397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 574730393}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bc1f87c399e8cd46a65b080ab6296b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerMovement: {fileID: 1530800302}
-  quickTimeSlider: {fileID: 466139720}
-  sliderDrainSpeed: 0.3
-  sliderIncrement: 5
 --- !u!1 &590347357
 GameObject:
   m_ObjectHideFlags: 0
@@ -1982,7 +1965,7 @@ MonoBehaviour:
   customerVisitTime: 10
   pathfinder: {fileID: 1525501539}
   seatManager: {fileID: 1156768477}
-  qteScript: {fileID: 574730397}
+  qteScript: {fileID: 1849896316}
   currentState: 0
 --- !u!4 &670091884
 Transform:
@@ -4266,7 +4249,7 @@ MonoBehaviour:
   customerVisitTime: 10
   pathfinder: {fileID: 1525501539}
   seatManager: {fileID: 1156768477}
-  qteScript: {fileID: 574730397}
+  qteScript: {fileID: 1849896316}
   currentState: 0
 --- !u!4 &1225520346
 Transform:
@@ -4691,7 +4674,7 @@ MonoBehaviour:
   customerVisitTime: 10
   pathfinder: {fileID: 1525501539}
   seatManager: {fileID: 1156768477}
-  qteScript: {fileID: 574730397}
+  qteScript: {fileID: 1849896316}
   currentState: 0
 --- !u!4 &1381869069
 Transform:
@@ -6501,6 +6484,7 @@ GameObject:
   - component: {fileID: 1849896311}
   - component: {fileID: 1849896310}
   - component: {fileID: 1849896315}
+  - component: {fileID: 1849896316}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -6600,6 +6584,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1849896309}
   m_CullTransparentMesh: 1
+--- !u!114 &1849896316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849896309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bc1f87c399e8cd46a65b080ab6296b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  qtePanel: {fileID: 574730393}
+  playerMovement: {fileID: 1530800302}
+  quickTimeSlider: {fileID: 466139720}
+  sliderDrainSpeed: 0.3
+  sliderIncrement: 5
 --- !u!1 &1908676613
 GameObject:
   m_ObjectHideFlags: 0
