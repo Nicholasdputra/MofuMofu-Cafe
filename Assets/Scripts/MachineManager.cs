@@ -26,17 +26,24 @@ public class MachineManager : MonoBehaviour
     private void Start()
     {
         isInteractable = false;
+        player = FindObjectOfType<PlayerInteraction>();
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        isInteractable = true;
-        this.GetComponent<SpriteRenderer>().sprite = selectedSprite;
+        if(collision.CompareTag("Player"))
+        {
+            isInteractable = true;
+            this.GetComponent<SpriteRenderer>().sprite = selectedSprite;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        isInteractable = false;
-        this.GetComponent<SpriteRenderer>().sprite = defaultSprite;
+        if (collision.CompareTag("Player"))
+        {
+            isInteractable = false;
+            this.GetComponent<SpriteRenderer>().sprite = defaultSprite;
+        }
     }
 
     private void Update()

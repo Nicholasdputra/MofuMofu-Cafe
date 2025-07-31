@@ -29,7 +29,7 @@ public class MenuPopup : MonoBehaviour
         }
     }
 
-    void MenuPanel()
+    public void MenuPanel()
     {
         if (menuPanel != null && !menuPanel.activeSelf)
         {

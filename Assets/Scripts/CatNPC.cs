@@ -46,9 +46,13 @@ public class CatNPC : MonoBehaviour
     private bool playerInRange = false;
     private float playerDetectionTimer = 0f;
     private bool qteTriggered = false;
+
+    private PlayerInteraction playerInteractionScript; // Reference to player interaction script
     
     void Start()
     {
+        playerInteractionScript = GameObject.FindObjectOfType<PlayerInteraction>();
+
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
         rb.freezeRotation = false; // Allow rotation for ramp tilting
@@ -161,7 +165,7 @@ public class CatNPC : MonoBehaviour
             playerDetectionTimer += Time.deltaTime;
             
             // If player has been in range for more than 1 second and QTE hasn't been triggered yet
-            if (playerDetectionTimer >= 1f && !qteTriggered)
+            if (playerDetectionTimer >= 1f && !qteTriggered && playerInteractionScript.isHoldingItem)
             {
                 qteTriggered = true;
                 OpenQTE();

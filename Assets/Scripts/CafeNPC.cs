@@ -51,7 +51,7 @@ public class CafeNPC : MonoBehaviour
     public bool hasReceivedOrder = false;
 
     [Header("Patience Variables")]
-    [SerializeField] float patience = 100f;
+    [SerializeField] public float patience = 100f;
     Image heartImage;
     public enum NPCState
     {
