@@ -1,6 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
+
+// using System.Collections.Generic;
+// using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class DrinkData
@@ -22,15 +26,32 @@ public class MachineManager : MonoBehaviour
     [SerializeField] private DrinkData DrinkObjects;
     [SerializeField] private GameObject displayedObject;
     [SerializeField] private PlayerInteraction player;
+    [SerializeField] public float timeToGenerateItem; // Time to generate item in seconds
+    
+    public Canvas canvas;
+    public Image progressBar;
+    public bool isGenerating;
 
     private void Start()
     {
         isInteractable = false;
         player = FindObjectOfType<PlayerInteraction>();
+        
+        // if (progressBar != null && gameObject.name != "Fridge")
+        // {
+        //     progressBar.fillAmount = 0f; // Initialize progress bar to empty
+        // }
+        // else
+        // {
+        //     Debug.LogError("Progress Bar is not assigned in the inspector for " + gameObject.name);
+        //     return;
+        // }
+        // progressBar.fillAmount = 0f;
     }
+    
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             isInteractable = true;
             this.GetComponent<SpriteRenderer>().sprite = selectedSprite;
@@ -51,7 +72,7 @@ public class MachineManager : MonoBehaviour
         if (isInteractable && Input.GetKeyDown(KeyCode.E))
         {
             //Debug.Log("E key pressed on machine");
-            if(isItemGenerator)
+            if (isItemGenerator)
             {
                 if (isItemReady)
                 {
@@ -68,6 +89,11 @@ public class MachineManager : MonoBehaviour
                 UpdateItemToCold();
             }
         }
+        
+        if (isGenerating && progressBar != null)
+        {
+            FillProgressBar();
+        }
     }
 
     private void GiveItemToPlayer()
@@ -76,6 +102,7 @@ public class MachineManager : MonoBehaviour
         {
             displayedObject.SetActive(false);
             player.item_Data = DrinkObjects;
+            player.item_Data.isIced = false; 
             isItemReady = false;
             player.isHoldingItem = true;
         }
@@ -86,9 +113,20 @@ public class MachineManager : MonoBehaviour
     }
     private IEnumerator GenerateItem()
     {
-        yield return new WaitForSeconds(2f);
+        canvas.gameObject.SetActive(true);
+        isGenerating = true;
+        yield return new WaitForSeconds(timeToGenerateItem);
+        isGenerating = false;
         isItemReady = true;
         displayedObject.SetActive(true);
+        progressBar.fillAmount = 0f;
+        canvas.gameObject.SetActive(false);
+    }
+
+    private void FillProgressBar()
+    {
+        Debug.Log("Filling progress bar");
+        progressBar.fillAmount += 1 / timeToGenerateItem * Time.deltaTime;
     }
 
     private void UpdateItemToCold()

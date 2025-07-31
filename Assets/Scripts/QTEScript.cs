@@ -41,6 +41,10 @@ public class QTEScript : MonoBehaviour
     [ContextMenu("Start Quick Time Event")]
     public void StartQuickTimeEvent()
     {
+        if (playerMovement == null)
+        {
+            playerMovement.canMove = false; // Disable player movement during QTE
+        }
         if (isQuickTimeActive) return; // Prevent multiple QTEs from starting
         isQuickTimeActive = true;
         quickTimeSlider.value = 0; // Reset slider to full
@@ -59,6 +63,10 @@ public class QTEScript : MonoBehaviour
 
     void EndQuickTimeEvent()
     {
+        if (playerMovement == null)
+        {
+            playerMovement.canMove = false; // Disable player movement during QTE
+        }
         //resume time
         Debug.Log("QuickTime event ended");
         Time.timeScale = 1;

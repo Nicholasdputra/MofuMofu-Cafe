@@ -11,7 +11,7 @@ public class PlayerInteraction : MonoBehaviour
     [Header("Settings")]
     public DrinkData item_Data;
     public bool isHoldingItem;
-    [SerializeField] private GameObject hold_item;
+    [SerializeField] public GameObject hold_item;
     [SerializeField] private bool isInteractable;
     [SerializeField] private GameObject targetNPC;
 
@@ -38,10 +38,11 @@ public class PlayerInteraction : MonoBehaviour
         isHoldingItem = false;
         hold_item.SetActive(false);
     }
+    
     private void Update()
     {
         GetData();
-        
+
         if (item_Data != null)
         {
             hold_item.SetActive(true);
@@ -63,7 +64,7 @@ public class PlayerInteraction : MonoBehaviour
             if (npcData.currentOrder.itemName.Contains(item_Data.drinkName))
             {
                 npcData.FinishOrder();
-                scoreManager.AddScore((int) npcData.patience);
+                scoreManager.AddScore((int)npcData.patience);
                 isHoldingItem = false;
                 hold_item.SetActive(false);
                 item_Data = null;
