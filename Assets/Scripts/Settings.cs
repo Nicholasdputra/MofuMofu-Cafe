@@ -146,10 +146,16 @@ public class Settings : MonoBehaviour
 
     void Update()
     {
-        if (!settingsPanel.activeSelf)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (settingsPanel.activeSelf)
             {
+                Debug.Log("Closing settings panel");
+                ClosePanel();
+            }
+            else
+            {
+                Debug.Log("Opening settings panel");
                 OpenTab();
             }
         }

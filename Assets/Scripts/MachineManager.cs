@@ -125,7 +125,7 @@ public class MachineManager : MonoBehaviour
 
     private void FillProgressBar()
     {
-        Debug.Log("Filling progress bar");
+        // Debug.Log("Filling progress bar");
         progressBar.fillAmount += 1 / timeToGenerateItem * Time.deltaTime;
     }
 

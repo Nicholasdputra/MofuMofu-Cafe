@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.U2D.Animation;
 
 [System.Serializable]
 public class CafeNPC : MonoBehaviour
@@ -31,6 +32,8 @@ public class CafeNPC : MonoBehaviour
     public Sprite happyEmote;
     public Sprite angryEmote;
     public Sprite catEmote;
+    Sprite standingSprite;
+    [SerializeField] Sprite seatedSprite;
 
     [Header("Order Variables")]
     [TextArea(3, 10)]
@@ -68,12 +71,16 @@ public class CafeNPC : MonoBehaviour
         Leaving
     }
 
+    SpriteRenderer spriteRenderer;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         seatManager = FindObjectOfType<SeatManager>();
         rb.gravityScale = 0f;
         rb.freezeRotation = true;
+        standingSprite = spriteRenderer.sprite;
 
         heartImage = transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>();
         heartImage.fillAmount = patience / 100f;
@@ -165,6 +172,7 @@ public class CafeNPC : MonoBehaviour
                 // NPC sits and waits
                 break;
             case NPCState.Leaving:
+                
                 MoveToTarget();
                 break;
         }
@@ -181,7 +189,7 @@ public class CafeNPC : MonoBehaviour
         rb.velocity = direction * moveSpeed;
 
         float distanceToTarget = Vector2.Distance(currentPosition, targetPosition);
-        if (distanceToTarget < 0.1f)
+        if (distanceToTarget < 0.05f)
         {
             currentPathIndex++;
             if (currentPathIndex >= currentPath.Count)
@@ -205,6 +213,8 @@ public class CafeNPC : MonoBehaviour
                 break;
             case NPCState.MovingToSeat:
                 currentState = NPCState.Seated;
+                spriteRenderer.sprite = seatedSprite; // Change sprite to seated
+                GetComponent<SpriteSkin>().enabled = false; // Disable sprite skinning if used
                 // StartCoroutine(SitAndLeave());
                 break;
             case NPCState.Leaving:
@@ -295,6 +305,8 @@ public class CafeNPC : MonoBehaviour
                 {
                     seatManager.FreeSeat(currentSeat);
                     SetPathToExit();
+                    spriteRenderer.sprite = standingSprite; // Change sprite back to standing
+                    GetComponent<SpriteSkin>().enabled = true; // Re-enable sprite skinning if used
                     currentState = NPCState.Leaving;
                     if (hasReceivedOrder)
                     {

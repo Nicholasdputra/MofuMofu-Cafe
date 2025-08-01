@@ -8,6 +8,7 @@ public class CatNPC : MonoBehaviour
     public float moveSpeed = 1.5f;
     public float nodeReachDistance = 0.3f;
     public CatID catID = CatID.Cat1; // Which cat this is
+    public bool canMove = true; // Whether this cat can move or not
     
     [Header("Rotation Settings")]
     public float rotationSpeed = 180f; // Degrees per second
@@ -45,13 +46,14 @@ public class CatNPC : MonoBehaviour
     // Player detection variables
     private bool playerInRange = false;
     private float playerDetectionTimer = 0f;
-    private bool qteTriggered = false;
+    public bool qteTriggered = false;
+    public bool justFinishedQTE = false; // Flag to indicate if QTE just finished
 
     private PlayerInteraction playerInteractionScript; // Reference to player interaction script
     
     void Start()
     {
-        playerInteractionScript = GameObject.FindObjectOfType<PlayerInteraction>();
+        playerInteractionScript = FindObjectOfType<PlayerInteraction>();
 
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
@@ -77,38 +79,45 @@ public class CatNPC : MonoBehaviour
     
     void HandleMovement()
     {
-        if (isMoving)
+        if (canMove)
         {
-            if (useDirectMovement)
+            if (isMoving)
             {
-                // Direct linear movement to target node
-                Vector2 targetPos = targetNode.transform.position;
-                Vector2 direction = (targetPos - (Vector2)transform.position).normalized;
-                rb.velocity = direction * moveSpeed;
-                
-                // Check if reached target node
-                if (Vector2.Distance(transform.position, targetPos) < nodeReachDistance)
+                if (useDirectMovement)
                 {
-                    OnReachedDirectTarget();
+                    // Direct linear movement to target node
+                    Vector2 targetPos = targetNode.transform.position;
+                    Vector2 direction = (targetPos - (Vector2)transform.position).normalized;
+                    rb.velocity = direction * moveSpeed;
+
+                    // Check if reached target node
+                    if (Vector2.Distance(transform.position, targetPos) < nodeReachDistance)
+                    {
+                        OnReachedDirectTarget();
+                    }
+                }
+                else if (currentPath.Count > 0 && currentPathIndex < currentPath.Count)
+                {
+                    // Normal pathfinding movement
+                    Vector2 targetPos = currentPath[currentPathIndex].transform.position;
+                    Vector2 direction = (targetPos - (Vector2)transform.position).normalized;
+                    rb.velocity = direction * moveSpeed;
+
+                    // Check if reached current node
+                    if (Vector2.Distance(transform.position, targetPos) < nodeReachDistance)
+                    {
+                        OnReachedNode();
+                    }
                 }
             }
-            else if (currentPath.Count > 0 && currentPathIndex < currentPath.Count)
+            else
             {
-                // Normal pathfinding movement
-                Vector2 targetPos = currentPath[currentPathIndex].transform.position;
-                Vector2 direction = (targetPos - (Vector2)transform.position).normalized;
-                rb.velocity = direction * moveSpeed;
-                
-                // Check if reached current node
-                if (Vector2.Distance(transform.position, targetPos) < nodeReachDistance)
-                {
-                    OnReachedNode();
-                }
+                rb.velocity = Vector2.zero;
             }
         }
         else
         {
-            rb.velocity = Vector2.zero;
+            rb.velocity = Vector2.zero; // Stop movement if cannot move
         }
     }
     
@@ -122,7 +131,7 @@ public class CatNPC : MonoBehaviour
                 targetRotation,
                 rotationSpeed * Time.deltaTime
             );
-            
+
             // Check if rotation is complete
             if (Quaternion.Angle(transform.rotation, targetRotation) < 1f)
             {
@@ -140,6 +149,10 @@ public class CatNPC : MonoBehaviour
     
     void HandlePlayerDetection()
     {
+        if (justFinishedQTE)
+        {
+            Invoke(nameof(ResetQTE), 3f); // Reset QTE state after a short delay
+        }
         // Only detect player when not at cat bed (not resting) AND not visiting a customer
         if (currentState == CatState.Resting || currentState == CatState.VisitingCustomer)
         {
@@ -161,14 +174,22 @@ public class CatNPC : MonoBehaviour
                 playerInRange = true;
                 playerDetectionTimer = 0f;
             }
-            
-            playerDetectionTimer += Time.deltaTime;
-            
+
+            if (playerInteractionScript.isHoldingItem && !qteTriggered)
+            {
+                playerDetectionTimer += Time.deltaTime;
+            }
+            else
+            {
+                playerDetectionTimer = 0f; // Reset timer if player is not holding an item
+            }
+
             // If player has been in range for more than 1 second and QTE hasn't been triggered yet
             if (playerDetectionTimer >= 1f && !qteTriggered && playerInteractionScript.isHoldingItem)
             {
                 qteTriggered = true;
                 OpenQTE();
+                playerDetectionTimer = 0;
             }
         }
         else
@@ -182,10 +203,15 @@ public class CatNPC : MonoBehaviour
             }
         }
     }
-    
+
+    void ResetQTE()
+    {
+        justFinishedQTE = false; // Reset flag after handling
+    }
+
     void OpenQTE()
     {
-        qteScript.StartQuickTimeEvent();
+        qteScript.StartQuickTimeEvent(this);
     }
     
     void HandleBehaviorLogic()

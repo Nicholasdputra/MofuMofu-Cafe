@@ -23,11 +23,7 @@ public class CashierManager : MonoBehaviour
         if (isOpeningDialogue)
         {
             playerMovement.canMove = false;
-        }
-        else
-        {
-            playerMovement.canMove = true;
-        }    
+        }  
         
         if (onCashier)
         {
@@ -36,6 +32,7 @@ public class CashierManager : MonoBehaviour
                 isDialogueFinished = false;
                 isOpeningDialogue = false;
                 dialoguePanel.SetActive(false);
+                playerMovement.canMove = true; // Re-enable player movement after dialogue
                 MoveQueue(false);
             }
             if (Input.GetKeyDown(KeyCode.E) && !isOpeningDialogue)

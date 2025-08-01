@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Coffee
   m_EditorClassIdentifier: 
   itemName: Coffee
-  coldSprite: {fileID: 21300000, guid: 58ed9ae993dfd0645bd56a6c501d3578, type: 3}
-  hotSprite: {fileID: 21300000, guid: ef84a540d711ab84099f75e5228cbf35, type: 3}
-  isCold: 0
+  coldSprite: {fileID: 21300000, guid: 3a7745ac351ffa841a0b67749a8f392b, type: 3}
+  hotSprite: {fileID: 21300000, guid: d2651cb298e1b9842a133479390e8049, type: 3}
+  isIced: 0

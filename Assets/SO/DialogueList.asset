@@ -17,59 +17,57 @@ MonoBehaviour:
     orderingIcedCoffee:
     - Iced coffee, no sugar
     - "Get me something cold that\u2019ll make me feel focused"
-    - Cold\nFocus\n
+    - Cold\nFocus
     orderingWarmCoffee:
     - Hot coffee, latte
     - Get me something warm that keeps me awake
-    - Hot\nAwake\n
+    - Hot\nAwake
     orderingIcedMatcha:
     - Get me an iced matcha
     - Something cold with an umami flavor
-    - Cold\nUmami\n
+    - Cold\nUmami
     orderingWarmMatcha:
     - A warm matcha
     - Get me something warm that has an earthy flavor
-    - Warm\nEarthy\n
+    - Warm\nEarthy
     orderingIcedChocolate:
     - A cup of chocolate, with ice
     - Get me something cold and sweet
-    - Cold\nSweet\n
+    - Cold\nSweet
     orderingWarmChocolate:
     - Hot chocolate
     - Get me something warm and sweet
-    - Warm\nSweet\n
-    repeatedDialogue: 
+    - Warm\nSweet
   - npcName: Kid
     orderingIcedCoffee:
     - I want iced coffee!
     - I wanna get the cold bitter drink that makes me zoomy!
-    - Cold\nBitter\nZoomy\n
+    - Cold\nBitter\nZoomy
     orderingWarmCoffee:
     - I wanna get a warm coffee please!
     - The warm bitter drink please, the one adults drink!
-    - Warm\nBitter\nAdults\n
+    - Warm\nBitter\nAdults
     orderingIcedMatcha:
     - I wanna get an iced macah!
     - "The colourful green drink that\u2019s cold please!"
-    - Green\nCold\n
+    - Green\nCold
     orderingWarmMatcha:
     - I want the warm maca!
     - I wanna get the warm green drink!
-    - Warm\nGreen\n
+    - Warm\nGreen
     orderingIcedChocolate:
     - Choco milk!
     - I want something super cold and super sweet!
-    - Cold\nSweet\n
+    - Cold\nSweet
     orderingWarmChocolate:
     - Hot choco milk please!
     - I wanna get a warm sweet drink!
-    - Warm\nSweet\n
-    repeatedDialogue: 
+    - Warm\nSweet
   - npcName: CutesyInfluencer
     orderingIcedCoffee:
     - An iced coffee please, make it look good~
     - Get me a my usual morning cup, but in cold pleaseee~
-    - Cold\nMorning\n
+    - Cold\nMorning
     orderingWarmCoffee:
     - Can i get uh warm coffee pleaseee?
     - I wanna get my usual warm morning cup please~
@@ -77,71 +75,68 @@ MonoBehaviour:
     orderingIcedMatcha:
     - A cup of uh warm matcha please~
     - I want something cold, earthy and trendy~
-    - Cold\nEarthy\nTrendy\n
+    - Cold\nEarthy\nTrendy
     orderingWarmMatcha:
     - A cup of uh warm matcha please~
     - Something natural to match my aesthetic~
-    - Warm\nNatural\n
+    - Warm\nNatural
     orderingIcedChocolate:
     - I wanna get an iced choccy milk~
     - I wanna get sweet and cool like me~
-    - Sweet\nCool\n
+    - Sweet\nCool
     orderingWarmChocolate:
     - Warm cup of choccy milk pleaseee
     - I want something that gives a cozy energy~
-    - Warm\nCozy\n
-    repeatedDialogue: 
+    - Warm\nCozy
   - npcName: AlternativeGuy
     orderingIcedCoffee:
     - Yooo, can i get an iced coffee? Thanksss dudeeee
     - You got anything cold and bitterrr? Feels like that kinda day man.
-    - Cold\nBitter\n
+    - Cold\nBitter
     orderingWarmCoffee:
     - Yooo, can you get me a nice hot cup of coffee? thanks mannn
     - Duuude, get me likeeee something warm to wake me up, ya? Thanks
-    - Warm\nWake\n
+    - Warm\nWake
     orderingIcedMatcha:
     - "Thinkkk I\u2019ll go with an iced matcha"
     - Dudeee, you have anything cold with that earthy, green, kinda feel to it?
-    - Cold\nEarthy\nGreen\n
+    - Cold\nEarthy\nGreen
     orderingWarmMatcha:
     - You knowww, I thinkkk imm gonna get an warm matchaaa
     - Yooo, can you get me something warmmm and earthyyy?
-    - Warm\nEarthy\n
+    - Warm\nEarthy
     orderingIcedChocolate:
     - Iiiii kinda wanna get an iced chocolate
     - Honestlyyy, get me something sweet and cool
-    - Sweet\nCool\n
+    - Sweet\nCool
     orderingWarmChocolate:
     - "Yknowww, I think I\u2019ll orderrr a hot chocooo"
     - I reallly want something warm, sweet, and cozy right now
-    - Warm\nSweet\nCozy\n
-    repeatedDialogue: 
+    - Warm\nSweet\nCozy
   - npcName: NerdyPerson
     orderingIcedCoffee:
     - '*Ahem*, iced coffee, please. I need to stay... sharp.'
     - Give me something cold and bitter, i want to feel something
-    - Cold\nBitter\n
+    - Cold\nBitter
     orderingWarmCoffee:
     - "Cup of uh... warm coffee please, I read somewhere it\u2019s good for you"
     - "Can i get something warm and bitter, something that\u2019ll get me in the
       mood to focus"
-    - Warm\nBitter\nFocus\n
+    - Warm\nBitter\nFocus
     orderingIcedMatcha:
     - "Get me a cup of uh iced matcha, it\u2019ll help me feel refreshed"
     - I wanna get something cold and natural, just like my intelligence.
-    - Cold\nNatural\n
+    - Cold\nNatural
     orderingWarmMatcha:
     - Um, get me a cup of warm matcha, it helps with brain function
     - Can I get something warm and earthy? Something a wise man might sip.
-    - Warm\nEarthy\n
+    - Warm\nEarthy
     orderingIcedChocolate:
     - Something as complex yet classic as me... Get me an iced chocolate.
     - "I want something cool and sweet, I\u2019m sure you\u2019ll understand."
-    - Cool\nSweet\n
+    - Cool\nSweet
     orderingWarmChocolate:
     - "Hot chocolate, thanks and no, it\u2019s not childish, it\u2019s... urgh, forget
       it."
     - Get me something warm and sweet, my brain needs a treat.
-    - Warm\nSweet\n
-    repeatedDialogue: 
+    - Warm\nSweet
