@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class CatNPC : MonoBehaviour
@@ -50,6 +51,12 @@ public class CatNPC : MonoBehaviour
     public bool justFinishedQTE = false; // Flag to indicate if QTE just finished
 
     private PlayerInteraction playerInteractionScript; // Reference to player interaction script
+
+    [Header("Animations")]
+    SpriteRenderer spriteRenderer;
+    Animator animator;
+    public Sprite idleSprite;
+    public Sprite walkingSprite;
     
     void Start()
     {
@@ -65,16 +72,41 @@ public class CatNPC : MonoBehaviour
         if (seatManager == null)
             seatManager = FindObjectOfType<SeatManager>();
         
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>(); // Get the SpriteRenderer component
         // Start with random roaming
         StartRoaming();
     }
-    
+
     void Update()
     {
         HandleMovement();
         HandleRotation();
         HandleBehaviorLogic();
         HandlePlayerDetection();
+        animator.SetFloat("Velocity", rb.velocity.magnitude);
+        if (rb.velocity.magnitude > 0.05f)
+        {
+            spriteRenderer.sprite = walkingSprite; // Set walking sprite
+        }
+        else
+        {
+            spriteRenderer.sprite = idleSprite; // Set idle sprite
+        }
+        Flip();
+    }
+
+    private void Flip()
+    {
+        // Flip the NPC's sprite based on movement direction
+        if (rb.velocity.x > 0)
+        {
+            spriteRenderer.flipX = true; // Facing right
+        }
+        else if (rb.velocity.x < 0)
+        {
+            spriteRenderer.flipX = false; // Facing left
+        }
     }
     
     void HandleMovement()

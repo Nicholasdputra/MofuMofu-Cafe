@@ -5,16 +5,6 @@ using Unity.VisualScripting;
 // using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 using UnityEngine.UI;
-
-[System.Serializable]
-public class DrinkData
-{
-    public string drinkName;
-    public Sprite coldSprite;
-    public Sprite hotSprite;
-    public bool isIced;
-}
-
 public class MachineManager : MonoBehaviour
 {
     [SerializeField] private Sprite defaultSprite;
@@ -23,7 +13,7 @@ public class MachineManager : MonoBehaviour
     [SerializeField] private bool isInteractable;
     [SerializeField] private bool isItemReady;
     [SerializeField] private bool isItemGenerator;
-    [SerializeField] private DrinkData DrinkObjects;
+    [SerializeField] private DrinkSO outputDrink;
     [SerializeField] private GameObject displayedObject;
     [SerializeField] private PlayerInteraction player;
     [SerializeField] public float timeToGenerateItem; // Time to generate item in seconds
@@ -54,7 +44,7 @@ public class MachineManager : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isInteractable = true;
-            this.GetComponent<SpriteRenderer>().sprite = selectedSprite;
+            GetComponent<SpriteRenderer>().sprite = selectedSprite;
         }
     }
 
@@ -63,7 +53,7 @@ public class MachineManager : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isInteractable = false;
-            this.GetComponent<SpriteRenderer>().sprite = defaultSprite;
+            GetComponent<SpriteRenderer>().sprite = defaultSprite;
         }
     }
 
@@ -101,7 +91,7 @@ public class MachineManager : MonoBehaviour
         if (!player.isHoldingItem)
         {
             displayedObject.SetActive(false);
-            player.item_Data = DrinkObjects;
+            player.item_Data = outputDrink;
             player.item_Data.isIced = false; 
             isItemReady = false;
             player.isHoldingItem = true;

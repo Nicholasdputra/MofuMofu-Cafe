@@ -21,8 +21,7 @@ public class MenuPopup : MonoBehaviour
 
         if (menuPanel != null)
         {
-            menuPanel.SetActive(true); // Ensure the menu panel is hidden at start
-            Time.timeScale = 0f;
+            menuPanel.SetActive(false);
         }
         else
         {
@@ -40,6 +39,7 @@ public class MenuPopup : MonoBehaviour
 
     public void MenuPanel()
     {
+        Debug.Log("Menu button clicked. Toggling menu panel visibility.");
         if (menuPanel != null && !menuPanel.activeSelf)
         {
             menuPanel.SetActive(true);

@@ -73,11 +73,13 @@ public class CafeNPC : MonoBehaviour
     }
 
     SpriteRenderer spriteRenderer;
+    Animator animator;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         seatManager = FindObjectOfType<SeatManager>();
         rb.gravityScale = 0f;
         rb.freezeRotation = true;
@@ -87,6 +89,8 @@ public class CafeNPC : MonoBehaviour
         orderBubble = transform.GetChild(0).GetChild(0).gameObject;
         heartImage = transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>();
         heartImage.fillAmount = patience / 100f;
+
+        
 
         StartCoroutine(DrainPatience());
     }
@@ -182,6 +186,7 @@ public class CafeNPC : MonoBehaviour
                 MoveToTarget();
                 break;
         }
+        animator.SetFloat("Velocity", rb.velocity.magnitude);
     }
 
     void MoveToTarget()

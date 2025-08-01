@@ -169,7 +169,14 @@ public class Settings : MonoBehaviour
 
     public void ClosePanel()
     {
-        Time.timeScale = 1f;
+        if (GameObject.Find("Menu Popup") != null)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
         settingsPanel.SetActive(false);
         AudioManager.instance.DimAudio(false);
     }

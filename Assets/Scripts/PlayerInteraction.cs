@@ -9,7 +9,7 @@ public class PlayerInteraction : MonoBehaviour
     public ScoreManager scoreManager;
 
     [Header("Settings")]
-    public DrinkData item_Data;
+    public DrinkSO item_Data;
     public bool isHoldingItem;
     [SerializeField] public GameObject hold_item;
     [SerializeField] private bool isInteractable;
@@ -61,7 +61,7 @@ public class PlayerInteraction : MonoBehaviour
             CafeNPC npcData = targetNPC.GetComponent<CafeNPC>();
             if (npcData.currentState != CafeNPC.NPCState.Seated) return;
             Debug.Log("Interacting with NPC: " + npcData.name);
-            if (npcData.currentOrder.itemName.Contains(item_Data.drinkName))
+            if (npcData.currentOrder.itemName.Contains(item_Data.itemName))
             {
                 npcData.FinishOrder();
                 scoreManager.AddScore((int)npcData.patience);

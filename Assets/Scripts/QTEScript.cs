@@ -7,9 +7,17 @@ using UnityEngine.UI;
 public class QTEScript : MonoBehaviour
 {
     [SerializeField] GameObject qtePanel;
+    Image qteDrinkImage;
+    Image qteSliderPawImage;
+    Image qteSpaceTooltipImage;
+    public Sprite[] catPaws; // Array of sprites for cat paws
+    public Sprite[] spaceTooltipSprites; // Array of sprites for space tooltip
+    [SerializeField] DrinkSO[] AllDrinkData;
     [SerializeField] PlayerMovement playerMovement;
+    PlayerInteraction playerInteraction;
     [SerializeField] Slider quickTimeSlider;
-    [SerializeField] float sliderDrainSpeed = 0.5f;
+    [SerializeField] float quickTimeStartValue = 10f; // Initial value for the slider when QTE starts
+    [SerializeField] float sliderDecrement = 0.5f;
     [SerializeField] float sliderIncrement = 10f; // Amount to increase slider on key press
     bool isQuickTimeActive = false;
     bool canStartQTE = true; // Flag to control if QTE can start
@@ -17,12 +25,17 @@ public class QTEScript : MonoBehaviour
     CatNPC currentCatNPC;
     Coroutine qteCoroutine;
 
+
     // Start is called before the first frame update
     void Start()
     {
+        playerInteraction = playerMovement.GetComponent<PlayerInteraction>();
         quickTimeSlider.maxValue = 100; // Initialize slider to full
-        quickTimeSlider.value = 0; // Initialize slider to full
+        quickTimeSlider.value = quickTimeStartValue; // Initialize slider to full
         qtePanel.SetActive(false); // Hide the QTE UI initially
+        qteDrinkImage = qtePanel.transform.GetChild(0).GetComponent<Image>();
+        qteSliderPawImage = qtePanel.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Image>();
+        qteSpaceTooltipImage = qtePanel.transform.GetChild(2).GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -50,25 +63,58 @@ public class QTEScript : MonoBehaviour
         if(!canStartQTE) return;
         canStartQTE = false;
         Debug.Log("Starting QuickTime Event for CatNPC: " + catNPC.name);
-        if (playerMovement == null)
+        switch(catNPC.catID)
         {
-            playerMovement.canMove = false; // Disable player movement during QTE
+            case CatID.Cat1:
+                qteSliderPawImage.sprite = catPaws[0]; // Set sprite for Cat1
+                qteSpaceTooltipImage.sprite = spaceTooltipSprites[0]; // Set sprite for space tooltip
+                break;
+            case CatID.Cat2:
+                qteSliderPawImage.sprite = catPaws[1]; // Set sprite for Cat2
+                qteSpaceTooltipImage.sprite = spaceTooltipSprites[1]; // Set sprite for space tooltip
+                break;
+            case CatID.Cat3:
+                qteSliderPawImage.sprite = catPaws[2]; // Set sprite for Cat3
+                qteSpaceTooltipImage.sprite = spaceTooltipSprites[2]; // Set sprite for space tooltip
+                break;
+            default:
+                Debug.LogWarning("Unknown Cat Type: " + catNPC.catID);
+                return; // Exit if cat type is unknown
         }
+        if (playerMovement == null)
+                {
+                    playerMovement.canMove = false; // Disable player movement during QTE
+                }
         currentCatNPC = catNPC; // Set the current cat NPC
         Debug.Log("Set Current CatNPC");
         currentCatNPC.canMove = false; // Disable cat NPC movement during QTE
         currentCatNPC.qteTriggered = true; // Set the QTE triggered flag for the cat NPC
         if (isQuickTimeActive) return; // Prevent multiple QTEs from starting
         isQuickTimeActive = true;
-        quickTimeSlider.value = 5; // Reset slider to 5
+        quickTimeSlider.value = quickTimeStartValue; // Reset slider 
         qtePanel.SetActive(true); // Show the QTE UI
+        foreach (DrinkSO drink in AllDrinkData)
+        {
+            if (drink.itemName == playerInteraction.item_Data.itemName)
+            {
+                if (drink.isIced)
+                {
+                    qteDrinkImage.sprite = drink.coldSprite;
+                }
+                else
+                {
+                    qteDrinkImage.sprite = drink.hotSprite;
+                }
+                break;
+            }
+        }
         qteCoroutine = StartCoroutine(QuickTimeEvent());
     }
     IEnumerator QuickTimeEvent()
     {
         while(true){
-            yield return new WaitForSeconds(sliderDrainSpeed);
-            quickTimeSlider.value--;
+            yield return new WaitForSeconds(0.1f);
+            quickTimeSlider.value -= sliderDecrement;
             quickTimeSlider.value = Mathf.Clamp(quickTimeSlider.value, 0, 100);
             if (quickTimeSlider.value <= 0)
             {

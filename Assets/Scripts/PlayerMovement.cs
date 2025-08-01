@@ -18,11 +18,13 @@ public class PlayerMovement : MonoBehaviour
     [Header("Sprite")]
 
     [SerializeField] private SpriteRenderer sr;
+    Animator animator;
 
     void Start()
     {
         canMove = true; // Allow movement by default
         sr = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         // Disable gravity for top-down movement
         rb.gravityScale = 0f;
@@ -51,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = Vector2.zero; // Stop movement if cannot move
         }
+        animator.SetFloat("Velocity", rb.velocity.magnitude);
         if (rb.velocity.magnitude > 0.1f)
         {
             // If moving, flip the sprite based on direction

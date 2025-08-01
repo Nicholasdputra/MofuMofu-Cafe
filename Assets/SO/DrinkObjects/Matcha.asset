@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: Matcha
   coldSprite: {fileID: 21300000, guid: e434492d375cdf44e87c5da642e52c01, type: 3}
   hotSprite: {fileID: 21300000, guid: 379a7c94be5371149b0302e6c00948a1, type: 3}
-  isIced: 1
+  isIced: 0
