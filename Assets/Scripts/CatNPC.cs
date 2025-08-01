@@ -309,21 +309,31 @@ public class CatNPC : MonoBehaviour
         // Reset state timer when reaching destination - start counting down from here
         stateTimer = 0f;
         // Debug.Log($"Cat {catID} reached destination, starting {currentState} timer");
-        
+
         switch (currentState)
         {
             case CatState.Roaming:
                 // Continue roaming to another random node
                 // Debug.Log($"Cat {catID} roaming at destination, will change behavior in {roamTime} seconds");
                 break;
-                
+
             case CatState.Resting:
                 // Debug.Log($"Cat {catID} is resting in bed, will leave in {restTime} seconds");
                 break;
-                
+
             case CatState.VisitingCustomer:
-                if(catID != CatID.Cat2)
                 GetComponent<SpriteRenderer>().sortingOrder = 2; // Bring cat in front of customers
+                if (currentNode.GetComponent<CafeSeat>().IsOccupied())
+                {
+                    CafeNPC npc = currentNode.GetComponent<CafeSeat>().currentNPC;
+                    npc.SetEmote("Cat");
+                    npc.AddPatience(10f);
+                }
+                else
+                {
+                    Debug.LogWarning($"Cat {catID} reached customer node but seat is not occupied! This should not happen.");
+                    StartRoaming(); // Fallback to roaming if no customer is present
+                }
                 // Debug.Log($"Cat {catID} is visiting customer, will leave in {customerVisitTime} seconds");
                 break;
         }
@@ -350,8 +360,7 @@ public class CatNPC : MonoBehaviour
         bool hasCustomers = HasOccupiedSeats();
         
         float randomValue = Random.Range(0f, 1f);
-        
-        if(catID != CatID.Cat2)
+
         GetComponent<SpriteRenderer>().sortingOrder = 1; // Bring cat in front of customers
         if (hasCustomers && randomValue < 0.4f) // 40% chance to visit customer
         {

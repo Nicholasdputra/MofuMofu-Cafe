@@ -33,6 +33,8 @@ public class CafeNPC : MonoBehaviour
     public Sprite angryEmote;
     public Sprite catEmote;
     Sprite standingSprite;
+    GameObject orderBubble;
+    GameObject emoteBubble;
     [SerializeField] Sprite seatedSprite;
 
     [Header("Order Variables")]
@@ -81,8 +83,11 @@ public class CafeNPC : MonoBehaviour
         rb.freezeRotation = true;
         standingSprite = spriteRenderer.sprite;
 
+        emoteBubble = transform.GetChild(0).GetChild(2).gameObject;
+        orderBubble = transform.GetChild(0).GetChild(0).gameObject;
         heartImage = transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>();
         heartImage.fillAmount = patience / 100f;
+
         StartCoroutine(DrainPatience());
     }
 
@@ -145,9 +150,11 @@ public class CafeNPC : MonoBehaviour
 
     public void FinishOrder()
     {
-        transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        orderBubble.SetActive(false);
+        heartImage.transform.parent.gameObject.SetActive(false);
         patience = 5f;
         hasReceivedOrder = true;
+        SetEmote("Happy");
     }
 
     #region Movement
@@ -171,7 +178,7 @@ public class CafeNPC : MonoBehaviour
                 // NPC sits and waits
                 break;
             case NPCState.Leaving:
-                
+
                 MoveToTarget();
                 break;
         }
@@ -229,7 +236,7 @@ public class CafeNPC : MonoBehaviour
         currentSeat = seatManager.GetEmptyCafeSeat();
         if (currentSeat != null)
         {
-            seatManager.OccupySeat(currentSeat);
+            seatManager.OccupySeat(currentSeat, this);
             SetPathToSeat();
             currentState = NPCState.MovingToSeat;
         }
@@ -337,9 +344,29 @@ public class CafeNPC : MonoBehaviour
         heartImage.fillAmount = patience / 100f;
     }
     #endregion
-    
-    void SetEmote(string emoteType)
+
+    public void SetEmote(string emoteType)
     {
-        transform.GetChild(0).GetChild(2).GetComponent<Image>().gameObject.SetActive(true);
+        if (!hasReceivedOrder && emoteType != "Angry") return;
+        emoteBubble.SetActive(true);
+        Image emoteImage = emoteBubble.transform.GetChild(0).GetComponent<Image>();
+        switch (emoteType)
+        {
+            case "Happy":
+                emoteImage.sprite = happyEmote;
+                break;
+            case "Angry":
+                emoteImage.sprite = angryEmote;
+                break;
+            case "Cat":
+                emoteImage.sprite = catEmote;
+                break;
+        }
+        Invoke(nameof(HideEmote), 2f); // Hide emote after 1 second
+    }
+    
+    void HideEmote()
+    {
+        emoteBubble.SetActive(false);
     }
 }

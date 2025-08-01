@@ -32,8 +32,6 @@ public class TimerScript : MonoBehaviour
     IEnumerator StartTime()
     {
         while (true){
-            yield return new WaitForSeconds(1f); // Wait for 1 second
-            minutes++;
             if (minutes >= 60)
             {
                 hour++;
@@ -63,6 +61,8 @@ public class TimerScript : MonoBehaviour
                 cashierManager.TrySpawnNPC();
             }
             
+            yield return new WaitForSeconds(1f); // Wait for 1 second
+            minutes++;
         }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CafeSeat : MonoBehaviour
 {
+    public CafeNPC currentNPC; // Reference to the NPC currently seated here
     [Header("Seat Settings")]
     public bool isOccupied = false;
     
@@ -19,10 +20,11 @@ public class CafeSeat : MonoBehaviour
     {
         return isOccupied;
     }
-    
-    public void SetOccupied(bool occupied)
+
+    public void SetOccupied(bool occupied, CafeNPC npc = null)
     {
         isOccupied = occupied;
+        currentNPC = npc;
     }
     
     public List<Vector2> GetPathFromCashier()

@@ -44,9 +44,9 @@ public class SeatManager : MonoBehaviour
         return emptySeat.transform.position;
     }
     
-    public void OccupySeat(CafeSeat seat)
+    public void OccupySeat(CafeSeat seat, CafeNPC npc)
     {
-        seat.SetOccupied(true);
+        seat.SetOccupied(true, npc);
     }
     
     public void FreeSeat(CafeSeat seat)

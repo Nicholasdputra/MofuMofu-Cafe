@@ -20,7 +20,7 @@ public class NPCManager : MonoBehaviour
     void Start()
     {
         // Spawn an NPC at the start
-        SpawnNPC();
+        // SpawnNPC();
     }
 
     void Update()
