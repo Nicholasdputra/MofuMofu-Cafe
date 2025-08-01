@@ -2,22 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class Sound
 {
+    public string audioName;
     public AudioClip clip;
-    public float volume = 1f;
-    public float pitch = 1f;
     public bool loop = false;
-
-    public Sound(AudioClip clip, float volume = 1f, float pitch = 1f, bool loop = false)
-    {
-        this.clip = clip;
-        this.volume = volume;
-        this.pitch = pitch;
-        this.loop = loop;
-    }
+    public float startTime = 0f;
 }
 
 public class AudioManager : MonoBehaviour
@@ -44,6 +37,53 @@ public class AudioManager : MonoBehaviour
         }
 
         lowPassFilter.enabled = false; // Ensure low-pass filter is disabled at start
+
+        PlayMusic(SceneManager.GetActiveScene().name); // Play music for the current scene
+    }
+
+    public void PlayMusic(string name)
+    {
+        Sound sound = System.Array.Find(musicClips, s => s.audioName == name);
+        if (sound != null)
+        {
+            musicSource.clip = sound.clip;
+            musicSource.loop = sound.loop;
+            musicSource.time = sound.startTime;
+            musicSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("Music clip not found: " + name);
+        }
+    }
+
+    public void PlayOneShotSFX(string audioName)
+    {
+        Sound sound = System.Array.Find(sfxClips, s => s.audioName == audioName);
+        if (sound != null)
+        {
+            sfxSource.PlayOneShot(sound.clip);
+        }
+        else
+        {
+            Debug.LogWarning("SFX clip not found: " + audioName);
+        }
+    }
+
+    public void PlaySFX(string audioName)
+    {
+        Sound sound = System.Array.Find(sfxClips, s => s.audioName == audioName);
+        if (sound != null)
+        {
+            sfxSource.clip = sound.clip;
+            sfxSource.loop = sound.loop; ;
+            sfxSource.time = sound.startTime;
+            sfxSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("Looping SFX clip not found: " + audioName);
+        }
     }
 
     public void DimAudio(bool status)

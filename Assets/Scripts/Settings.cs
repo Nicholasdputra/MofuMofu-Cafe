@@ -10,7 +10,7 @@ public class Settings : MonoBehaviour
     [SerializeField] Toggle fullscreenToggle;
     [SerializeField] Slider volumeSlider;
     [SerializeField] GameObject settingsPanel;
-    
+
     private Resolution[] supportedResolutions = {
         new Resolution {width = 640, height = 360},
         new Resolution {width = 854, height = 480},
@@ -29,8 +29,7 @@ public class Settings : MonoBehaviour
 
     void Start()
     {
-        Time.timeScale = 1f; // Ensure time scale is normal when starting
-        settingsPanel.SetActive(false);        
+        settingsPanel.SetActive(false);
         nativeResolutions = Screen.resolutions;
         finalResolutions = new List<Resolution>();
         List<string> options = new List<string>();
@@ -173,5 +172,11 @@ public class Settings : MonoBehaviour
         Time.timeScale = 1f;
         settingsPanel.SetActive(false);
         AudioManager.instance.DimAudio(false);
+    }
+    
+    public void QuitGame()
+    {
+        Debug.Log("Quitting game");
+        Application.Quit();
     }
 }

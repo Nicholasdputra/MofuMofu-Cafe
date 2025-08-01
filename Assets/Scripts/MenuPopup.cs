@@ -21,7 +21,8 @@ public class MenuPopup : MonoBehaviour
 
         if (menuPanel != null)
         {
-            menuPanel.SetActive(false); // Ensure the menu panel is hidden at start
+            menuPanel.SetActive(true); // Ensure the menu panel is hidden at start
+            Time.timeScale = 0f;
         }
         else
         {
@@ -46,6 +47,7 @@ public class MenuPopup : MonoBehaviour
         else if (menuPanel != null && menuPanel.activeSelf)
         {
             menuPanel.SetActive(false);
+            Time.timeScale = 1f; // Resume game time when closing the menu
         }
     }
 }
