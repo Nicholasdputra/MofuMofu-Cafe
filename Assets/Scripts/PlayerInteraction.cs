@@ -14,6 +14,12 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] public GameObject hold_item;
     [SerializeField] private bool isInteractable;
     [SerializeField] private GameObject targetNPC;
+    Rigidbody2D rb;
+    SpriteRenderer spriteRenderer;
+    public Sprite normalSprite;
+    public Sprite holdingItemSprite;
+    public Sprite holdingItemFaceLeftSprite;
+    Vector2 lastMove;
 
     // private void OnTriggerStay2D(Collider2D collision)
     // {
@@ -35,10 +41,12 @@ public class PlayerInteraction : MonoBehaviour
     private void Start()
     {
         scoreManager = FindObjectOfType<ScoreManager>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
         isHoldingItem = false;
         hold_item.SetActive(false);
     }
-    
+
     private void Update()
     {
         GetData();
@@ -58,6 +66,7 @@ public class PlayerInteraction : MonoBehaviour
 
         if (isInteractable && Input.GetKeyDown(KeyCode.E) && targetNPC != null)
         {
+            if (!isHoldingItem) return;
             CafeNPC npcData = targetNPC.GetComponent<CafeNPC>();
             if (npcData.currentState != CafeNPC.NPCState.Seated) return;
             Debug.Log("Interacting with NPC: " + npcData.name);
@@ -74,8 +83,36 @@ public class PlayerInteraction : MonoBehaviour
                 Debug.Log("This NPC does not want this item.");
             }
         }
-    }
+        if (isHoldingItem)
+        {
+            spriteRenderer.sprite = holdingItemSprite;
+            spriteRenderer.flipX = false;
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
 
+            // Create movement vector
+            Vector2 moveInput = new Vector2(horizontal, vertical).normalized;
+
+            // Update last move direction if there's input
+            if (moveInput != Vector2.zero)
+            {
+                lastMove = moveInput;
+            }
+
+            if (lastMove.x > 0)
+            {
+                spriteRenderer.sprite = holdingItemSprite; // Facing right
+            }
+            else if (lastMove.x < 0)
+            {
+                spriteRenderer.sprite = holdingItemFaceLeftSprite; // Facing left
+            }
+        }
+        else
+        {
+            spriteRenderer.sprite = normalSprite;
+        }
+    }
 
     private void GetData()
     {

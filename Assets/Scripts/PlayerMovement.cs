@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Sprite")]
 
-    [SerializeField] private SpriteRenderer sr;
+    private SpriteRenderer sr;
     Animator animator;
 
     void Start()
