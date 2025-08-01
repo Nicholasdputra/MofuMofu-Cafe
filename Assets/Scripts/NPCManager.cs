@@ -32,7 +32,7 @@ public class NPCManager : MonoBehaviour
         }
     }
     [ContextMenu("Spawn NPC")]
-    void SpawnNPC()
+    public void SpawnNPC()
     {
         // Randomly select an NPC prefab
         GameObject npcPrefab = null;

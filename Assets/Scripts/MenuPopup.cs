@@ -29,6 +29,14 @@ public class MenuPopup : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.M) && menuPanel != null)
+        {
+            MenuPanel();
+        }
+    }
+
     public void MenuPanel()
     {
         if (menuPanel != null && !menuPanel.activeSelf)

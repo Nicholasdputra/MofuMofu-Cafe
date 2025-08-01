@@ -46,7 +46,6 @@ public class CafeNPC : MonoBehaviour
     };
     public string npcName;
     public string npcOrderDialogue;
-    bool hasRepeatedOrder = false;
     public bool isImage = false;
     //public Order currentOrder;
     public DrinkSO[] AllDrinkData;

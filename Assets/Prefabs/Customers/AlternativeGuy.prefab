@@ -80,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: fc877d0354ca23843aa88d58efc0e35f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -156,9 +156,9 @@ MonoBehaviour:
   currentState: 2
   moveSpeed: 2
   waitTime: 2
-  happyEmote: {fileID: 0}
-  angryEmote: {fileID: 0}
-  catEmote: {fileID: 0}
+  happyEmote: {fileID: -738512866, guid: 4103ecf7fc0752a4a9667ce7bd14d89b, type: 3}
+  angryEmote: {fileID: -489003842, guid: 4103ecf7fc0752a4a9667ce7bd14d89b, type: 3}
+  catEmote: {fileID: -332865166, guid: 4103ecf7fc0752a4a9667ce7bd14d89b, type: 3}
   seatedSprite: {fileID: 21300000, guid: 2be34968523f44149b59fee0d0af4236, type: 3}
   npcName: 
   npcOrderDialogue: 
@@ -229,7 +229,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.11297035, y: 0}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.50382257, y: -0.07}
@@ -240,7 +240,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.2384262, y: 0.5}
+  m_Size: {x: 2.25, y: 2}
   m_EdgeRadius: 0
 --- !u!114 &-1311913818313054250
 MonoBehaviour:
@@ -704,7 +704,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: -1187348051
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!1 &7064186558043695052
 GameObject:
@@ -954,7 +954,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 230.8, y: -317.1}
+  m_AnchoredPosition: {x: 170, y: -317.1}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4896428500853381079

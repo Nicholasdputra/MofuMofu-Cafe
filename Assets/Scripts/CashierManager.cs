@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CashierManager : MonoBehaviour
 {
+    public NPCManager npcManager; // Reference to the NPCManager to add new customers
     public PlayerMovement playerMovement;
     public Transform cashierPosition;
     public float firstCustomerGap;
@@ -14,9 +16,21 @@ public class CashierManager : MonoBehaviour
     [SerializeField] bool isDialogueFinished = false;
     public GameObject dialoguePanel;
     public List<CafeNPC> customers = new List<CafeNPC>();
+    public int bufferedNPC = 0; // Number of NPCs waiting to be added to the queue
+
+    [Header("Dialogue Settings")]
+    public Image customerImage;
+    public Sprite customerSprite;
+
+    [Header("Cashier Looks")]
     public SpriteRenderer cashierSpriteRenderer;
     public Sprite baseSprite;
     public Sprite selectedSprite;
+
+    private void Start()
+    {
+        customerImage = dialoguePanel.transform.GetComponentInChildren<Image>();
+    }
 
     void Update()
     {
@@ -29,11 +43,7 @@ public class CashierManager : MonoBehaviour
         {
             if (dialoguePanel.activeSelf && isDialogueFinished && Input.GetKeyDown(KeyCode.E))
             {
-                isDialogueFinished = false;
-                isOpeningDialogue = false;
-                dialoguePanel.SetActive(false);
-                playerMovement.canMove = true; // Re-enable player movement after dialogue
-                MoveQueue(false);
+                CloseOrderDialogue();
             }
             if (Input.GetKeyDown(KeyCode.E) && !isOpeningDialogue)
             {
@@ -47,16 +57,37 @@ public class CashierManager : MonoBehaviour
                     Debug.Log("Customer is not waiting at cashier");
                     return;
                 }
-                isOpeningDialogue = true;
-                dialoguePanel.SetActive(true);
-                // Trigger dialogue logic here
-                // Debug.Log("Opening dialogue with cashier");
-                // Simulate dialogue completion after a delay
-                StartCoroutine(TypeDialogue());
+                OpenOrderDialogue();
             }
         }
     }
 
+    void OpenOrderDialogue()
+    {
+        isOpeningDialogue = true;
+        dialoguePanel.SetActive(true);
+        customerImage.sprite = customers[0].GetComponent<SpriteRenderer>().sprite; // Set the customer sprite in the dialogue panel
+        StartCoroutine(TypeDialogue());
+    }
+
+    void CloseOrderDialogue()
+    {
+        isDialogueFinished = false;
+            isOpeningDialogue = false;
+            dialoguePanel.SetActive(false);
+            playerMovement.canMove = true; // Re-enable player movement after dialogue
+            MoveQueue(false);
+    }
+
+    public void TrySpawnNPC()
+    {
+        if(customers.Count > 3){
+            Debug.Log("Cashier queue is full, cannot add more customers");
+            bufferedNPC++;
+        }else{
+            npcManager.SpawnNPC();
+        }
+    }
     public void AddCustomer(CafeNPC cafeNPC)
     {
         if (customers.Count == 0)
@@ -109,11 +140,15 @@ public class CashierManager : MonoBehaviour
                 customers[i].currentState = CafeNPC.NPCState.MovingToQueue;
             }
         }
+        if (bufferedNPC > 0){
+            npcManager.SpawnNPC();
+            bufferedNPC--;
+        }
     }
 
     private IEnumerator TypeDialogue()
     {
-        TMP_Text dialogueText = dialoguePanel.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>();
+        TMP_Text dialogueText = dialoguePanel.transform.GetChild(1).GetComponentInChildren<TMP_Text>();
         string fullText = customers[0].npcOrderDialogue;
         dialogueText.text = "";
         foreach (char letter in fullText)

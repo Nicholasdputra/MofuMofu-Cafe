@@ -322,6 +322,8 @@ public class CatNPC : MonoBehaviour
                 break;
                 
             case CatState.VisitingCustomer:
+                if(catID != CatID.Cat2)
+                GetComponent<SpriteRenderer>().sortingOrder = 2; // Bring cat in front of customers
                 // Debug.Log($"Cat {catID} is visiting customer, will leave in {customerVisitTime} seconds");
                 break;
         }
@@ -349,6 +351,8 @@ public class CatNPC : MonoBehaviour
         
         float randomValue = Random.Range(0f, 1f);
         
+        if(catID != CatID.Cat2)
+        GetComponent<SpriteRenderer>().sortingOrder = 1; // Bring cat in front of customers
         if (hasCustomers && randomValue < 0.4f) // 40% chance to visit customer
         {
             VisitCustomer();

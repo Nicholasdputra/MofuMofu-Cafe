@@ -12,7 +12,11 @@ public class QTEScript : MonoBehaviour
     [SerializeField] float sliderDrainSpeed = 0.5f;
     [SerializeField] float sliderIncrement = 10f; // Amount to increase slider on key press
     bool isQuickTimeActive = false;
+    bool canStartQTE = true; // Flag to control if QTE can start
+    [SerializeField] float qteCooldown = 3f; // Cooldown time before another QTE can start
     CatNPC currentCatNPC;
+    Coroutine qteCoroutine;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,19 +47,22 @@ public class QTEScript : MonoBehaviour
     [ContextMenu("Start Quick Time Event")]
     public void StartQuickTimeEvent(CatNPC catNPC)
     {
+        if(!canStartQTE) return;
+        canStartQTE = false;
         Debug.Log("Starting QuickTime Event for CatNPC: " + catNPC.name);
         if (playerMovement == null)
         {
             playerMovement.canMove = false; // Disable player movement during QTE
         }
         currentCatNPC = catNPC; // Set the current cat NPC
+        Debug.Log("Set Current CatNPC");
         currentCatNPC.canMove = false; // Disable cat NPC movement during QTE
         currentCatNPC.qteTriggered = true; // Set the QTE triggered flag for the cat NPC
         if (isQuickTimeActive) return; // Prevent multiple QTEs from starting
         isQuickTimeActive = true;
         quickTimeSlider.value = 5; // Reset slider to 5
         qtePanel.SetActive(true); // Show the QTE UI
-        StartCoroutine(QuickTimeEvent());
+        qteCoroutine = StartCoroutine(QuickTimeEvent());
     }
     IEnumerator QuickTimeEvent()
     {
@@ -69,7 +76,7 @@ public class QTEScript : MonoBehaviour
                 playerInteraction.isHoldingItem = false; // Reset item holding state
                 playerInteraction.hold_item.SetActive(false);
                 playerInteraction.item_Data = null; // Clear item data
-                Debug.Log("QuickTime event failed, slider reached 0");
+                
                 EndQuickTimeEvent();
 
                 yield break; // Exit the coroutine if the slider reaches 0
@@ -80,20 +87,33 @@ public class QTEScript : MonoBehaviour
 
     void EndQuickTimeEvent()
     {
-        StopCoroutine(QuickTimeEvent()); // Stop the QTE coroutine
+        StopCoroutine(qteCoroutine); // Stop the QTE coroutine
         if (playerMovement == null)
         {
             playerMovement.canMove = false; // Disable player movement during QTE
         }
+
+        if (currentCatNPC == null)
+        {
+            Debug.LogWarning("Current CatNPC is null, cannot end QTE.");
+            return;
+        }
+
         currentCatNPC.canMove = true; // Re-enable cat NPC movement
         currentCatNPC.qteTriggered = false; // Reset the QTE triggered flag for the cat NPC
         currentCatNPC.justFinishedQTE = true; // Set flag to indicate QTE just finished
         currentCatNPC = null; // Clear the current cat NPC reference
+        Debug.Log("Setting cat NPC to null after QTE");
         //resume time
         Debug.Log("QuickTime event ended");
         Time.timeScale = 1;
         isQuickTimeActive = false;
         qtePanel.SetActive(false);
         playerMovement.canMove = true; // Re-enable player movement
+        Invoke(nameof(ResetQTECooldown), qteCooldown); // Cooldown before allowing another QTE
+    }
+
+    void ResetQTECooldown(){
+        canStartQTE = true; // Allow QTE to start again
     }
 }
