@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Settings : MonoBehaviour
 {
@@ -162,6 +163,7 @@ public class Settings : MonoBehaviour
 
     public void OpenTab()
     {
+        // AudioManager.instance.PlaySFX("MenuOpen");
         Time.timeScale = 0f;
         settingsPanel.SetActive(true);
         AudioManager.instance.DimAudio(true);
@@ -180,10 +182,17 @@ public class Settings : MonoBehaviour
         settingsPanel.SetActive(false);
         AudioManager.instance.DimAudio(false);
     }
-    
+
     public void QuitGame()
     {
         Debug.Log("Quitting game");
         Application.Quit();
+    }
+
+    public void ReloadScene()
+    {
+        Debug.Log("Reloading scene");
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

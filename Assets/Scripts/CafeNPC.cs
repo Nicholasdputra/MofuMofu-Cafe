@@ -49,7 +49,6 @@ public class CafeNPC : MonoBehaviour
     public string npcName;
     public string npcOrderDialogue;
     public bool isImage = false;
-    //public Order currentOrder;
     public DrinkSO[] AllDrinkData;
     public DrinkSO currentOrder;
     public bool hasReceivedOrder = false;

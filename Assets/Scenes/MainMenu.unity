@@ -7947,63 +7947,83 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 964bb0ba13ba48643a27d295be21ecaf, type: 3}
     loop: 1
     startTime: 0
+    volume: 1
   - audioName: Cafe
     clip: {fileID: 8300000, guid: db19f3571932fe34d9e4986fcb36b4d5, type: 3}
     loop: 1
     startTime: 0
+    volume: 1
   sfxClips:
   - audioName: StartButton
     clip: {fileID: 8300000, guid: 35c8169710c08904ea0e15dc67740a28, type: 3}
     loop: 0
     startTime: 1
-  - audioName: Cats
+    volume: 0.5
+  - audioName: CatQTE
     clip: {fileID: 8300000, guid: 3c824fe5f545d324e80a924c0749eb69, type: 3}
     loop: 0
     startTime: 0
-  - audioName: AltDud
+    volume: 1
+  - audioName: AlternativeGuy
     clip: {fileID: 8300000, guid: 0af61f506cb1a0a4aa310df607cac0fe, type: 3}
     loop: 0
-    startTime: 0
+    startTime: 0.2
+    volume: 1
   - audioName: BusinessWoman
     clip: {fileID: 8300000, guid: b038dd179a6985f429a1a861ef74c4d4, type: 3}
     loop: 0
-    startTime: 0
-  - audioName: Influencer
+    startTime: 0.8
+    volume: 1
+  - audioName: CutesyInfluencer
     clip: {fileID: 8300000, guid: 90c539eb43c238141a3a138e20712e8e, type: 3}
     loop: 0
-    startTime: 0
+    startTime: 0.8
+    volume: 1
   - audioName: Kid
     clip: {fileID: 8300000, guid: bdaf9a83f9a614e44afc5b50ac1f9489, type: 3}
     loop: 0
-    startTime: 0
-  - audioName: Nerd
+    startTime: 0.5
+    volume: 1
+  - audioName: NerdyPerson
     clip: {fileID: 8300000, guid: 4178e949e0cca7344a642cf791a59c37, type: 3}
     loop: 0
-    startTime: 0
+    startTime: 0.5
+    volume: 1
   - audioName: OpenMenuBook
     clip: {fileID: 8300000, guid: d361610e36bb607458b853f487d2dc2d, type: 3}
     loop: 0
     startTime: 0
+    volume: 1
   - audioName: ChocoStation
     clip: {fileID: 8300000, guid: 767025c1b3ef47340b7eecf7935ae6ed, type: 3}
-    loop: 0
+    loop: 1
     startTime: 0
+    volume: 1
   - audioName: CoffeeStation
     clip: {fileID: 8300000, guid: 67d70bf45cc35e849b72023001ac6ea1, type: 3}
-    loop: 0
+    loop: 1
     startTime: 0
+    volume: 1
   - audioName: Fridge
     clip: {fileID: 8300000, guid: 2c1293285b47de64591bb9715a77084b, type: 3}
     loop: 0
     startTime: 0
+    volume: 1
   - audioName: MatchaStation
     clip: {fileID: 8300000, guid: 6c62ebfbcb0b989488969e6d54283cfb, type: 3}
-    loop: 0
+    loop: 1
     startTime: 0
+    volume: 1
   - audioName: Trash
     clip: {fileID: 8300000, guid: 913043bf13b6c124f9f2e1267e3ae3e8, type: 3}
     loop: 0
     startTime: 0
+    volume: 1
+  - audioName: MouseClick
+    clip: {fileID: 8300000, guid: 99998a41bc2ac534fa35974d9579b242, type: 3}
+    loop: 0
+    startTime: 0
+    volume: 1
 --- !u!4 &1596793564
 Transform:
   m_ObjectHideFlags: 0

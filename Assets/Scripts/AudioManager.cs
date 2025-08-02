@@ -11,6 +11,9 @@ public class Sound
     public AudioClip clip;
     public bool loop = false;
     public float startTime = 0f;
+
+    [Range(0f, 1f)]
+    public float volume = 1f;
 }
 
 public class AudioManager : MonoBehaviour
@@ -49,6 +52,7 @@ public class AudioManager : MonoBehaviour
             musicSource.clip = sound.clip;
             musicSource.loop = sound.loop;
             musicSource.time = sound.startTime;
+            musicSource.volume = sound.volume;
             musicSource.Play();
         }
         else
@@ -78,11 +82,28 @@ public class AudioManager : MonoBehaviour
             sfxSource.clip = sound.clip;
             sfxSource.loop = sound.loop; ;
             sfxSource.time = sound.startTime;
+            sfxSource.volume = sound.volume;
             sfxSource.Play();
         }
         else
         {
             Debug.LogWarning("Looping SFX clip not found: " + audioName);
+        }
+    }
+
+    public void StopSFX()
+    {
+        if (sfxSource.isPlaying)
+        {
+            sfxSource.Stop();
+        }
+    }
+
+    public void StopMusic()
+    {
+        if (musicSource.isPlaying)
+        {
+            musicSource.Stop();
         }
     }
 

@@ -34,6 +34,7 @@ public class NPCManager : MonoBehaviour
     [ContextMenu("Spawn NPC")]
     public void SpawnNPC()
     {
+        AudioManager.instance.PlaySFX("StartButton");
         // Randomly select an NPC prefab
         GameObject npcPrefab = null;
         //Copied the list of names from CafeNPC so we can just pass the index

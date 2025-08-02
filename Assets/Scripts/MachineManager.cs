@@ -105,7 +105,9 @@ public class MachineManager : MonoBehaviour
     {
         canvas.gameObject.SetActive(true);
         isGenerating = true;
+        AudioManager.instance.PlaySFX(gameObject.name);
         yield return new WaitForSeconds(timeToGenerateItem);
+        AudioManager.instance.StopSFX();
         isGenerating = false;
         isItemReady = true;
         displayedObject.SetActive(true);
@@ -121,6 +123,7 @@ public class MachineManager : MonoBehaviour
 
     private void UpdateItemToCold()
     {
+        AudioManager.instance.PlaySFX("Fridge");
         if (player.item_Data != null)
         {
             player.item_Data.isIced = true;

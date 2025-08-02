@@ -81,10 +81,11 @@ public class QTEScript : MonoBehaviour
                 Debug.LogWarning("Unknown Cat Type: " + catNPC.catID);
                 return; // Exit if cat type is unknown
         }
+        AudioManager.instance.PlaySFX("CatQTE"); // Play QTE start sound
         if (playerMovement == null)
-                {
-                    playerMovement.canMove = false; // Disable player movement during QTE
-                }
+        {
+            playerMovement.canMove = false; // Disable player movement during QTE
+        }
         currentCatNPC = catNPC; // Set the current cat NPC
         Debug.Log("Set Current CatNPC");
         currentCatNPC.canMove = false; // Disable cat NPC movement during QTE

@@ -67,16 +67,17 @@ public class CashierManager : MonoBehaviour
         isOpeningDialogue = true;
         dialoguePanel.SetActive(true);
         customerImage.sprite = customers[0].GetComponent<SpriteRenderer>().sprite; // Set the customer sprite in the dialogue panel
+        AudioManager.instance.PlaySFX(customers[0].npcName); // Play cashier dialogue sound
         StartCoroutine(TypeDialogue());
     }
 
     void CloseOrderDialogue()
     {
         isDialogueFinished = false;
-            isOpeningDialogue = false;
-            dialoguePanel.SetActive(false);
-            playerMovement.canMove = true; // Re-enable player movement after dialogue
-            MoveQueue(false);
+        isOpeningDialogue = false;
+        dialoguePanel.SetActive(false);
+        playerMovement.canMove = true; // Re-enable player movement after dialogue
+        MoveQueue(false);
     }
 
     public void TrySpawnNPC()

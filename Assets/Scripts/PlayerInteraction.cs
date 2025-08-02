@@ -73,7 +73,7 @@ public class PlayerInteraction : MonoBehaviour
             if (npcData.currentOrder.itemName.Contains(item_Data.itemName))
             {
                 npcData.FinishOrder();
-                scoreManager.AddScore((int)npcData.patience);
+                CalculateScore(npcData);
                 isHoldingItem = false;
                 hold_item.SetActive(false);
                 item_Data = null;
@@ -118,5 +118,22 @@ public class PlayerInteraction : MonoBehaviour
     {
         isInteractable = playerTriggerCheck.collide;
         targetNPC = playerTriggerCheck.targetNPC;
+    }
+
+    void CalculateScore(CafeNPC npcData)
+    {
+        scoreManager.AddScore((int)npcData.patience);
+        if (npcData.patience > 50)
+        {
+            scoreManager.happyCustomers++;
+        }
+        else if (npcData.patience > 0)
+        {
+            scoreManager.normalCustomers++;
+        }
+        else
+        {
+            scoreManager.sadCustomers++;
+        }
     }
 }

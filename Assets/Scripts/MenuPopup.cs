@@ -39,6 +39,7 @@ public class MenuPopup : MonoBehaviour
 
     public void MenuPanel()
     {
+        AudioManager.instance.PlaySFX("OpenMenuBook");
         Debug.Log("Menu button clicked. Toggling menu panel visibility.");
         if (menuPanel != null && !menuPanel.activeSelf)
         {

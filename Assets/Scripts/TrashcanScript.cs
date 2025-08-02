@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TrashcanScript : MonoBehaviour
 {
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
@@ -26,6 +25,7 @@ public class TrashcanScript : MonoBehaviour
     
     public void DiscardItem()
     {
+        AudioManager.instance.PlaySFX("Trash");
         // Logic to discard the item
         PlayerInteraction playerInteraction = FindObjectOfType<PlayerInteraction>();
         if (playerInteraction.isHoldingItem)

@@ -11,6 +11,7 @@ public class TimerScript : MonoBehaviour
     public int hour;
     public int minutes;
     public CashierManager cashierManager;
+    public ScoreManager scoreManager;
     int npcThisHour = 60;
 
     // Start is called before the first frame update
@@ -21,12 +22,6 @@ public class TimerScript : MonoBehaviour
         minutes = 0;
         GetComponent<SpriteRenderer>().sprite = clockSprites[(hour - 1) % 12]; // Set initial clock sprite
         StartCoroutine(StartTime());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     IEnumerator StartTime()
@@ -44,6 +39,11 @@ public class TimerScript : MonoBehaviour
             if (minutes % (60 / npcThisHour) == 0 && hour < 20)
             {
                 cashierManager.TrySpawnNPC();
+            }
+            else if (hour >= 20)
+            {
+                scoreManager.isEnding = true; // Trigger end of game if hour is 20 or more
+                yield break;
             }
             yield return new WaitForSeconds(1f); // Wait for 1 second
             minutes++;
