@@ -5939,7 +5939,7 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -2.808447, y: 2.0985212}
+    - - {x: -2.624835, y: 1.8584123}
       - {x: -3.4868183, y: 3.4367251}
       - {x: -4.6515145, y: -6.721556}
       - {x: 16.467625, y: -6.6385465}
@@ -5950,7 +5950,7 @@ PolygonCollider2D:
       - {x: 14.941608, y: 0.3168602}
       - {x: 14.251321, y: 0.27767593}
       - {x: 14.97882, y: -5.6834445}
-      - {x: -3.976859, y: -5.7081103}
+      - {x: -3.7296886, y: -5.7081103}
   m_UseDelaunayMesh: 0
 --- !u!1 &899884314
 GameObject:
@@ -8345,7 +8345,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7125588704946586659, guid: 389dec2dec2c80044b21ae868f554ef8, type: 3}
       propertyPath: m_Size.x
-      value: 1.04
+      value: 1.1461287
+      objectReference: {fileID: 0}
+    - target: {fileID: 7125588704946586659, guid: 389dec2dec2c80044b21ae868f554ef8, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.27897096
       objectReference: {fileID: 0}
     - target: {fileID: 7889167559858717410, guid: 389dec2dec2c80044b21ae868f554ef8, type: 3}
       propertyPath: normalSprite

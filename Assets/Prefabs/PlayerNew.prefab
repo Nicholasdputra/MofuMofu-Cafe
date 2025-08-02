@@ -359,15 +359,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTriggerCheck: {fileID: 1231820230618428767}
   scoreManager: {fileID: 0}
-  item_Data:
-    drinkName: 
-    coldSprite: {fileID: 0}
-    hotSprite: {fileID: 0}
-    isIced: 0
+  item_Data: {fileID: 0}
   isHoldingItem: 0
   hold_item: {fileID: 374790282314332456}
   isInteractable: 0
   targetNPC: {fileID: 0}
+  normalSprite: {fileID: 0}
+  holdingItemSprite: {fileID: 0}
+  holdingItemFaceLeftSprite: {fileID: 0}
 --- !u!114 &948908405562960764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,7 +383,6 @@ MonoBehaviour:
   canMove: 1
   interactableTriggerArea: {fileID: 3211405413668520366}
   colliderOffsetDistance: 2
-  sr: {fileID: 0}
 --- !u!50 &2803216837484351847
 Rigidbody2D:
   serializedVersion: 4
@@ -444,8 +442,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.08794081, y: 0.35308242}
-  m_Size: {x: 2.147627, y: 5.4289384}
+  m_Offset: {x: 0.08794081, y: -0.05917692}
+  m_Size: {x: 2.147627, y: 4.6044197}
   m_Direction: 0
 --- !u!1 &2322769347448393144
 GameObject:
