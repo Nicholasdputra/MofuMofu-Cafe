@@ -7664,7 +7664,7 @@ MonoBehaviour:
   hour: 0
   minutes: 0
   cashierManager: {fileID: 2108568827}
-  scoreManager: {fileID: 0}
+  scoreManager: {fileID: 582199326}
 --- !u!1 &1090326544
 GameObject:
   m_ObjectHideFlags: 0
