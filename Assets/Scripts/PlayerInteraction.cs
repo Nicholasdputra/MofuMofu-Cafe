@@ -70,10 +70,10 @@ public class PlayerInteraction : MonoBehaviour
             CafeNPC npcData = targetNPC.GetComponent<CafeNPC>();
             if (npcData.currentState != CafeNPC.NPCState.Seated) return;
             Debug.Log("Interacting with NPC: " + npcData.name);
-            if (npcData.currentOrder.itemName.Contains(item_Data.itemName))
+            if (npcData.currentOrder.itemName.Contains(item_Data.itemName) && npcData.currentOrder.isIced == item_Data.isIced)
             {
-                npcData.FinishOrder();
                 CalculateScore(npcData);
+                npcData.FinishOrder();
                 isHoldingItem = false;
                 hold_item.SetActive(false);
                 item_Data = null;

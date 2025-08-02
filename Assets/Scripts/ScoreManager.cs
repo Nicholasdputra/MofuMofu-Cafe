@@ -20,6 +20,7 @@ public class ScoreManager : MonoBehaviour
     [Header("End Screen")]
 
     public bool isEnding = false;
+    public TMP_Text totalIncome;
     public GameObject endScreen;
 
     void Start()
@@ -60,5 +61,6 @@ public class ScoreManager : MonoBehaviour
         happyCustText.text = happyCustomers.ToString();
         normalCustText.text = normalCustomers.ToString();
         sadCustText.text = sadCustomers.ToString();
+        totalIncome.text = score.ToString();
     }
 }

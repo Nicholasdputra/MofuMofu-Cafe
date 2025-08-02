@@ -3822,6 +3822,7 @@ MonoBehaviour:
   scoreText: {fileID: 294068605}
   score: 0
   isEnding: 0
+  totalIncome: {fileID: 1286351690}
   endScreen: {fileID: 2051382852}
 --- !u!4 &582199327
 Transform:

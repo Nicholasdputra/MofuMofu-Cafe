@@ -30,6 +30,7 @@ public class Settings : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1f; // Ensure time scale is normal when starting
         settingsPanel.SetActive(false);
         nativeResolutions = Screen.resolutions;
         finalResolutions = new List<Resolution>();
