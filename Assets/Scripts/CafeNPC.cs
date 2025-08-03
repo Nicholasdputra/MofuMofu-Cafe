@@ -14,6 +14,7 @@ public class CafeNPC : MonoBehaviour
     public SeatManager seatManager;
     public CashierManager cashierManager;
     public DialogueManager dialogueManager;
+    public ScoreManager scoreManager;
     [Header("Important Nodes")]
     public Vector2 cashierPosition;
     public Vector2 exitPosition;
@@ -332,6 +333,7 @@ public class CafeNPC : MonoBehaviour
                     else
                     {
                         FinishOrder();
+                        scoreManager.sadCustomers++;
                         SetEmote("Angry");
                     }
                     yield break;
@@ -340,6 +342,8 @@ public class CafeNPC : MonoBehaviour
                 if (currentState == NPCState.WaitingAtCashier || currentState == NPCState.MovingToCashier)
                 {
                     Debug.Log(npcName + " has left due to impatience.");
+                    SetEmote("Angry");
+                    scoreManager.sadCustomers++;
                     cashierManager.MoveQueue(true);
                 }
             }

@@ -2071,7 +2071,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 999
+  m_text: 9999
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 575fe45589180cf4f8b231af3b5a141c, type: 2}
   m_sharedMaterial: {fileID: 748216331715453490, guid: 575fe45589180cf4f8b231af3b5a141c, type: 2}
@@ -2134,7 +2134,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: -4.9274445, z: -23.016449, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -7829,6 +7829,7 @@ MonoBehaviour:
   seatManager: {fileID: 1156768477}
   cashierManager: {fileID: 2108568827}
   dialogueManager: {fileID: 1730023334}
+  scoreManager: {fileID: 582199326}
   cashierPosition: {fileID: 204862371}
   exitPosition: {fileID: 2043579773}
   businessWomanPrefab: {fileID: 3247852226794954236, guid: 41dd1c22190eb4249ac39a14d6c8a731, type: 3}
@@ -8316,6 +8317,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1143171062129496209, guid: 389dec2dec2c80044b21ae868f554ef8, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1928629585626011139, guid: 389dec2dec2c80044b21ae868f554ef8, type: 3}
       propertyPath: m_Name
       value: PlayerNew
@@ -14620,7 +14625,7 @@ GameObject:
   - component: {fileID: 2108568827}
   - component: {fileID: 2108568829}
   - component: {fileID: 2108568830}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CashierManager
   m_TagString: Cashier
   m_Icon: {fileID: 0}

@@ -8,6 +8,7 @@ public class NPCManager : MonoBehaviour
     public SeatManager seatManager;
     public CashierManager cashierManager;
     public DialogueManager dialogueManager;
+    public ScoreManager scoreManager;
     public Transform cashierPosition;
     public Transform exitPosition;
     public GameObject businessWomanPrefab;
@@ -78,6 +79,7 @@ public class NPCManager : MonoBehaviour
                 cafeNPC.exitPosition = exitPosition.position;
                 cafeNPC.cashierManager = cashierManager;
                 cafeNPC.dialogueManager = dialogueManager;
+                cafeNPC.scoreManager = scoreManager;
                 // Debug.Log("Adding Customer to CashierManager");
                 cashierManager.AddCustomer(cafeNPC);
                 cafeNPC.SetupCustomerOrder(npcNames[randomIndex]);
