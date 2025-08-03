@@ -13,17 +13,17 @@ public class DialogueManager : MonoBehaviour
         {
             if (dialogue.npcName == npc.npcName)
             {
-                npc.npcOrderDialogue = DetermineOrder(npc.currentOrder, dialogue, npc.isImage);
+                npc.npcOrderDialogue = DetermineOrder(npc.currentOrder.drinkName, npc.currentOrder.isIced, dialogue, npc.isImage);
             }
         }
     }
 
-    private string DetermineOrder(DrinkSO order, Dialogues dialogue, bool isImage)
+    private string DetermineOrder(string drinkName, bool isIced, Dialogues dialogue, bool isImage)
     {
-        switch (order.itemName)
+        switch (drinkName)
         {
             case "Coffee":
-                if(order.isIced)
+                if(isIced)
                 {
                     if(isImage)
                     {
@@ -41,7 +41,7 @@ public class DialogueManager : MonoBehaviour
                 }
 
             case "Matcha":
-                if(order.isIced)
+                if(isIced)
                 {
                     if(isImage)
                     {
@@ -58,7 +58,7 @@ public class DialogueManager : MonoBehaviour
                     return dialogue.orderingWarmMatcha[1];
                 }
             case "Chocolate":
-                if(order.isIced)
+                if(isIced)
                 {
                     if(isImage)
                     {

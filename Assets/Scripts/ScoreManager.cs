@@ -25,6 +25,11 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
+        // Initialize score and customer counts
+        score = 0;
+        happyCustomers = 0;
+        normalCustomers = 0;
+        sadCustomers = 0;
         endScreen.SetActive(false);
         UpdateText();
     }
@@ -51,6 +56,7 @@ public class ScoreManager : MonoBehaviour
         if (GameObject.FindGameObjectsWithTag("Customer").Length == 0 && isEnding)
         {
             endScreen.SetActive(true);
+            UpdateText();
             Time.timeScale = 0f;
         }
     }

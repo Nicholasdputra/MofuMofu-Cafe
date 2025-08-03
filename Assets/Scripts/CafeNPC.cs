@@ -50,7 +50,7 @@ public class CafeNPC : MonoBehaviour
     public string npcOrderDialogue;
     public bool isImage = false;
     public DrinkSO[] AllDrinkData;
-    public DrinkSO currentOrder;
+    public DrinkData currentOrder;
     public bool hasReceivedOrder = false;
 
     [Header("Patience Variables")]
@@ -98,12 +98,19 @@ public class CafeNPC : MonoBehaviour
     {
         transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
         this.npcName = npcName;
-        currentOrder = AllDrinkData[Random.Range(0, AllDrinkData.Length)];
-        currentOrder.isIced = Random.Range(0, 2) == 0; // Randomly choose if the drink is iced or not
-        isImage = Random.Range(0, 2) == 0; // Randomly choose if the order is an image or not
-        Debug.Log(isImage ? "Image order" : "Text order");
+        SetRandomDrinkOrder();
         // Set the dialogue for the NPC
         dialogueManager.SetDialogue(this);
+    }
+
+    void SetRandomDrinkOrder()
+    {
+        // Randomly select a drink from the AllDrinkData array
+        DrinkSO temp = AllDrinkData[Random.Range(0, AllDrinkData.Length)];
+        currentOrder.drinkName = temp.itemName;
+        currentOrder.isIced = Random.Range(0, 2) == 0; // Randomly decide if the drink is iced or hot
+        isImage = Random.Range(0, 2) == 0; // Randomly decide if the drink will be shown as an image or text
+        Debug.Log("NPC Order: " + npcOrderDialogue);
     }
 
     public void SetTextHint(string hint)
@@ -125,7 +132,7 @@ public class CafeNPC : MonoBehaviour
         {
             foreach (DrinkSO drink in AllDrinkData)
             {
-                if (drink.itemName == currentOrder.itemName)
+                if (drink.itemName == currentOrder.drinkName)
                 {
                     if (currentOrder.isIced)
                     {

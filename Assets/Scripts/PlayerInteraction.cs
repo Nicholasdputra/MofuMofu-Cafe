@@ -9,7 +9,7 @@ public class PlayerInteraction : MonoBehaviour
     public ScoreManager scoreManager;
 
     [Header("Settings")]
-    public DrinkSO item_Data;
+    public DrinkData item_Data;
     public bool isHoldingItem;
     [SerializeField] public GameObject hold_item;
     [SerializeField] private bool isInteractable;
@@ -69,8 +69,8 @@ public class PlayerInteraction : MonoBehaviour
             if (!isHoldingItem) return;
             CafeNPC npcData = targetNPC.GetComponent<CafeNPC>();
             if (npcData.currentState != CafeNPC.NPCState.Seated) return;
-            Debug.Log("Interacting with NPC: " + npcData.name);
-            if (npcData.currentOrder.itemName.Contains(item_Data.itemName) && npcData.currentOrder.isIced == item_Data.isIced)
+            // Debug.Log("Interacting with NPC: " + npcData.name);
+            if (npcData.currentOrder.drinkName.Contains(item_Data.drinkName) && npcData.currentOrder.isIced == item_Data.isIced)
             {
                 CalculateScore(npcData);
                 npcData.FinishOrder();
@@ -126,10 +126,12 @@ public class PlayerInteraction : MonoBehaviour
         if (npcData.patience > 50)
         {
             scoreManager.happyCustomers++;
+            Debug.Log("Happy Customer! Happy customer: " + scoreManager.happyCustomers);
         }
         else if (npcData.patience > 0)
         {
             scoreManager.normalCustomers++;
+            Debug.Log("Normal Customer! Normal customer: " + scoreManager.normalCustomers);
         }
         else
         {

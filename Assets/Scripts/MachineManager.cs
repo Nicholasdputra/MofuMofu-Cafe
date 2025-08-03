@@ -1,10 +1,15 @@
 using System.Collections;
-using Unity.VisualScripting;
-
-// using System.Collections.Generic;
-// using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 using UnityEngine.UI;
+
+[System.Serializable]
+public class DrinkData
+{
+    public string drinkName;
+    public Sprite coldSprite;
+    public Sprite hotSprite;
+    public bool isIced;
+}
 public class MachineManager : MonoBehaviour
 {
     [SerializeField] private Sprite defaultSprite;
@@ -13,11 +18,11 @@ public class MachineManager : MonoBehaviour
     [SerializeField] private bool isInteractable;
     [SerializeField] private bool isItemReady;
     [SerializeField] private bool isItemGenerator;
-    [SerializeField] private DrinkSO outputDrink;
+    [SerializeField] private DrinkData outputDrink;
     [SerializeField] private GameObject displayedObject;
     [SerializeField] private PlayerInteraction player;
     [SerializeField] public float timeToGenerateItem; // Time to generate item in seconds
-    
+
     public Canvas canvas;
     public Image progressBar;
     public bool isGenerating;
@@ -26,7 +31,7 @@ public class MachineManager : MonoBehaviour
     {
         isInteractable = false;
         player = FindObjectOfType<PlayerInteraction>();
-        
+
         // if (progressBar != null && gameObject.name != "Fridge")
         // {
         //     progressBar.fillAmount = 0f; // Initialize progress bar to empty
@@ -38,7 +43,7 @@ public class MachineManager : MonoBehaviour
         // }
         // progressBar.fillAmount = 0f;
     }
-    
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -79,7 +84,7 @@ public class MachineManager : MonoBehaviour
                 UpdateItemToCold();
             }
         }
-        
+
         if (isGenerating && progressBar != null)
         {
             FillProgressBar();
@@ -92,9 +97,10 @@ public class MachineManager : MonoBehaviour
         {
             displayedObject.SetActive(false);
             player.item_Data = outputDrink;
-            player.item_Data.isIced = false; 
+            player.item_Data.isIced = false;
             isItemReady = false;
             player.isHoldingItem = true;
+            Debug.Log($"Player received item: {player.item_Data.drinkName}");
         }
         else
         {

@@ -192,8 +192,9 @@ public class Settings : MonoBehaviour
 
     public void ReloadScene()
     {
-        Debug.Log("Reloading scene");
+        Debug.Log("Reloading Main Menu");
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("MainMenu");
+        AudioManager.instance.PlayMusic("MainMenu");
     }
 }

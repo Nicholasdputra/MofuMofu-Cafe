@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: Coffee
   coldSprite: {fileID: 21300000, guid: 3a7745ac351ffa841a0b67749a8f392b, type: 3}
   hotSprite: {fileID: 21300000, guid: d2651cb298e1b9842a133479390e8049, type: 3}
-  isIced: 0
+  isIced: 1

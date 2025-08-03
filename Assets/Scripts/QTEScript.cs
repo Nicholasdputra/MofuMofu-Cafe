@@ -62,7 +62,7 @@ public class QTEScript : MonoBehaviour
     {
         if(!canStartQTE) return;
         canStartQTE = false;
-        Debug.Log("Starting QuickTime Event for CatNPC: " + catNPC.name);
+        // Debug.Log("Starting QuickTime Event for CatNPC: " + catNPC.name);
         switch(catNPC.catID)
         {
             case CatID.Cat1:
@@ -87,28 +87,15 @@ public class QTEScript : MonoBehaviour
             playerMovement.canMove = false; // Disable player movement during QTE
         }
         currentCatNPC = catNPC; // Set the current cat NPC
-        Debug.Log("Set Current CatNPC");
+        // Debug.Log("Set Current CatNPC");
         currentCatNPC.canMove = false; // Disable cat NPC movement during QTE
         currentCatNPC.qteTriggered = true; // Set the QTE triggered flag for the cat NPC
         if (isQuickTimeActive) return; // Prevent multiple QTEs from starting
         isQuickTimeActive = true;
         quickTimeSlider.value = quickTimeStartValue; // Reset slider 
         qtePanel.SetActive(true); // Show the QTE UI
-        foreach (DrinkSO drink in AllDrinkData)
-        {
-            if (drink.itemName == playerInteraction.item_Data.itemName)
-            {
-                if (drink.isIced)
-                {
-                    qteDrinkImage.sprite = drink.coldSprite;
-                }
-                else
-                {
-                    qteDrinkImage.sprite = drink.hotSprite;
-                }
-                break;
-            }
-        }
+
+        qteDrinkImage.sprite = playerInteraction.hold_item.GetComponent<SpriteRenderer>().sprite; // Use the sprite from the player's held item
         qteCoroutine = StartCoroutine(QuickTimeEvent());
     }
     IEnumerator QuickTimeEvent()
