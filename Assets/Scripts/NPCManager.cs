@@ -16,7 +16,7 @@ public class NPCManager : MonoBehaviour
     public GameObject alternativeGuyPrefab;
     public GameObject cutesyInfluencerPrefab;
     public GameObject kidPrefab;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +35,7 @@ public class NPCManager : MonoBehaviour
     [ContextMenu("Spawn NPC")]
     public void SpawnNPC()
     {
-        AudioManager.instance.PlaySFX("StartButton");
+        Invoke("PlayStartButtonSound", 1f);
         // Randomly select an NPC prefab
         GameObject npcPrefab = null;
         //Copied the list of names from CafeNPC so we can just pass the index
@@ -85,6 +85,11 @@ public class NPCManager : MonoBehaviour
                 cafeNPC.SetupCustomerOrder(npcNames[randomIndex]);
             }
         }
+    }
+    
+    private void PlayStartButtonSound()
+    {
+        AudioManager.instance.PlaySFX("StartButton");
     }
 }
 

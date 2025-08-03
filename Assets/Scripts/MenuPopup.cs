@@ -19,14 +19,14 @@ public class MenuPopup : MonoBehaviour
             Debug.LogError("Menu Button is not assigned in the inspector.");
         }
 
-        if (menuPanel != null)
-        {
-            menuPanel.SetActive(false);
-        }
-        else
-        {
-            Debug.LogError("Menu Panel is not assigned in the inspector.");
-        }
+        // if (menuPanel != null)
+        // {
+        //     menuPanel.SetActive(false);
+        // }
+        // else
+        // {
+        //     Debug.LogError("Menu Panel is not assigned in the inspector.");
+        // }
     }
 
     void Update()

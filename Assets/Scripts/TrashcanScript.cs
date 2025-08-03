@@ -8,28 +8,17 @@ public class TrashcanScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            PlayerInteraction playerInteraction = FindObjectOfType<PlayerInteraction>();
-            if (playerInteraction.isHoldingItem)
-            {
-                playerInteraction.isHoldingItem = false;
-                playerInteraction.item_Data = null;
-                playerInteraction.hold_item.SetActive(false);
-                // playerInteraction.hold_item = null;
-            }
-            else
-            {
-                Debug.Log("No item to discard");
-            }
+            DiscardItem();
         }
     }
     
     public void DiscardItem()
     {
-        AudioManager.instance.PlaySFX("Trash");
         // Logic to discard the item
         PlayerInteraction playerInteraction = FindObjectOfType<PlayerInteraction>();
         if (playerInteraction.isHoldingItem)
         {
+            AudioManager.instance.PlaySFX("Trash");
             playerInteraction.isHoldingItem = false;
             playerInteraction.item_Data = null;
             playerInteraction.hold_item.SetActive(false);
