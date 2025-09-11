@@ -31,17 +31,6 @@ public class MachineManager : MonoBehaviour
     {
         isInteractable = false;
         player = FindObjectOfType<PlayerInteraction>();
-
-        // if (progressBar != null && gameObject.name != "Fridge")
-        // {
-        //     progressBar.fillAmount = 0f; // Initialize progress bar to empty
-        // }
-        // else
-        // {
-        //     Debug.LogError("Progress Bar is not assigned in the inspector for " + gameObject.name);
-        //     return;
-        // }
-        // progressBar.fillAmount = 0f;
     }
 
     private void OnTriggerStay2D(Collider2D collision)

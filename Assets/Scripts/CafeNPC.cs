@@ -9,44 +9,30 @@ using UnityEngine.U2D.Animation;
 [System.Serializable]
 public class CafeNPC : MonoBehaviour
 {
-    [Header("Managers")]
-    public NPCManager npcManager;
-    public SeatManager seatManager;
-    public CashierManager cashierManager;
-    public DialogueManager dialogueManager;
-    public ScoreManager scoreManager;
     [Header("Important Nodes")]
     public Vector2 cashierPosition;
     public Vector2 exitPosition;
 
     [Header("Movement Settings")]
-    public NPCState currentState = NPCState.MovingToCashier;
     public float moveSpeed = 2f;
     public float waitTime = 2f;
-
     private Rigidbody2D rb;
     private int currentPathIndex = 0;
     private List<Vector2> currentPath = new List<Vector2>();
     private CafeSeat currentSeat;
-
+    
     [Header("Emoticons")]
     public Sprite happyEmote;
     public Sprite angryEmote;
     public Sprite catEmote;
     Sprite standingSprite;
-    GameObject orderBubble;
+    Transform orderBubble;
     GameObject emoteBubble;
     [SerializeField] Sprite seatedSprite;
 
     [Header("Order Variables")]
-    [TextArea(3, 10)]
-    List<string> npcNames = new List<string> {
-        "BusinessWoman",
-        "Kid",
-        "CutesyInfluencer",
-        "AlternativeGuy",
-        "NerdyPerson"
-    };
+    public NPCState currentState = NPCState.MovingToCashier;
+    
     public string npcName;
     public string npcOrderDialogue;
     public bool isImage = false;
@@ -57,51 +43,47 @@ public class CafeNPC : MonoBehaviour
     [Header("Patience Variables")]
     [SerializeField] public float patience = 100f;
     Image heartImage;
+
     public enum NPCState
     {
-        //Moving within queue
         MovingToQueue,
-        //Nunggu di queue, basically to stop movement
         WaitingInQueue,
-        //Jalan ke cashier, so ikutin path cashier dari GetPathFromCashier
         MovingToCashier,
-        //Nunggu di cashier, basically to stop movement
         WaitingAtCashier,
         MovingToSeat,
         Seated,
         Leaving
     }
 
+    [Header("Other Components")]
     SpriteRenderer spriteRenderer;
     Animator animator;
+    Transform NPCCanvas;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        seatManager = FindObjectOfType<SeatManager>();
         rb.gravityScale = 0f;
         rb.freezeRotation = true;
         standingSprite = spriteRenderer.sprite;
+        NPCCanvas = transform.GetChild(0);
 
-        emoteBubble = transform.GetChild(0).GetChild(2).gameObject;
-        orderBubble = transform.GetChild(0).GetChild(0).gameObject;
-        heartImage = transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>();
-        heartImage.fillAmount = patience / 100f;
-
-        
+        orderBubble = NPCCanvas.GetChild(0);
+        heartImage = NPCCanvas.GetChild(1).GetChild(0).GetComponent<Image>();
+        emoteBubble = NPCCanvas.GetChild(2).gameObject;
+        heartImage.fillAmount = patience / 100f;    
 
         StartCoroutine(DrainPatience());
     }
 
     public void SetupCustomerOrder(string npcName)
     {
-        transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        orderBubble.gameObject.SetActive(false);
         this.npcName = npcName;
         SetRandomDrinkOrder();
-        // Set the dialogue for the NPC
-        dialogueManager.SetDialogue(this);
+        DialogueManager.instance.SetDialogue(this);
     }
 
     void SetRandomDrinkOrder()
@@ -127,8 +109,9 @@ public class CafeNPC : MonoBehaviour
     }
     public void ShowOrder()
     {
-        Image drinkImage = transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>();
-        TMP_Text drinkClues = transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<TMP_Text>();
+        Image drinkImage = orderBubble.GetChild(0).GetComponent<Image>();
+        TMP_Text drinkClues = orderBubble.GetChild(1).GetComponent<TMP_Text>();
+
         if (isImage)
         {
             foreach (DrinkSO drink in AllDrinkData)
@@ -155,51 +138,37 @@ public class CafeNPC : MonoBehaviour
             drinkImage.gameObject.SetActive(false);
             drinkClues.gameObject.SetActive(true);
         }
-        //Order bubble
-        transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+        
+        orderBubble.gameObject.SetActive(true);
     }
 
     public void FinishOrder()
     {
-        orderBubble.SetActive(false);
+        orderBubble.gameObject.SetActive(false);
         heartImage.transform.parent.gameObject.SetActive(false);
         patience = 5f;
         hasReceivedOrder = true;
         SetEmote("Happy");
     }
 
-    #region Movement
+    #region Pathing
     void Update()
     {
-        switch (currentState)
+        if (currentState != NPCState.Seated || currentState != NPCState.WaitingAtCashier)
         {
-            case NPCState.MovingToQueue:
-                MoveToTarget();
-                break;
-            case NPCState.MovingToCashier:
-                MoveToTarget();
-                break;
-            case NPCState.WaitingAtCashier:
-                // NPC waits at cashier and automatically orders
-                break;
-            case NPCState.MovingToSeat:
-                MoveToTarget();
-                break;
-            case NPCState.Seated:
-                // NPC sits and waits
-                break;
-            case NPCState.Leaving:
-
-                MoveToTarget();
-                break;
+            MoveToTarget();
         }
         animator.SetFloat("Velocity", rb.velocity.magnitude);
     }
 
     void MoveToTarget()
     {
-        if (currentPath == null || currentPath.Count == 0) return;
-
+        if (currentPath.Count == 0 || currentPathIndex >= currentPath.Count)
+        {
+            rb.velocity = Vector2.zero;
+            return;
+        }
+        
         Vector2 targetPosition = currentPath[currentPathIndex];
         Vector2 currentPosition = transform.position;
         Vector2 direction = (targetPosition - currentPosition).normalized;
@@ -243,12 +212,11 @@ public class CafeNPC : MonoBehaviour
 
     public void FindSeat()
     {
-        // Debug.Log("Finding seat for NPC: " + gameObject.name);
         // Find empty seat
-        currentSeat = seatManager.GetEmptyCafeSeat();
+        currentSeat = SeatManager.instance.GetEmptyCafeSeat();
         if (currentSeat != null)
         {
-            seatManager.OccupySeat(currentSeat, this);
+            SeatManager.instance.OccupySeat(currentSeat, this);
             SetPathToSeat();
             currentState = NPCState.MovingToSeat;
         }
@@ -257,8 +225,6 @@ public class CafeNPC : MonoBehaviour
             SetPathToExit();
             currentState = NPCState.Leaving;
         }
-        // Debug.Log("Moving queue");
-        // GameObject.Find("CashierManager").GetComponent<CashierManager>().MoveQueue();
     }
 
     public void SetPath(Vector2 targetPosition)
@@ -321,7 +287,7 @@ public class CafeNPC : MonoBehaviour
             {
                 if (currentState == NPCState.Seated)
                 {
-                    seatManager.FreeSeat(currentSeat);
+                    SeatManager.instance.FreeSeat(currentSeat);
                     SetPathToExit();
                     spriteRenderer.sprite = standingSprite; // Change sprite back to standing
                     GetComponent<SpriteSkin>().enabled = true; // Re-enable sprite skinning if used
@@ -333,7 +299,7 @@ public class CafeNPC : MonoBehaviour
                     else
                     {
                         FinishOrder();
-                        scoreManager.sadCustomers++;
+                        ScoreManager.instance.sadCustomers++;
                         SetEmote("Angry");
                     }
                     yield break;
@@ -343,8 +309,8 @@ public class CafeNPC : MonoBehaviour
                 {
                     Debug.Log(npcName + " has left due to impatience.");
                     SetEmote("Angry");
-                    scoreManager.sadCustomers++;
-                    cashierManager.MoveQueue(true);
+                    ScoreManager.instance.sadCustomers++;
+                    CashierManager.instance.MoveQueue(true);
                 }
             }
 
@@ -362,7 +328,11 @@ public class CafeNPC : MonoBehaviour
 
     public void SetEmote(string emoteType)
     {
-        if (!hasReceivedOrder && emoteType != "Angry") return;
+        if (!hasReceivedOrder && emoteType != "Angry")
+        {
+            return;
+        }
+            
         emoteBubble.SetActive(true);
         Image emoteImage = emoteBubble.transform.GetChild(0).GetComponent<Image>();
         switch (emoteType)

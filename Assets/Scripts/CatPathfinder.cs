@@ -1,11 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CatPathfinder : MonoBehaviour
 {
     [Header("Auto-Generated Node Graph")]
-    public Transform nodeParent; // Parent object containing all nodes
+    public Transform nodeParent;
     
     private Dictionary<PathNode, List<PathNode>> nodeGraph = new Dictionary<PathNode, List<PathNode>>();
     private List<PathNode> allNodes = new List<PathNode>();
@@ -19,7 +18,6 @@ public class CatPathfinder : MonoBehaviour
             return;
         }
         
-        // Clear existing data
         nodeGraph.Clear();
         allNodes.Clear();
         
@@ -36,6 +34,7 @@ public class CatPathfinder : MonoBehaviour
         // Build connections based on hierarchy
         foreach (PathNode node in nodes)
         {
+            
             List<PathNode> connections = new List<PathNode>();
             
             // Connect to parent (if it has PathNode)
@@ -64,8 +63,6 @@ public class CatPathfinder : MonoBehaviour
             
             nodeGraph[node] = connections;
         }
-        
-        // Debug.Log($"Built graph with {nodes.Length} nodes and {GetTotalConnections()} connections");
     }
     
     int GetTotalConnections()

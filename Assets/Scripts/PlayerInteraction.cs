@@ -6,7 +6,6 @@ public class PlayerInteraction : MonoBehaviour
 {
     [Header("Trigger Check")]
     public PlayerTriggerCheck playerTriggerCheck;
-    public ScoreManager scoreManager;
 
     [Header("Settings")]
     public DrinkData item_Data;
@@ -14,35 +13,16 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] public GameObject hold_item;
     [SerializeField] private bool isInteractable;
     [SerializeField] private GameObject targetNPC;
-    Rigidbody2D rb;
+    
     SpriteRenderer spriteRenderer;
     public Sprite normalSprite;
     public Sprite holdingItemSprite;
     public Sprite holdingItemFaceLeftSprite;
     Vector2 lastMove;
 
-    // private void OnTriggerStay2D(Collider2D collision)
-    // {
-    //     // Debug.Log("Player Interaction Trigger Entered with: " + collision.gameObject.name);
-    //     isInteractable = true;
-    //     if(collision.CompareTag("Customer"))
-    //     {
-    //         targetNPC = collision.gameObject;
-    //     }
-    // }
-
-    // private void OnTriggerExit2D(Collider2D collision)
-    // {
-    //     // Debug.Log("Player Inside: " + collision.gameObject.name);
-    //     isInteractable = false;
-    //     targetNPC = null;
-    // }
-
     private void Start()
     {
-        scoreManager = FindObjectOfType<ScoreManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
         isHoldingItem = false;
         hold_item.SetActive(false);
     }
@@ -122,20 +102,20 @@ public class PlayerInteraction : MonoBehaviour
 
     void CalculateScore(CafeNPC npcData)
     {
-        scoreManager.AddScore((int)npcData.patience);
+        ScoreManager.instance.AddScore((int)npcData.patience);
         if (npcData.patience > 50)
         {
-            scoreManager.happyCustomers++;
-            Debug.Log("Happy Customer! Happy customer: " + scoreManager.happyCustomers);
+            ScoreManager.instance.happyCustomers++;
+            Debug.Log("Happy Customer! Happy customer: " + ScoreManager.instance.happyCustomers);
         }
         else if (npcData.patience > 0)
         {
-            scoreManager.normalCustomers++;
-            Debug.Log("Normal Customer! Normal customer: " + scoreManager.normalCustomers);
+            ScoreManager.instance.normalCustomers++;
+            Debug.Log("Normal Customer! Normal customer: " + ScoreManager.instance.normalCustomers);
         }
         else
         {
-            scoreManager.sadCustomers++;
+            ScoreManager.instance.sadCustomers++;
         }
     }
 }

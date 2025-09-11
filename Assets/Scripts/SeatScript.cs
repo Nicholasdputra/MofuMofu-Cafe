@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CafeSeat : MonoBehaviour
 {
-    public CafeNPC currentNPC; // Reference to the NPC currently seated here
+
+    public CafeNPC currentNPC; 
     [Header("Seat Settings")]
     public bool isOccupied = false;
     
@@ -31,7 +32,6 @@ public class CafeSeat : MonoBehaviour
     {
         List<Vector2> path = new List<Vector2>();
         
-        // Add all path nodes
         foreach (Transform node in pathNodes)
         {
             if (node != null)
@@ -47,7 +47,6 @@ public class CafeSeat : MonoBehaviour
     {
         List<Vector2> path = new List<Vector2>();
         
-        // Add all exit path nodes
         foreach (Transform node in exitPathNodes)
         {
             if (node != null)
@@ -55,65 +54,6 @@ public class CafeSeat : MonoBehaviour
                 path.Add(node.position);
             }
         }
-        
-        // If no exit path defined, return empty list (fallback will be used)
         return path;
-    }
-    
-    void OnDrawGizmos()
-    {
-        // Visual indicator for seat status
-        Gizmos.color = isOccupied ? Color.red : Color.green;
-        Gizmos.DrawWireCube(transform.position, Vector3.one * 0.5f);
-        
-        // Draw path to seat
-        if (pathNodes != null && pathNodes.Length > 0)
-        {
-            Gizmos.color = Color.cyan;
-            
-            // Draw path lines
-            for (int i = 0; i < pathNodes.Length - 1; i++)
-            {
-                if (pathNodes[i] != null && pathNodes[i + 1] != null)
-                {
-                    Gizmos.DrawLine(pathNodes[i].position, pathNodes[i + 1].position);
-                }
-            }
-            
-            // Draw nodes
-            foreach (Transform node in pathNodes)
-            {
-                if (node != null)
-                {
-                    Gizmos.color = Color.yellow;
-                    Gizmos.DrawWireSphere(node.position, 0.2f);
-                }
-            }
-        }
-        
-        // Draw exit path
-        if (exitPathNodes != null && exitPathNodes.Length > 0)
-        {
-            Gizmos.color = Color.magenta;
-            
-            // Draw exit path lines
-            for (int i = 0; i < exitPathNodes.Length - 1; i++)
-            {
-                if (exitPathNodes[i] != null && exitPathNodes[i + 1] != null)
-                {
-                    Gizmos.DrawLine(exitPathNodes[i].position, exitPathNodes[i + 1].position);
-                }
-            }
-            
-            // Draw exit nodes
-            foreach (Transform node in exitPathNodes)
-            {
-                if (node != null)
-                {
-                    Gizmos.color = Color.red;
-                    Gizmos.DrawWireSphere(node.position, 0.15f);
-                }
-            }
-        }
     }
 }

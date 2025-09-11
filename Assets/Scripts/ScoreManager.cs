@@ -5,6 +5,8 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
+    public static ScoreManager instance;
+
     [Header("Customer Data")]
     public TMP_Text happyCustText;
     public TMP_Text normalCustText;
@@ -22,6 +24,19 @@ public class ScoreManager : MonoBehaviour
     public bool isEnding = false;
     public TMP_Text totalIncome;
     public GameObject endScreen;
+
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.LogWarning("Multiple instances of ScoreManager detected: " + transform + " is a ScoreManager!");
+        }
+    }
 
     void Start()
     {

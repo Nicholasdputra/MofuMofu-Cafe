@@ -13,6 +13,7 @@ public class PlayerTriggerCheck : MonoBehaviour
             targetNPC = collision.gameObject;
         }
     }
+    
     void OnTriggerExit2D(Collider2D collision)
     {
         collide = false;

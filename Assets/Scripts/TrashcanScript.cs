@@ -14,7 +14,6 @@ public class TrashcanScript : MonoBehaviour
     
     public void DiscardItem()
     {
-        // Logic to discard the item
         PlayerInteraction playerInteraction = FindObjectOfType<PlayerInteraction>();
         if (playerInteraction.isHoldingItem)
         {
@@ -22,7 +21,6 @@ public class TrashcanScript : MonoBehaviour
             playerInteraction.isHoldingItem = false;
             playerInteraction.item_Data = null;
             playerInteraction.hold_item.SetActive(false);
-            // playerInteraction.hold_item = null;
         }
         else
         {

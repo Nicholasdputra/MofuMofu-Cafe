@@ -5,40 +5,41 @@ using UnityEngine;
 
 public class NPCManager : MonoBehaviour
 {
-    public SeatManager seatManager;
-    public CashierManager cashierManager;
-    public DialogueManager dialogueManager;
-    public ScoreManager scoreManager;
+    public static NPCManager instance;
+
+    [Header("Destination Positions")]
     public Transform cashierPosition;
     public Transform exitPosition;
+
+    [Header("NPC Prefabs")]
     public GameObject businessWomanPrefab;
     public GameObject nerdyPersonPrefab;
     public GameObject alternativeGuyPrefab;
     public GameObject cutesyInfluencerPrefab;
     public GameObject kidPrefab;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        // Spawn an NPC at the start
-        // SpawnNPC();
-    }
-
-    void Update()
-    {
-        // Check for input to spawn a new NPC
-        if (Input.GetKeyDown(KeyCode.N))
+        if (instance == null)
         {
-            SpawnNPC();
+            instance = this;
+        }
+        else
+        {
+            Debug.LogWarning("Multiple instances of NPCManager detected: " + transform + " is an NPC Manager!");
         }
     }
+
+    void Start()
+    {
+        StartCoroutine(SpawnNPC());
+    }
+
     [ContextMenu("Spawn NPC")]
-    public void SpawnNPC()
+    public IEnumerator SpawnNPC()
     {
         Invoke("PlayStartButtonSound", 1f);
-        // Randomly select an NPC prefab
         GameObject npcPrefab = null;
-        //Copied the list of names from CafeNPC so we can just pass the index
         List<string> npcNames = new List<string> {
             "BusinessWoman",
             "Kid",
@@ -67,29 +68,39 @@ public class NPCManager : MonoBehaviour
                 break;
         }
 
-        if (npcPrefab != null && seatManager != null)
+        if (npcPrefab != null && SeatManager.instance != null)
         {
             GameObject npc = Instantiate(npcPrefab, transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(0.1f);
             CafeNPC cafeNPC = npc.GetComponent<CafeNPC>();
+
             if (cafeNPC != null)
             {
-                cafeNPC.npcManager = this;
-                cafeNPC.seatManager = seatManager;
                 cafeNPC.cashierPosition = cashierPosition.position;
                 cafeNPC.exitPosition = exitPosition.position;
-                cafeNPC.cashierManager = cashierManager;
-                cafeNPC.dialogueManager = dialogueManager;
-                cafeNPC.scoreManager = scoreManager;
-                // Debug.Log("Adding Customer to CashierManager");
-                cashierManager.AddCustomer(cafeNPC);
+
+                CashierManager.instance.AddCustomer(cafeNPC);
                 cafeNPC.SetupCustomerOrder(npcNames[randomIndex]);
             }
         }
     }
-    
+
     private void PlayStartButtonSound()
     {
         AudioManager.instance.PlaySFX("StartButton");
     }
+    
+    // Move Try Spawn NPC Here from Cashier Manager! REMOVE LATER (just this debug line i mean.)
+    public void TrySpawnNPC()
+    {
+        if(CashierManager.instance.customers.Count > 3)
+        {
+            Debug.Log("Cashier queue is full, cannot add more customers");
+            CashierManager.instance.bufferedNPC++;
+        }
+        else
+        {
+            StartCoroutine(SpawnNPC());
+        }
+    }
 }
-

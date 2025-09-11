@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: Goodknight Studio
+  companyName: Goodknight Studios
   productName: 5_GoodKnight Studios_Student_Mofumofu Cafe
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}

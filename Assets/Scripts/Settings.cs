@@ -25,12 +25,13 @@ public class Settings : MonoBehaviour
         new Resolution {width = 3200, height = 1800},
         new Resolution {width = 3840, height = 2160},
     };
+    
     Resolution[] nativeResolutions;
     List<Resolution> finalResolutions;
 
     void Start()
     {
-        Time.timeScale = 1f; // Ensure time scale is normal when starting
+        Time.timeScale = 1f;
         settingsPanel.SetActive(false);
         nativeResolutions = Screen.resolutions;
         finalResolutions = new List<Resolution>();
@@ -62,7 +63,6 @@ public class Settings : MonoBehaviour
         resolutionDropdown.AddOptions(options);
         LoadSettings();
 
-        // Add listeners
         resolutionDropdown.onValueChanged.AddListener(SetResolution);
         fullscreenToggle.onValueChanged.AddListener(SetFullscreen);
         volumeSlider.onValueChanged.AddListener(SetVolume);
@@ -72,8 +72,6 @@ public class Settings : MonoBehaviour
     {
         Resolution resolution = finalResolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-
-        // Save resolution setting
         PlayerPrefs.SetInt("ResolutionIndex", resolutionIndex);
         PlayerPrefs.Save();
     }
@@ -81,8 +79,6 @@ public class Settings : MonoBehaviour
     public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
-
-        // Save fullscreen setting
         PlayerPrefs.SetInt("Fullscreen", isFullscreen ? 1 : 0);
         PlayerPrefs.Save();
     }
@@ -91,15 +87,12 @@ public class Settings : MonoBehaviour
     {
         AudioListener.volume = volume;
         Debug.Log("Setting volume to " + volume);
-
-        // Save volume setting
         PlayerPrefs.SetFloat("Volume", volume);
         PlayerPrefs.Save();
     }
 
     private void LoadSettings()
     {
-        // Load resolution setting
         if (PlayerPrefs.HasKey("ResolutionIndex"))
         {
             int resolutionIndex = PlayerPrefs.GetInt("ResolutionIndex");
@@ -115,7 +108,6 @@ public class Settings : MonoBehaviour
             PlayerPrefs.SetInt("ResolutionIndex", finalResolutions.Count - 1);
         }
 
-        // Load fullscreen setting
         if (PlayerPrefs.HasKey("Fullscreen"))
         {
             bool isFullscreen = PlayerPrefs.GetInt("Fullscreen") == 1;
@@ -124,12 +116,10 @@ public class Settings : MonoBehaviour
         }
         else
         {
-            //default
             fullscreenToggle.isOn = Screen.fullScreen;
             PlayerPrefs.SetInt("Fullscreen", 1);
         }
 
-        // Load volume setting
         if (PlayerPrefs.HasKey("Volume"))
         {
             float volume = PlayerPrefs.GetFloat("Volume");
@@ -164,7 +154,6 @@ public class Settings : MonoBehaviour
 
     public void OpenTab()
     {
-        // AudioManager.instance.PlaySFX("MenuOpen");
         Time.timeScale = 0f;
         settingsPanel.SetActive(true);
         AudioManager.instance.DimAudio(true);

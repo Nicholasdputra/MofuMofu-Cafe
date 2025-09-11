@@ -4,9 +4,23 @@ using UnityEngine;
 
 public class SeatManager : MonoBehaviour
 {
+    public static SeatManager instance;
+
     [Header("Seat Management")]
     public CafeSeat[] cafeSeats;
-    
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.LogWarning("Multiple instances of SeatManager detected: " + transform + " is a SeatManager!");
+        }
+    }
+
     void Start()
     {
         if (cafeSeats == null || cafeSeats.Length == 0)

@@ -14,18 +14,14 @@ public class NPCAnimationController : MonoBehaviour
     }
     void Update()
     {
-        // Check if the NPC is moving
         if (rb.velocity.magnitude > 0.1f)
         {
-            // If moving, flip the sprite based on direction
             Flip();
         }
-
     }
 
     private void Flip()
     {
-        // Flip the NPC's sprite based on movement direction
         if (rb.velocity.x > 0)
         {
             sr.flipX = false; // Facing right

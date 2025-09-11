@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class CashierManager : MonoBehaviour
 {
-    public NPCManager npcManager; // Reference to the NPCManager to add new customers
-    public PlayerMovement playerMovement;
+    public static CashierManager instance;
+
     public Transform cashierPosition;
     public float firstCustomerGap;
     public float customerGap;
@@ -21,23 +21,37 @@ public class CashierManager : MonoBehaviour
     [Header("Dialogue Settings")]
     public Image customerImage;
     public Sprite customerSprite;
+    TMP_Text dialogueText;
 
     [Header("Cashier Looks")]
     public SpriteRenderer cashierSpriteRenderer;
     public Sprite baseSprite;
     public Sprite selectedSprite;
 
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.LogWarning("Multiple instances of CashierManager detected: " + transform + " is an CashierManager!");
+        }
+    }
+
     private void Start()
     {
         customerImage = dialoguePanel.transform.GetComponentInChildren<Image>();
+        dialogueText = dialoguePanel.transform.GetChild(1).GetComponentInChildren<TMP_Text>();
     }
 
     void Update()
     {
         if (isOpeningDialogue)
         {
-            playerMovement.canMove = false;
-        }  
+            PlayerMovement.instance.canMove = false;
+        }
         
         if (onCashier)
         {
@@ -66,8 +80,8 @@ public class CashierManager : MonoBehaviour
     {
         isOpeningDialogue = true;
         dialoguePanel.SetActive(true);
-        customerImage.sprite = customers[0].GetComponent<SpriteRenderer>().sprite; // Set the customer sprite in the dialogue panel
-        AudioManager.instance.PlaySFX(customers[0].npcName); // Play cashier dialogue sound
+        customerImage.sprite = customers[0].GetComponent<SpriteRenderer>().sprite;
+        AudioManager.instance.PlaySFX(customers[0].npcName);
         StartCoroutine(TypeDialogue());
     }
 
@@ -76,32 +90,20 @@ public class CashierManager : MonoBehaviour
         isDialogueFinished = false;
         isOpeningDialogue = false;
         dialoguePanel.SetActive(false);
-        playerMovement.canMove = true; // Re-enable player movement after dialogue
+        PlayerMovement.instance.canMove = true;
         MoveQueue(false);
     }
-
-    public void TrySpawnNPC()
-    {
-        if(customers.Count > 3){
-            Debug.Log("Cashier queue is full, cannot add more customers");
-            bufferedNPC++;
-        }else{
-            npcManager.SpawnNPC();
-        }
-    }
+    
     public void AddCustomer(CafeNPC cafeNPC)
     {
         if (customers.Count == 0)
         {
-            // Debug.Log("Adding first customer to cashier");
             cafeNPC.SetPathToCashier();
             cafeNPC.currentState = CafeNPC.NPCState.MovingToCashier;
         }
         else
         {
-            // Debug.Log("Adding customer to cashier queue");
             Vector2 nextPosition = (Vector2)cashierPosition.position + new Vector2((customers.Count - 1) * customerGap + firstCustomerGap, 0);
-            // Debug.Log("Setting customer path to: " + nextPosition);
             cafeNPC.SetPath(nextPosition);
             cafeNPC.currentState = CafeNPC.NPCState.MovingToQueue;
         }
@@ -118,44 +120,39 @@ public class CashierManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Moving queue due to impatience");
             customers[0].SetPathToExit();
             customers[0].currentState = CafeNPC.NPCState.Leaving;
 
         }
         customers.RemoveAt(0);
-        // Debug.Log("Removing customer, Current queue size: " + customers.Count);
         for (int i = 0; i < customers.Count; i++)
         {
-            // Debug.Log("Moving customer " + i);
             if (i == 0)
             {
-                // Debug.Log("Setting first customer path");
                 customers[0].SetPathToCashier();
             }
             else
             {
                 Vector2 nextPosition = (Vector2)cashierPosition.position + new Vector2((i - 1) * customerGap + firstCustomerGap, 0);
-                // Debug.Log("Setting customer path to: " + nextPosition);
                 customers[i].SetPath(nextPosition);
                 customers[i].currentState = CafeNPC.NPCState.MovingToQueue;
             }
         }
         if (bufferedNPC > 0){
-            npcManager.SpawnNPC();
+            NPCManager.instance.SpawnNPC();
             bufferedNPC--;
         }
     }
 
     private IEnumerator TypeDialogue()
     {
-        TMP_Text dialogueText = dialoguePanel.transform.GetChild(1).GetComponentInChildren<TMP_Text>();
         string fullText = customers[0].npcOrderDialogue;
         dialogueText.text = "";
+
         foreach (char letter in fullText)
         {
             dialogueText.text += letter;
-            yield return new WaitForSeconds(0.01f); // Adjust typing speed here
+            yield return new WaitForSeconds(0.01f);
         }
         isDialogueFinished = true;
     }

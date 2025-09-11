@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement instance;
+
     [Header("Movement Settings")]
     public float moveSpeed = 5f;
     private Rigidbody2D rb;
@@ -19,6 +21,14 @@ public class PlayerMovement : MonoBehaviour
 
     private SpriteRenderer sr;
     Animator animator;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
 
     void Start()
     {

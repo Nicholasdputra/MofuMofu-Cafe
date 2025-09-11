@@ -3,8 +3,21 @@ using System.Collections;
 
 public class DialogueManager : MonoBehaviour
 {
+    public static DialogueManager instance;
     public CharacterDialogueSO characterDialogueSO;
     CafeNPC targetNPC;
+
+    public void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.LogWarning("Multiple instances of DialogueManager detected: " + transform + " is a DialogueManager!");
+        }
+    }
     
     public void SetDialogue(CafeNPC npc)
     {
@@ -23,7 +36,7 @@ public class DialogueManager : MonoBehaviour
         switch (drinkName)
         {
             case "Coffee":
-                if(isIced)
+                if (isIced)
                 {
                     if(isImage)
                     {
@@ -31,8 +44,10 @@ public class DialogueManager : MonoBehaviour
                     }
                     targetNPC.SetTextHint(dialogue.orderingIcedCoffee[2]); // Set the text hint for iced coffee
                     return dialogue.orderingIcedCoffee[1];
-                }else{
-                    if(isImage)
+                }
+                else
+                {
+                    if (isImage)
                     {
                         return dialogue.orderingWarmCoffee[0]; // Return the first string for image orders
                     }
@@ -49,16 +64,19 @@ public class DialogueManager : MonoBehaviour
                     }
                     targetNPC.SetTextHint(dialogue.orderingIcedMatcha[2]); // Set the text hint for iced matcha
                     return dialogue.orderingIcedMatcha[1];
-                }else{
-                    if(isImage)
+                }
+                else
+                {
+                    if (isImage)
                     {
                         return dialogue.orderingWarmMatcha[0]; // Return the first string for image orders
                     }
                     targetNPC.SetTextHint(dialogue.orderingWarmMatcha[2]); // Set the text hint for warm matcha
                     return dialogue.orderingWarmMatcha[1];
                 }
+
             case "Chocolate":
-                if(isIced)
+                if (isIced)
                 {
                     if(isImage)
                     {
@@ -66,16 +84,19 @@ public class DialogueManager : MonoBehaviour
                     }
                     targetNPC.SetTextHint(dialogue.orderingIcedChocolate[2]); // Set the text hint for iced chocolate
                     return dialogue.orderingIcedChocolate[1];
-                }else{
-                    if(isImage)
+                }
+                else
+                {
+                    if (isImage)
                     {
                         return dialogue.orderingWarmChocolate[0]; // Return the first string for image orders
                     }
                     targetNPC.SetTextHint(dialogue.orderingWarmChocolate[2]); // Set the text hint for warm chocolate
                     return dialogue.orderingWarmChocolate[1];
                 }   
+
             default:
-                return "Boo boo order broken contact discord: nicholas_d_p.";
+                return "An unexpected error has occurred.";
         }
     }
 }

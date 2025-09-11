@@ -6,19 +6,26 @@ using UnityEngine.UI;
 
 public class QTEScript : MonoBehaviour
 {
+    [Header("QTE Settings")]
     [SerializeField] GameObject qtePanel;
+
+    [Header("To Display")]
     Image qteDrinkImage;
     Image qteSliderPawImage;
     Image qteSpaceTooltipImage;
-    public Sprite[] catPaws; // Array of sprites for cat paws
-    public Sprite[] spaceTooltipSprites; // Array of sprites for space tooltip
-    [SerializeField] DrinkSO[] AllDrinkData;
-    [SerializeField] PlayerMovement playerMovement;
-    PlayerInteraction playerInteraction;
+
+    [Header("Slider Settings")]
     [SerializeField] Slider quickTimeSlider;
     [SerializeField] float quickTimeStartValue = 10f; // Initial value for the slider when QTE starts
     [SerializeField] float sliderDecrement = 0.5f;
     [SerializeField] float sliderIncrement = 10f; // Amount to increase slider on key press
+
+    [Header("QTE Variables")]
+    public Sprite[] catPaws; // Array of sprites for cat paws
+    public Sprite[] spaceTooltipSprites; // Array of sprites for space tooltip
+    [SerializeField] DrinkSO[] AllDrinkData;
+    
+    PlayerInteraction playerInteraction;
     bool isQuickTimeActive = false;
     bool canStartQTE = true; // Flag to control if QTE can start
     [SerializeField] float qteCooldown = 3f; // Cooldown time before another QTE can start
@@ -29,10 +36,10 @@ public class QTEScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerInteraction = playerMovement.GetComponent<PlayerInteraction>();
-        quickTimeSlider.maxValue = 100; // Initialize slider to full
-        quickTimeSlider.value = quickTimeStartValue; // Initialize slider to full
-        qtePanel.SetActive(false); // Hide the QTE UI initially
+        playerInteraction = PlayerMovement.instance.GetComponent<PlayerInteraction>();
+        quickTimeSlider.maxValue = 100;
+        quickTimeSlider.value = quickTimeStartValue;
+        qtePanel.SetActive(false); 
         qteDrinkImage = qtePanel.transform.GetChild(0).GetComponent<Image>();
         qteSliderPawImage = qtePanel.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Image>();
         qteSpaceTooltipImage = qtePanel.transform.GetChild(2).GetComponent<Image>();
@@ -45,6 +52,7 @@ public class QTEScript : MonoBehaviour
         {
             quickTimeSlider.value += sliderIncrement;
         }
+        
         if (quickTimeSlider.value >= 100)
         {
             EndQuickTimeEvent();
@@ -53,7 +61,7 @@ public class QTEScript : MonoBehaviour
 
         if (isQuickTimeActive)
         {
-            playerMovement.canMove = false; // Disable player movement during QTE
+            PlayerMovement.instance.canMove = false; // Disable player movement during QTE
         }
     }
 
@@ -81,11 +89,9 @@ public class QTEScript : MonoBehaviour
                 Debug.LogWarning("Unknown Cat Type: " + catNPC.catID);
                 return; // Exit if cat type is unknown
         }
+
         AudioManager.instance.PlaySFX("CatQTE"); // Play QTE start sound
-        if (playerMovement == null)
-        {
-            playerMovement.canMove = false; // Disable player movement during QTE
-        }
+        PlayerMovement.instance.canMove = false; // Disable player movement during QTE
         currentCatNPC = catNPC; // Set the current cat NPC
         // Debug.Log("Set Current CatNPC");
         currentCatNPC.canMove = false; // Disable cat NPC movement during QTE
@@ -98,34 +104,38 @@ public class QTEScript : MonoBehaviour
         qteDrinkImage.sprite = playerInteraction.hold_item.GetComponent<SpriteRenderer>().sprite; // Use the sprite from the player's held item
         qteCoroutine = StartCoroutine(QuickTimeEvent());
     }
+
     IEnumerator QuickTimeEvent()
     {
-        while(true){
+        if (quickTimeSlider.value <= 0)
+        {
+            quickTimeSlider.value = quickTimeStartValue;
+        } 
+
+        while (true)
+        {
             yield return new WaitForSeconds(0.1f);
             quickTimeSlider.value -= sliderDecrement;
             quickTimeSlider.value = Mathf.Clamp(quickTimeSlider.value, 0, 100);
+
             if (quickTimeSlider.value <= 0)
             {
                 PlayerInteraction playerInteraction = FindObjectOfType<PlayerInteraction>();
                 playerInteraction.isHoldingItem = false; // Reset item holding state
                 playerInteraction.hold_item.SetActive(false);
                 playerInteraction.item_Data = null; // Clear item data
-                
+
                 EndQuickTimeEvent();
 
                 yield break; // Exit the coroutine if the slider reaches 0
             }
-            yield return null;
         }
     }
 
     void EndQuickTimeEvent()
     {
         StopCoroutine(qteCoroutine); // Stop the QTE coroutine
-        if (playerMovement == null)
-        {
-            playerMovement.canMove = false; // Disable player movement during QTE
-        }
+        PlayerMovement.instance.canMove = false; // Disable player movement during QTE
 
         if (currentCatNPC == null)
         {
@@ -143,11 +153,12 @@ public class QTEScript : MonoBehaviour
         Time.timeScale = 1;
         isQuickTimeActive = false;
         qtePanel.SetActive(false);
-        playerMovement.canMove = true; // Re-enable player movement
+        PlayerMovement.instance.canMove = true; // Re-enable player movement
         Invoke(nameof(ResetQTECooldown), qteCooldown); // Cooldown before allowing another QTE
     }
 
-    void ResetQTECooldown(){
+    void ResetQTECooldown()
+    {
         canStartQTE = true; // Allow QTE to start again
     }
 }

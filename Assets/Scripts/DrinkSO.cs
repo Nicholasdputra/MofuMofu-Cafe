@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Drinks", menuName = "ScriptableObjects/DrinkObjects")]
@@ -10,4 +8,3 @@ public class DrinkSO : ScriptableObject
     public Sprite hotSprite;
     public bool isIced;
 }
-

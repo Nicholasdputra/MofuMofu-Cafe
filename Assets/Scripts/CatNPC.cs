@@ -7,15 +7,15 @@ public class CatNPC : MonoBehaviour
     [Header("Cat Settings")]
     public float moveSpeed = 1.5f;
     public float nodeReachDistance = 0.3f;
-    public CatID catID = CatID.Cat1; // Which cat this is
-    public bool canMove = true; // Whether this cat can move or not
+    public CatID catID = CatID.Cat1; 
+    public bool canMove = true; 
     
     [Header("Rotation Settings")]
-    public float rotationSpeed = 180f; // Degrees per second
+    public float rotationSpeed = 180f;
     
     [Header("Player Detection")]
     public float detectionRange = 2f;
-    public LayerMask playerLayer = -1; // Which layer the player is on
+    public LayerMask playerLayer = -1;
     
     [Header("Behavior Timers")]
     public float restTime = 5f;
@@ -25,7 +25,7 @@ public class CatNPC : MonoBehaviour
     [Header("References")]
     public CatPathfinder pathfinder;
     public SeatManager seatManager;
-    public QTEScript qteScript; // Reference to the QTE script
+    public QTEScript qteScript;
     
     [Header("Current State")]
     public CatState currentState = CatState.Roaming;
@@ -38,18 +38,17 @@ public class CatNPC : MonoBehaviour
     
     private bool isMoving = false;
     private float stateTimer = 0f;
-    private bool useDirectMovement = false; // Flag for direct vs pathfinded movement
+    private bool useDirectMovement = false;
     
     private Quaternion targetRotation = Quaternion.identity;
     private bool isRotating = false;
-    
-    // Player detection variables
+
     private bool playerInRange = false;
     private float playerDetectionTimer = 0f;
     public bool qteTriggered = false;
-    public bool justFinishedQTE = false; // Flag to indicate if QTE just finished
+    public bool justFinishedQTE = false;
 
-    private PlayerInteraction playerInteractionScript; // Reference to player interaction script
+    private PlayerInteraction playerInteractionScript;
 
     [Header("Animations")]
     SpriteRenderer spriteRenderer;
@@ -63,7 +62,7 @@ public class CatNPC : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
-        rb.freezeRotation = false; // Allow rotation for ramp tilting
+        rb.freezeRotation = false;
         
         if (pathfinder == null)
             pathfinder = FindObjectOfType<CatPathfinder>();
@@ -72,8 +71,7 @@ public class CatNPC : MonoBehaviour
             seatManager = FindObjectOfType<SeatManager>();
         
         animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>(); // Get the SpriteRenderer component
-        // Start with random roaming
+        spriteRenderer = GetComponent<SpriteRenderer>();
         StartRoaming();
     }
 
@@ -86,25 +84,24 @@ public class CatNPC : MonoBehaviour
         animator.SetFloat("Velocity", rb.velocity.magnitude);
         if (rb.velocity.magnitude > 0.05f)
         {
-            spriteRenderer.sprite = walkingSprite; // Set walking sprite
+            spriteRenderer.sprite = walkingSprite;
         }
         else
         {
-            spriteRenderer.sprite = idleSprite; // Set idle sprite
+            spriteRenderer.sprite = idleSprite;
         }
         Flip();
     }
 
     private void Flip()
     {
-        // Flip the NPC's sprite based on movement direction
         if (rb.velocity.x > 0)
         {
-            spriteRenderer.flipX = true; // Facing right
+            spriteRenderer.flipX = true;
         }
         else if (rb.velocity.x < 0)
         {
-            spriteRenderer.flipX = false; // Facing left
+            spriteRenderer.flipX = false;
         }
     }
     
@@ -116,12 +113,10 @@ public class CatNPC : MonoBehaviour
             {
                 if (useDirectMovement)
                 {
-                    // Direct linear movement to target node
                     Vector2 targetPos = targetNode.transform.position;
                     Vector2 direction = (targetPos - (Vector2)transform.position).normalized;
                     rb.velocity = direction * moveSpeed;
 
-                    // Check if reached target node
                     if (Vector2.Distance(transform.position, targetPos) < nodeReachDistance)
                     {
                         OnReachedDirectTarget();
@@ -129,12 +124,10 @@ public class CatNPC : MonoBehaviour
                 }
                 else if (currentPath.Count > 0 && currentPathIndex < currentPath.Count)
                 {
-                    // Normal pathfinding movement
                     Vector2 targetPos = currentPath[currentPathIndex].transform.position;
                     Vector2 direction = (targetPos - (Vector2)transform.position).normalized;
                     rb.velocity = direction * moveSpeed;
 
-                    // Check if reached current node
                     if (Vector2.Distance(transform.position, targetPos) < nodeReachDistance)
                     {
                         OnReachedNode();
@@ -148,7 +141,7 @@ public class CatNPC : MonoBehaviour
         }
         else
         {
-            rb.velocity = Vector2.zero; // Stop movement if cannot move
+            rb.velocity = Vector2.zero;
         }
     }
     
@@ -156,14 +149,12 @@ public class CatNPC : MonoBehaviour
     {
         if (isRotating)
         {
-            // Smoothly rotate towards target rotation
             transform.rotation = Quaternion.RotateTowards(
                 transform.rotation,
                 targetRotation,
                 rotationSpeed * Time.deltaTime
             );
 
-            // Check if rotation is complete
             if (Quaternion.Angle(transform.rotation, targetRotation) < 1f)
             {
                 transform.rotation = targetRotation;
@@ -182,24 +173,21 @@ public class CatNPC : MonoBehaviour
     {
         if (justFinishedQTE)
         {
-            Invoke(nameof(ResetQTE), 3f); // Reset QTE state after a short delay
+            Invoke(nameof(ResetQTE), 3f);
         }
-        // Only detect player when not at cat bed (not resting) AND not visiting a customer
+
         if (currentState == CatState.Resting || currentState == CatState.VisitingCustomer)
         {
-            // Reset detection when at bed or with customer
             playerInRange = false;
             playerDetectionTimer = 0f;
             qteTriggered = false;
             return;
         }
-        
-        // Check if player is in detection range
+
         Collider2D playerCollider = Physics2D.OverlapCircle(transform.position, detectionRange, playerLayer);
         
         if (playerCollider != null)
         {
-            // Player is in range
             if (!playerInRange)
             {
                 playerInRange = true;
@@ -212,10 +200,9 @@ public class CatNPC : MonoBehaviour
             }
             else
             {
-                playerDetectionTimer = 0f; // Reset timer if player is not holding an item
+                playerDetectionTimer = 0f;
             }
 
-            // If player has been in range for more than 1 second and QTE hasn't been triggered yet
             if (playerDetectionTimer >= 1f && !qteTriggered && playerInteractionScript.isHoldingItem)
             {
                 qteTriggered = true;
@@ -225,7 +212,6 @@ public class CatNPC : MonoBehaviour
         }
         else
         {
-            // Player left range, reset detection
             if (playerInRange)
             {
                 playerInRange = false;
@@ -237,7 +223,7 @@ public class CatNPC : MonoBehaviour
 
     void ResetQTE()
     {
-        justFinishedQTE = false; // Reset flag after handling
+        justFinishedQTE = false;
     }
 
     void OpenQTE()
@@ -247,7 +233,6 @@ public class CatNPC : MonoBehaviour
     
     void HandleBehaviorLogic()
     {
-        // Only count down timer if not currently moving
         if (!isMoving)
         {
             stateTimer += Time.deltaTime;
@@ -280,20 +265,17 @@ public class CatNPC : MonoBehaviour
     
     void OnReachedNode()
     {
-        // Handle rotation based on next node type
-        if (currentPathIndex < currentPath.Count - 1) // Not at final destination
+        if (currentPathIndex < currentPath.Count - 1)
         {
-            PathNode currentPathNode = currentPath[currentPathIndex]; // Node we just reached
-            PathNode nextNode = currentPath[currentPathIndex + 1]; // Node we're going to next
+            PathNode currentPathNode = currentPath[currentPathIndex];
+            PathNode nextNode = currentPath[currentPathIndex + 1];
             
-            // Only apply tilt when going from ramp to ramp
             if (currentPathNode != null && currentPathNode.IsRamp() && nextNode.IsRamp())
             {
                 SetTargetRotation(nextNode.GetTargetRotation());
             }
             else if (!nextNode.IsRamp())
             {
-                // Reset to flat when moving to non-ramp node
                 SetTargetRotation(Quaternion.identity);
             }
             else if (currentPathNode.IsRamp() && !nextNode.IsRamp())
@@ -304,7 +286,6 @@ public class CatNPC : MonoBehaviour
         
         currentPathIndex++;
         
-        // Check if reached destination
         if (currentPathIndex >= currentPath.Count)
         {
             OnReachedDestination();
@@ -316,10 +297,8 @@ public class CatNPC : MonoBehaviour
         isMoving = false;
         currentNode = targetNode;
         
-        // Handle rotation for destinations
         if (targetNode != null && targetNode.IsRamp())
         {
-            // Only keep ramp rotation if we came from another ramp
             PathNode previousNode = currentPath.Count > 1 ? currentPath[currentPath.Count - 2] : null;
             if (previousNode != null && previousNode.IsRamp())
             {
@@ -327,33 +306,26 @@ public class CatNPC : MonoBehaviour
             }
             else
             {
-                // Reset to flat if we didn't come from a ramp
                 SetTargetRotation(Quaternion.identity);
             }
         }
         else
         {
-            // Reset to flat for non-ramp destinations
             SetTargetRotation(Quaternion.identity);
         }
-        
-        // Reset state timer when reaching destination - start counting down from here
+
         stateTimer = 0f;
-        // Debug.Log($"Cat {catID} reached destination, starting {currentState} timer");
 
         switch (currentState)
         {
             case CatState.Roaming:
-                // Continue roaming to another random node
-                // Debug.Log($"Cat {catID} roaming at destination, will change behavior in {roamTime} seconds");
                 break;
 
             case CatState.Resting:
-                // Debug.Log($"Cat {catID} is resting in bed, will leave in {restTime} seconds");
                 break;
 
             case CatState.VisitingCustomer:
-                GetComponent<SpriteRenderer>().sortingOrder = 2; // Bring cat in front of customers
+                GetComponent<SpriteRenderer>().sortingOrder = 2;
                 if (currentNode.GetComponent<CafeSeat>().IsOccupied())
                 {
                     CafeNPC npc = currentNode.GetComponent<CafeSeat>().currentNPC;
@@ -363,9 +335,9 @@ public class CatNPC : MonoBehaviour
                 else
                 {
                     Debug.LogWarning($"Cat {catID} reached customer node but seat is not occupied! This should not happen.");
-                    StartRoaming(); // Fallback to roaming if no customer is present
+                    StartRoaming();
                 }
-                // Debug.Log($"Cat {catID} is visiting customer, will leave in {customerVisitTime} seconds");
+
                 break;
         }
     }
