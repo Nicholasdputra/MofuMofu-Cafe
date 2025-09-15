@@ -57,17 +57,61 @@
         Handles cat states, basic movement, behaviour, and Cat Pathfinding (with the help of the Cat Pathfinder Class) 
       </td>
     </tr>
-<!-- An entry starts here -->
     <tr>
       <td>
-        <!-- Insert script name here -->
         CatPathfinder.cs
       </td>
       <td>
-        <!-- Insert description here -->
         A helper script to help with pathfinding 
       </td>
     </tr>
-<!-- An entry ends here -->
+    <tr>
+      <td>
+        CharacterDialogueSO.cs
+      </td>
+      <td>
+        A scriptable object for holding character dialogue
+      </td>
+    </tr>
+    <tr>
+      <td>
+        DialogueManager.cs
+      </td>
+      <td>
+        Handles what dialogue to use for NPCs
+      </td>
+    </tr>
+    <tr>
+      <td>
+        DrinkSO.cs
+      </td>
+      <td>
+        A scriptable object for holding basic drink data
+      </td>
+    </tr>
+    <tr>
+      <td>
+        MachineManager.cs
+      </td>
+      <td>
+        Handles the machines (coffee machine, chocolate dispenser, matcha chawan, fridge)
+      </td>
+    </tr>
+    <tr>
+      <td>
+        MenuPopup.cs
+      </td>
+      <td>
+        Contains how to play elements that pop up in a menu-like book
+      </td>
+    </tr>
+    <tr>
+      <td>
+        NPCAnimationController.cs
+      </td>
+      <td>
+        Handles NPC sprite direction
+      </td>
+    </tr>
   </tbody>
 </table>
