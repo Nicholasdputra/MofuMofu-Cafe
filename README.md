@@ -25,28 +25,49 @@
     </tr>
   </thead>
   <tbody>
-<!--     An entry starts here -->
     <tr>
       <td>
-        <!-- Insert script name here -->
         AudioManager.cs
       </td>
       <td>
-        <!-- Insert description here -->
         Responsible for everything sound related in the game
       </td>
     </tr>
-<!--     An entry ends here -->
-    <!--     An entry starts here -->
     <tr>
       <td>
-        <!-- Insert script name here -->
         CafeNPC.cs
       </td>
       <td>
-        <!-- Insert description here -->
+        Handles NPC behavior and states as well as pathfinding
       </td>
     </tr>
-<!--     An entry ends here -->
+    <tr>
+      <td>
+        CashierManager.cs
+      </td>
+      <td>
+        Handles queueing and ordering for customers
+      </td>
+    </tr>
+    <tr>
+      <td>
+        CatNPC.cs
+      </td>
+      <td>
+        Handles cat states, basic movement, behaviour, and Cat Pathfinding (with the help of the Cat Pathfinder Class) 
+      </td>
+    </tr>
+<!-- An entry starts here -->
+    <tr>
+      <td>
+        <!-- Insert script name here -->
+        CatPathfinder.cs
+      </td>
+      <td>
+        <!-- Insert description here -->
+        A helper script to help with pathfinding 
+      </td>
+    </tr>
+<!-- An entry ends here -->
   </tbody>
 </table>
