@@ -25,14 +25,28 @@
     </tr>
   </thead>
   <tbody>
+<!--     An entry starts here -->
     <tr>
       <td>
-<!--         insert script name here -->
+        <!-- Insert script name here -->
+        AudioManager.cs
       </td>
       <td>
-<!--         insert description here -->
+        <!-- Insert description here -->
+        Responsible for everything sound related in the game
       </td>
     </tr>
-    
+<!--     An entry ends here -->
+    <!--     An entry starts here -->
+    <tr>
+      <td>
+        <!-- Insert script name here -->
+        CafeNPC.cs
+      </td>
+      <td>
+        <!-- Insert description here -->
+      </td>
+    </tr>
+<!--     An entry ends here -->
   </tbody>
 </table>
