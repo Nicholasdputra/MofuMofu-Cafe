@@ -46,7 +46,7 @@
         CashierManager.cs
       </td>
       <td>
-        Handles queueing and ordering for customers
+        Handles queueing and ordering for customers when they enter and go to the cashier to order
       </td>
     </tr>
     <tr>
@@ -111,6 +111,102 @@
       </td>
       <td>
         Handles NPC sprite direction
+      </td>
+    </tr>
+    <tr>
+      <td>
+        NPCManager.cs
+      </td>
+      <td>
+        Handles NPC spawning and setup
+      </td>
+    </tr>
+    <tr>
+      <td>
+        PathNode.cs
+      </td>
+      <td>
+       Used in path nodes that make up a graph that functions as a path, both for NPCs and cats
+      </td>
+    </tr>
+    <tr>
+      <td>
+        PlayerInteraction.cs
+      </td>
+      <td>
+        Handles player interaction, be it with NPCs or Machines
+      </td>
+    </tr>
+    <tr>
+      <td>
+        PlayerMovement.cs
+      </td>
+      <td>
+        Handles player movement
+      </td>
+    </tr>
+    <tr>
+      <td>
+        PlayerTriggerCheck.cs
+      </td>
+      <td>
+        Basic script that determines player's target NPC and if they're colliding with anything
+      </td>
+    </tr>
+    <tr>
+      <td>
+        QTEScript.cs
+      </td>
+      <td>
+        Handles QTE that's triggered when the cats are close and in a certain state
+      </td>
+    </tr>
+    <tr>
+      <td>
+        SceneHandler.cs
+      </td>
+      <td>
+        Handles scene transitions
+      </td>
+    </tr>
+    <tr>
+      <td>
+        SeatHandler.cs
+      </td>
+      <td>
+        Handles empty and occupied seats in the cafe as a whole for assigning where to seat NPCs
+      </td>
+    </tr>
+    <tr>
+      <td>
+        SeatScript.cs
+      </td>
+      <td>
+        Marks a seat's occupancy when there are customers and helps with pathing NPCs to said seat
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Settings.cs
+      </td>
+      <td>
+        Handles resolutions and volume settings for the game
+      </td>
+    </tr>
+    <tr>
+      <td>
+        TimerScript.cs
+      </td>
+      <td>
+        Handles the in game time and how time may influence other scripts 
+      </td>
+    </tr>
+    <tr>
+      <td>
+        TrashcanScript.cs
+      </td>
+      <td>
+        Handles resolutions and volume settings for the game
       </td>
     </tr>
   </tbody>
