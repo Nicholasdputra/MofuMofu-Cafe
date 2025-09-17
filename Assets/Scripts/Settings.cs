@@ -31,7 +31,6 @@ public class Settings : MonoBehaviour
 
     void Start()
     {
-        Time.timeScale = 1f;
         settingsPanel.SetActive(false);
         nativeResolutions = Screen.resolutions;
         finalResolutions = new List<Resolution>();
@@ -139,6 +138,7 @@ public class Settings : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            
             if (settingsPanel.activeSelf)
             {
                 Debug.Log("Closing settings panel");
@@ -146,6 +146,7 @@ public class Settings : MonoBehaviour
             }
             else
             {
+                // if (GameObject.Find("Menu Popup") != null) return;
                 Debug.Log("Opening settings panel");
                 OpenTab();
             }
@@ -161,7 +162,7 @@ public class Settings : MonoBehaviour
 
     public void ClosePanel()
     {
-        if (GameObject.Find("Menu Popup") != null)
+        if (GameObject.Find("MenuBooks") != null)
         {
             Time.timeScale = 0f;
         }

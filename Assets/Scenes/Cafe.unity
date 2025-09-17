@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 4809207}
   - component: {fileID: 4809206}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Settings Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7943,9 +7943,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1ad35de12e03edc4d830cdf93d1f5b09, type: 3}
   - {fileID: 21300000, guid: 8ad1f328240cdcf49b1b085b4cade19a, type: 3}
   hour: 0
-  minutes: 0
-  cashierManager: {fileID: 2108568827}
-  scoreManager: {fileID: 582199326}
+  minute: 0
 --- !u!1 &1090326544
 GameObject:
   m_ObjectHideFlags: 0
@@ -8094,10 +8092,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43110f40af456074ca01744a5b949ef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seatManager: {fileID: 1156768477}
-  cashierManager: {fileID: 2108568827}
-  dialogueManager: {fileID: 1730023334}
-  scoreManager: {fileID: 582199326}
   cashierPosition: {fileID: 204862371}
   exitPosition: {fileID: 2043579773}
   businessWomanPrefab: {fileID: 3247852226794954236, guid: 41dd1c22190eb4249ac39a14d6c8a731, type: 3}
@@ -10470,17 +10464,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.7836068, y: 2.589333}
   m_EdgeRadius: 0
---- !u!114 &1490497419 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 948908405562960764, guid: 389dec2dec2c80044b21ae868f554ef8, type: 3}
-  m_PrefabInstance: {fileID: 1192324895}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baaab43d74685f147a6178f0625bbaa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1507383964
 GameObject:
   m_ObjectHideFlags: 0
@@ -11430,7 +11413,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1616616781
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13282,17 +13265,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!223 &1849896312
 Canvas:
   m_ObjectHideFlags: 0
@@ -13302,7 +13285,7 @@ Canvas:
   m_GameObject: {fileID: 1849896309}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 2
+  m_RenderMode: 1
   m_Camera: {fileID: 1380080559}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -13324,8 +13307,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1849896309}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1636879362}
@@ -13341,8 +13324,8 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 1080}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!222 &1849896315
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13364,6 +13347,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   qtePanel: {fileID: 574730393}
+  quickTimeSlider: {fileID: 466139720}
+  quickTimeStartValue: 10
+  sliderDecrement: 0.5
+  sliderIncrement: 10
   catPaws:
   - {fileID: 21300000, guid: 15ca1ed95348062439a8e7f60c8ca9c5, type: 3}
   - {fileID: 21300000, guid: 336cccd2c1d307749b9feb02237584ce, type: 3}
@@ -13376,11 +13363,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a51b142f48f3d524a92689b7697ab085, type: 2}
   - {fileID: 11400000, guid: 514d6f7332a81e74eaccbbefa1f2e7b6, type: 2}
   - {fileID: 11400000, guid: eca0bf12e2eaf2b4f88232d095f94c08, type: 2}
-  playerMovement: {fileID: 1490497419}
-  quickTimeSlider: {fileID: 466139720}
-  quickTimeStartValue: 10
-  sliderDecrement: 0.5
-  sliderIncrement: 10
   qteCooldown: 3
 --- !u!1 &1908676613
 GameObject:
@@ -15047,8 +15029,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78cdb178fdfed8c419f985b37ab8dcdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcManager: {fileID: 1111760574}
-  playerMovement: {fileID: 1490497419}
   cashierPosition: {fileID: 204862371}
   firstCustomerGap: 2
   customerGap: 1.5
@@ -15109,7 +15089,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.7368911, y: -0.77}
+  m_Offset: {x: -0.7368911, y: -0.43300223}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -15120,7 +15100,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.31378233, y: 1.3600001}
+  m_Size: {x: 0.31378233, y: 0.68600464}
   m_EdgeRadius: 0
 --- !u!212 &2108568830
 SpriteRenderer:
@@ -15408,7 +15388,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 14.16, y: 0}
+  m_AnchoredPosition: {x: 14.160004, y: 0}
   m_SizeDelta: {x: 425.08, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3765772908152078307 stripped

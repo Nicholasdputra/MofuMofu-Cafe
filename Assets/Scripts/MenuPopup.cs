@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +20,7 @@ public class MenuPopup : MonoBehaviour
         {
             Debug.LogError("Menu Button is not assigned in the inspector.");
         }
+        MenuPanel();
     }
 
     void Update()
@@ -30,11 +33,14 @@ public class MenuPopup : MonoBehaviour
 
     public void MenuPanel()
     {
+        if (GameObject.Find("Settings Panel") != null) return;
         AudioManager.instance.PlaySFX("OpenMenuBook");
         Debug.Log("Menu button clicked. Toggling menu panel visibility.");
         if (menuPanel != null && !menuPanel.activeSelf)
         {
             menuPanel.SetActive(true);
+            Time.timeScale = 0f;
+            Debug.Log("Menu panel opened.");
         }
         else if (menuPanel != null && menuPanel.activeSelf)
         {
