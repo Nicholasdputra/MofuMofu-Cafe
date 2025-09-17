@@ -1,7 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class NPCManager : MonoBehaviour
 {
@@ -80,9 +80,27 @@ public class NPCManager : MonoBehaviour
                 cafeNPC.exitPosition = exitPosition.position;
 
                 CashierManager.instance.AddCustomer(cafeNPC);
-                cafeNPC.SetupCustomerOrder(npcNames[randomIndex]);
+                SetupCustomerOrder(npcNames[randomIndex], cafeNPC);
             }
         }
+    }
+
+    public void SetupCustomerOrder(string npcName, CafeNPC npc)
+    {
+        npc.orderBubble.gameObject.SetActive(false);
+        npc.npcName = npcName;
+        SetRandomDrinkOrder(npc);
+        DialogueManager.instance.SetDialogue(npc);
+    }
+
+    void SetRandomDrinkOrder(CafeNPC npc)
+    {
+        // Randomly select a drink from the AllDrinkData array
+        DrinkSO temp = npc.AllDrinkData[Random.Range(0, npc.AllDrinkData.Length)];
+        npc.currentOrder.drinkName = temp.itemName;
+        npc.currentOrder.isIced = Random.Range(0, 2) == 0; // Randomly decide if the drink is iced or hot
+        npc.isOrderFormImage = Random.Range(0, 2) == 0; // Randomly decide if the drink will be shown as an image or text
+        Debug.Log("NPC Order: " + npc.npcOrderDialogue);
     }
 
     private void PlayStartButtonSound()

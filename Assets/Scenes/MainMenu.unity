@@ -13752,7 +13752,7 @@ GameObject:
   - component: {fileID: 2113175838}
   - component: {fileID: 2113175837}
   m_Layer: 5
-  m_Name: Agar Particle ada di belakang title
+  m_Name: BackgroundCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

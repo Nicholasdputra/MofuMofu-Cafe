@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CafeSeat : MonoBehaviour
 {
-
     public CafeNPC currentNPC; 
     [Header("Seat Settings")]
     public bool isOccupied = false;

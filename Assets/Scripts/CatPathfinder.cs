@@ -65,16 +65,6 @@ public class CatPathfinder : MonoBehaviour
         }
     }
     
-    int GetTotalConnections()
-    {
-        int total = 0;
-        foreach (var kvp in nodeGraph)
-        {
-            total += kvp.Value.Count;
-        }
-        return total / 2; // Divide by 2 because connections are bidirectional
-    }
-    
     public List<PathNode> FindPath(PathNode start, PathNode end, CatID catID)
     {
         if (start == null || end == null) return new List<PathNode>();
@@ -150,7 +140,6 @@ public class CatPathfinder : MonoBehaviour
         return new List<PathNode>(); // No path found
     }
     
-    // Legacy method for backward compatibility
     public List<PathNode> FindPath(PathNode start, PathNode end)
     {
         return FindPath(start, end, CatID.Cat1); // Default to Cat1

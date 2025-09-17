@@ -103,7 +103,7 @@ public class CashierManager : MonoBehaviour
         }
         else
         {
-            Vector2 nextPosition = (Vector2)cashierPosition.position + new Vector2((customers.Count - 1) * customerGap + firstCustomerGap, 0);
+            Vector2 nextPosition = (Vector2) cashierPosition.position + new Vector2((customers.Count - 1) * customerGap + firstCustomerGap, 0);
             cafeNPC.SetPath(nextPosition);
             cafeNPC.currentState = CafeNPC.NPCState.MovingToQueue;
         }

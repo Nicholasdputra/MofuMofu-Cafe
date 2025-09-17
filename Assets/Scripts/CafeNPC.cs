@@ -26,7 +26,7 @@ public class CafeNPC : MonoBehaviour
     public Sprite angryEmote;
     public Sprite catEmote;
     Sprite standingSprite;
-    Transform orderBubble;
+    public Transform orderBubble;
     GameObject emoteBubble;
     [SerializeField] Sprite seatedSprite;
 
@@ -35,7 +35,7 @@ public class CafeNPC : MonoBehaviour
     
     public string npcName;
     public string npcOrderDialogue;
-    public bool isImage = false;
+    public bool isOrderFormImage = false;
     public DrinkSO[] AllDrinkData;
     public DrinkData currentOrder;
     public bool hasReceivedOrder = false;
@@ -77,42 +77,13 @@ public class CafeNPC : MonoBehaviour
 
         StartCoroutine(DrainPatience());
     }
-
-    public void SetupCustomerOrder(string npcName)
-    {
-        orderBubble.gameObject.SetActive(false);
-        this.npcName = npcName;
-        SetRandomDrinkOrder();
-        DialogueManager.instance.SetDialogue(this);
-    }
-
-    void SetRandomDrinkOrder()
-    {
-        // Randomly select a drink from the AllDrinkData array
-        DrinkSO temp = AllDrinkData[Random.Range(0, AllDrinkData.Length)];
-        currentOrder.drinkName = temp.itemName;
-        currentOrder.isIced = Random.Range(0, 2) == 0; // Randomly decide if the drink is iced or hot
-        isImage = Random.Range(0, 2) == 0; // Randomly decide if the drink will be shown as an image or text
-        Debug.Log("NPC Order: " + npcOrderDialogue);
-    }
-
-    public void SetTextHint(string hint)
-    {
-        Debug.Log("Setting text hint: " + hint);
-        TMP_Text textComponent = transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<TMP_Text>();
-        // Set the text hint for the NPC
-        //TMP Text renders special characters like \n, so we need to unescape it
-        string formattedHint = System.Text.RegularExpressions.Regex.Unescape(hint);
-
-        textComponent.text = formattedHint;
-
-    }
+    
     public void ShowOrder()
     {
         Image drinkImage = orderBubble.GetChild(0).GetComponent<Image>();
         TMP_Text drinkClues = orderBubble.GetChild(1).GetComponent<TMP_Text>();
 
-        if (isImage)
+        if (isOrderFormImage)
         {
             foreach (DrinkSO drink in AllDrinkData)
             {
@@ -138,7 +109,7 @@ public class CafeNPC : MonoBehaviour
             drinkImage.gameObject.SetActive(false);
             drinkClues.gameObject.SetActive(true);
         }
-        
+
         orderBubble.gameObject.SetActive(true);
     }
 
@@ -196,13 +167,11 @@ public class CafeNPC : MonoBehaviour
                 break;
             case NPCState.MovingToCashier:
                 currentState = NPCState.WaitingAtCashier;
-                // StartCoroutine(OrderCoroutine());
                 break;
             case NPCState.MovingToSeat:
                 currentState = NPCState.Seated;
                 spriteRenderer.sprite = seatedSprite; // Change sprite to seated
                 GetComponent<SpriteSkin>().enabled = false; // Disable sprite skinning if used
-                // StartCoroutine(SitAndLeave());
                 break;
             case NPCState.Leaving:
                 Destroy(gameObject);

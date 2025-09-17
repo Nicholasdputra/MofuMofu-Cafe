@@ -21,7 +21,7 @@ public class TimerScript : MonoBehaviour
     {
         sunlightOverlayRenderer = sunlightOverlay.GetComponent<SpriteRenderer>();
         hour = 7;
-        minute = 0;
+        minute = 1;
         GetComponent<SpriteRenderer>().sprite = clockSprites[(hour - 1) % 12]; // Set initial clock sprite
         StartCoroutine(StartTime());
     }
