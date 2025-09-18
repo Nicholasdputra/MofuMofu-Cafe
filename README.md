@@ -1,9 +1,9 @@
-# About
+# 🍵 About
 Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where you play as a barista who has to pick up customer orders and make said orders, then deliver them to the customers' tables starting from 7 A.M. until 8 P.M. Sometimes the customers will know  what they want and give you direct orders and other times, they'll just give you a general description of what kind of drinks they want. Also, you'll sometimes be bothered by the cats that are in the cafe while you're working and carrying your drinks, so make sure that they don't snatch it away from you and make you spill it.
 
 ---
 
-# Scripts Breakdown
+# 📜 Scripts Breakdown
 
 <table width="100%">
   <thead>
