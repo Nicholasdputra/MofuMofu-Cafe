@@ -23,7 +23,7 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
   <tbody>
     <tr>
       <td>
-        AudioManager.cs
+        🎵 AudioManager.cs
       </td>
       <td>
         Responsible for everything sound related in the game
@@ -31,7 +31,7 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
     </tr>
     <tr>
       <td>
-        CafeNPC.cs
+        👨‍🦱 CafeNPC.cs
       </td>
       <td>
         Handles NPC behavior and states as well as pathfinding
@@ -39,7 +39,7 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
     </tr>
     <tr>
       <td>
-        CashierManager.cs
+        💸 CashierManager.cs
       </td>
       <td>
         Handles queueing and ordering for customers when they enter and go to the cashier to order
@@ -47,7 +47,7 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
     </tr>
     <tr>
       <td>
-        CatNPC.cs
+        🐱 CatNPC.cs
       </td>
       <td>
         Handles cat states, basic movement, behaviour, and Cat Pathfinding (with the help of the Cat Pathfinder Class) 
@@ -55,7 +55,7 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
     </tr>
     <tr>
       <td>
-        CatPathfinder.cs
+        🛣️ CatPathfinder.cs
       </td>
       <td>
         A helper script to help with pathfinding 
@@ -63,7 +63,7 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
     </tr>
     <tr>
       <td>
-        CharacterDialogueSO.cs
+        🗯️ CharacterDialogueSO.cs
       </td>
       <td>
         A scriptable object for holding character dialogue
@@ -71,7 +71,7 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
     </tr>
     <tr>
       <td>
-        DialogueManager.cs
+        💬 DialogueManager.cs
       </td>
       <td>
         Handles what dialogue to use for NPCs
@@ -79,7 +79,7 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
     </tr>
     <tr>
       <td>
-        DrinkSO.cs
+        🧋 DrinkSO.cs
       </td>
       <td>
         A scriptable object for holding basic drink data
@@ -87,7 +87,7 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
     </tr>
     <tr>
       <td>
-        MachineManager.cs
+        🔧 MachineManager.cs
       </td>
       <td>
         Handles the machines (coffee machine, chocolate dispenser, matcha chawan, fridge)
@@ -95,7 +95,7 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
     </tr>
     <tr>
       <td>
-        MenuPopup.cs
+        📖 MenuPopup.cs
       </td>
       <td>
         Contains how to play elements that pop up in a menu-like book
@@ -103,7 +103,7 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
     </tr>
     <tr>
       <td>
-        NPCAnimationController.cs
+        🖼️ NPCAnimationController.cs
       </td>
       <td>
         Handles NPC sprite direction
@@ -111,7 +111,7 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
     </tr>
     <tr>
       <td>
-        NPCManager.cs
+        💁 NPCManager.cs
       </td>
       <td>
         Handles NPC spawning and setup
@@ -119,7 +119,7 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
     </tr>
     <tr>
       <td>
-        PathNode.cs
+        🔵 PathNode.cs
       </td>
       <td>
        Used in path nodes that make up a graph that functions as a path, both for NPCs and cats
@@ -127,7 +127,7 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
     </tr>
     <tr>
       <td>
-        PlayerInteraction.cs
+        ✋ PlayerInteraction.cs
       </td>
       <td>
         Handles player interaction, be it with NPCs or Machines
@@ -135,7 +135,7 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
     </tr>
     <tr>
       <td>
-        PlayerMovement.cs
+        ⛹️‍♂️ PlayerMovement.cs
       </td>
       <td>
         Handles player movement
@@ -143,7 +143,7 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
     </tr>
     <tr>
       <td>
-        PlayerTriggerCheck.cs
+        🚪 PlayerTriggerCheck.cs
       </td>
       <td>
         Basic script that determines player's target NPC and if they're colliding with anything
@@ -151,7 +151,7 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
     </tr>
     <tr>
       <td>
-        QTEScript.cs
+        ❗QTEScript.cs
       </td>
       <td>
         Handles QTE that's triggered when the cats are close and in a certain state
@@ -159,7 +159,7 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
     </tr>
     <tr>
       <td>
-        SceneHandler.cs
+        📽️ SceneHandler.cs
       </td>
       <td>
         Handles scene transitions
@@ -167,7 +167,7 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
     </tr>
     <tr>
       <td>
-        SeatHandler.cs
+        💺 SeatHandler.cs
       </td>
       <td>
         Handles empty and occupied seats in the cafe as a whole for assigning where to seat NPCs
@@ -175,7 +175,7 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
     </tr>
     <tr>
       <td>
-        SeatScript.cs
+        🪑 SeatScript.cs
       </td>
       <td>
         Marks a seat's occupancy when there are customers and helps with pathing NPCs to said seat
@@ -183,7 +183,7 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
     </tr>
     <tr>
       <td>
-        Settings.cs
+        ⚙️ Settings.cs
       </td>
       <td>
         Handles resolutions and volume settings for the game
@@ -191,7 +191,7 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
     </tr>
     <tr>
       <td>
-        TimerScript.cs
+        ⏰ TimerScript.cs
       </td>
       <td>
         Handles the in game time and how time may influence other scripts 
@@ -199,7 +199,7 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
     </tr>
     <tr>
       <td>
-        TrashcanScript.cs
+        📥 TrashcanScript.cs
       </td>
       <td>
         Discards the item the player is carrying
