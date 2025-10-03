@@ -28,6 +28,7 @@ public class TimerScript : MonoBehaviour
 
     IEnumerator StartTime()
     {
+        SetNPCThisHour(); // Set the number of NPCs based on the current hour
         while (true)
         {
             if (minute % 60 == 0)
@@ -47,27 +48,28 @@ public class TimerScript : MonoBehaviour
                 ScoreManager.instance.isEnding = true; // Trigger end of game if hour is 20 or more
                 yield break;
             }
-            yield return new WaitForSeconds(1f); // Wait for 1 second
+            yield return new WaitForSeconds(0.5f); // Wait for 1 second
             minute++;
         }
     }
 
     public void SetNPCThisHour()
     {
-        if(hour >= 7 && hour < 11)
+        if (hour >= 7 && hour < 11)
         {
             sunlightOverlayRenderer.sprite = overlaySprites[0];
-            npcsToSpawn = Random.Range(4, 7);
+            npcsToSpawn = Random.Range(2, 4);
         }
         else if (hour >= 11 && hour < 15)
         {
-            sunlightOverlayRenderer.sprite = overlaySprites[1]; 
-            npcsToSpawn = Random.Range(2, 4);
+            sunlightOverlayRenderer.sprite = overlaySprites[1];
+            npcsToSpawn = Random.Range(1, 3);
         }
         else if (hour >= 15 && hour < 20)
         {
-            sunlightOverlayRenderer.sprite = overlaySprites[2]; 
-            npcsToSpawn = Random.Range(4, 7);
+            sunlightOverlayRenderer.sprite = overlaySprites[2];
+            npcsToSpawn = Random.Range(2, 4);
         }
+        Debug.Log("Hour: " + hour + ", NPCs to spawn this hour: " + npcsToSpawn);
     }
 }
