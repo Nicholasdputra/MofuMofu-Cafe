@@ -31,6 +31,8 @@ public class Settings : MonoBehaviour
 
     void Start()
     {
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+            Time.timeScale = 1f;
         settingsPanel.SetActive(false);
         nativeResolutions = Screen.resolutions;
         finalResolutions = new List<Resolution>();
