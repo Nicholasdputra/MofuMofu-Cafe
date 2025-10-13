@@ -207,3 +207,65 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
     </tr>
   </tbody>
 </table>
+
+---
+
+# 🕹️ Controls
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="33%">
+        <h4>
+          <a>Button</a>
+        </h4>
+      </th>
+      <th width="67%">
+        <h4>
+          <a>Action</a>
+        </h4>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        WASD
+      </td>
+      <td>
+        Character Movement
+      </td>
+    </tr>
+    <tr>
+      <td>
+        E
+      </td>
+      <td>
+        Interact with machines, talk with customers at the register, and hand them drinks while facing them
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Q
+      </td>
+      <td>
+        Get rid of the currently held item
+      </td>
+    </tr>
+    <tr>
+      <td>
+        M
+      </td>
+      <td>
+        Open the menu/guide book
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Space Bar
+      </td>
+      <td>
+        Input consistently to complete the quick time event and not get your drink snatched by cats
+      </td>
+    </tr>
+  </tbody>
+</table>
