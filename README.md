@@ -14,12 +14,12 @@ For this project I worked mainly on the drinks, menu, trash, audio, dialogue, an
 <table width="100%">
   <thead>
     <tr>
-      <th width="33%">
+      <th width="40%">
         <h4>
           <a>Script Name</a>
         </h4>
       </th>
-      <th width="67%">
+      <th width="60%">
         <h4>
           <a>Script Description</a>
         </h4>
