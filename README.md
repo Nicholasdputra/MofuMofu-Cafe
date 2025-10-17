@@ -3,12 +3,6 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
 
 ---
 
-# 💻 My Contributions 
-
-For this project I worked mainly on the drinks, menu, trash, audio, dialogue, and lent a hand on a few other scripts. Aside from that, I also refactored the other scripts' code, with a special focus on how scripts interact with each other, making everything cleaner and more efficient. Speaking of which, you can see the scripts down below! Additionally, for this project I also worked as a game designer, for which I also came up with the overall game idea, the QTE, customers, and dialogues. Overall, this project took me about 50-60 hours to do!
-
----
-
 # 📜 Scripts Breakdown
 
 <table width="100%">
@@ -279,8 +273,8 @@ For this project I worked mainly on the drinks, menu, trash, audio, dialogue, an
 ---
 
 # Project Members
-Angeline Maria Suryadi - Game Artist
-Eric - Game Programmer
-Nicholas Dwi Putra - Game Designer and Programmer
-Rafael Wirasana Wijaya - Game Designer and Artist
-Steven Wijaya - Game Programmer
+<br> Angeline Maria Suryadi - Game Artist </br>
+<br> Eric - Game Programmer </br>
+<br> Nicholas Dwi Putra - Game Designer and Programmer </br>
+<br> Rafael Wirasana Wijaya - Game Designer and Artist </br>
+<br> Steven Wijaya - Game Programmer </br>
