@@ -273,8 +273,8 @@ Mofumofu cafe is a fast paced yet cozy, time management-diner dash game, where y
 ---
 
 # 🥤 Team Members
-<br> Angeline Maria Suryadi - Game Artist </br>
-<br> Eric - Game Programmer </br>
-<br> Nicholas Dwi Putra - Game Designer and Programmer </br>
-<br> Rafael Wirasana Wijaya - Game Designer and Artist </br>
-<br> Steven Wijaya - Game Programmer </br>
+* Angeline Maria Suryadi - Game Artist 🖌️
+* Eric - Game Programmer 💻
+* Nicholas Dwi Putra (Me) - Game Designer and Programmer 💻📃
+* Rafael Wirasana Wijaya - Game Designer and Artist 📃🖌️
+* Steven Wijaya - Game Programmer 💻
