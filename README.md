@@ -20,7 +20,7 @@
         <img src="https://github.com/user-attachments/assets/25376d92-2bdf-4c1a-b31e-c5b0d5400725" alt="MofuMofu QTE" width="100%">
       </td>
       <td align="center">
-        <img src="https://github.com/user-attachments/assets/55c75c9d-2174-40bf-87c1-c707d9d1c58a" alt="MofuMofu" width="100%">
+        <img src="https://github.com/user-attachments/assets/55c75c9d-2174-40bf-87c1-c707d9d1c58a" alt="MofuMofu Score" width="100%">
       </td>
     </tr>
   </tbody>
