@@ -2,7 +2,7 @@
   <thead>
     <tr>    
       <th colspan="2">
-        <h2>Gameplay Footage - May Take Time To Load</h2>
+        <h1>Gameplay Footage - May Take Time To Load</h1>
       </th>
     </tr>
   </thead>
